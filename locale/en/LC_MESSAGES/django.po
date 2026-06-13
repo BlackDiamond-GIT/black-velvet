@@ -782,7 +782,7 @@ msgstr "Have questions? We have answers"
 
 #: templates/partials/footer.html:7
 msgid "Masáž a relaxace"
-msgstr "Massage & relaxation"
+msgstr "Massage & Relaxation"
 
 #: templates/partials/footer.html:7
 msgid "v srdci Prahy"
