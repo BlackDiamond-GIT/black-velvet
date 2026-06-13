@@ -1,7 +1,9 @@
 django>=5.1
 psycopg2-binary
+dj-database-url
 django-modeltranslation
 pillow
 python-decouple
 whitenoise
 django-htmx
+gunicorn
