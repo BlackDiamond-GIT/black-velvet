@@ -1,17 +1,58 @@
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import check_for_language, gettext_lazy as _
+from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 
 from apps.pages.models import FAQ, Review
 from apps.services.models import Service
 from apps.team.models import Masseuse
 
+from .i18n import translate_url_for_language
 from .middleware import _ADMIN_LANG_COOKIE
 from .mixins import SEOMixin
+
+
+@require_POST
+def set_language(request):
+    """Switch site language and redirect to the equivalent page URL."""
+    next_url = request.POST.get('next', request.GET.get('next', '/'))
+    if not url_has_allowed_host_and_scheme(
+        url=next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        next_url = request.META.get('HTTP_REFERER', '/')
+        if not url_has_allowed_host_and_scheme(
+            url=next_url,
+            allowed_hosts={request.get_host()},
+            require_https=request.is_secure(),
+        ):
+            next_url = '/'
+
+    lang_code = request.POST.get('language')
+    if lang_code and check_for_language(lang_code):
+        translated = translate_url_for_language(next_url, lang_code)
+        if translated != next_url:
+            next_url = translated
+
+    response = HttpResponseRedirect(next_url)
+    if lang_code and check_for_language(lang_code):
+        response.set_cookie(
+            settings.LANGUAGE_COOKIE_NAME,
+            lang_code,
+            max_age=settings.LANGUAGE_COOKIE_AGE,
+            path=settings.LANGUAGE_COOKIE_PATH,
+            domain=settings.LANGUAGE_COOKIE_DOMAIN,
+            secure=settings.LANGUAGE_COOKIE_SECURE,
+            httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
+            samesite=settings.LANGUAGE_COOKIE_SAMESITE,
+        )
+    return response
 
 
 @staff_member_required(login_url='/admin/login/')

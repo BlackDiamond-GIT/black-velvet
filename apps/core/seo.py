@@ -13,12 +13,12 @@ def absolute_url(request, path=''):
 
 def build_hreflang(request):
     """Build hreflang URLs for all language variants of current page."""
-    from django.urls import translate_url
+    from apps.core.i18n import translate_url_for_language
 
     urls = {}
     current_lang = get_language()
     for code, _ in settings.LANGUAGES:
-        urls[code] = absolute_url(request, translate_url(request.path, code))
+        urls[code] = absolute_url(request, translate_url_for_language(request.path, code))
     urls['x-default'] = urls.get(settings.LANGUAGE_CODE, urls.get(current_lang, ''))
     return urls
 

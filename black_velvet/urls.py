@@ -4,9 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
-from django.views.i18n import set_language
-
-from apps.core.views import robots_txt, toggle_admin_language
+from apps.core.views import robots_txt, set_language, toggle_admin_language
 from black_velvet.sitemaps import SITEMAPS
 
 urlpatterns = [
