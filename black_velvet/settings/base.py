@@ -6,7 +6,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-change-in-production')
 DEBUG = config('DEBUG', default=False, cast=bool)
-SERVE_MEDIA = config('SERVE_MEDIA', default=False, cast=bool)
+CLOUDINARY_URL = config('CLOUDINARY_URL', default='')
+CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME', default='')
+CLOUDINARY_API_KEY = config('CLOUDINARY_API_KEY', default='')
+CLOUDINARY_API_SECRET = config('CLOUDINARY_API_SECRET', default='')
+USE_CLOUDINARY = bool(CLOUDINARY_URL) or all([
+    CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET,
+])
+SERVE_MEDIA = config('SERVE_MEDIA', default=False, cast=bool) and not USE_CLOUDINARY
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 
 SITE_URL = config('SITE_URL', default='https://black-velvet.cz')
@@ -35,6 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.humanize',
     'django_htmx',
+]
+
+if USE_CLOUDINARY:
+    INSTALLED_APPS += [
+        'cloudinary_storage',
+        'cloudinary',
+    ]
+
+INSTALLED_APPS += [
     'apps.core',
     'apps.services',
     'apps.team',
@@ -110,12 +128,25 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STORAGES = {
-    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'default': {
+        'BACKEND': (
+            'cloudinary_storage.storage.MediaCloudinaryStorage'
+            if USE_CLOUDINARY
+            else 'django.core.files.storage.FileSystemStorage'
+        ),
+    },
     'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
 }
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+if USE_CLOUDINARY and not CLOUDINARY_URL:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+        'API_KEY': CLOUDINARY_API_KEY,
+        'API_SECRET': CLOUDINARY_API_SECRET,
+    }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

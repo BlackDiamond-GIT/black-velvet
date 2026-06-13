@@ -31,8 +31,14 @@ services:
         value: https://black-velvet.cz,https://www.black-velvet.cz
       - key: SITE_URL
         sync: false
-      - key: SERVE_MEDIA
-        value: "true"
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
       - key: SECURE_SSL_REDIRECT
         value: "true"
       - key: DEFAULT_FROM_EMAIL

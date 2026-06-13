@@ -38,12 +38,18 @@ class Command(BaseCommand):
     def _attach_image(self, instance, field_name, category, slug, dest_name):
         src = seed_media_path(category, slug)
         if not src:
+            self.stdout.write(self.style.WARNING(f'Seed image missing: {category}/{slug}'))
             return
-        current = getattr(instance, field_name)
-        if current:
-            current.delete(save=False)
+
+        field = getattr(instance, field_name)
+        if field and field.name:
+            if field.url.startswith('https://res.cloudinary.com/'):
+                return
+            field.delete(save=False)
+
+        storage_name = f'black-velvet/{category}/{slug}.webp'
         with src.open('rb') as handle:
-            getattr(instance, field_name).save(dest_name, File(handle), save=True)
+            field.save(storage_name, File(handle), save=True)
 
     def _import_services(self, rows):
         service_map = {}

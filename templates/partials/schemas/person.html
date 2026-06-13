@@ -1,3 +1,4 @@
+{% load media_urls %}
 {% if masseuse %}
 <script type="application/ld+json">
 {
@@ -6,7 +7,7 @@
   "name": "{{ masseuse.name|escapejs }}",
   "jobTitle": "Masérka",
   "description": "{{ masseuse.bio|truncatechars:200|escapejs }}"{% if masseuse.photo %},
-  "image": "{{ SITE_URL }}{{ masseuse.photo.url }}"{% endif %},
+  "image": "{{ masseuse.photo.url|absolute_media_url|escapejs }}"{% endif %},
   "url": "{{ seo.canonical }}",
   "worksFor": {
     "@type": "Organization",

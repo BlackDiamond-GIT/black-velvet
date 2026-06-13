@@ -7,3 +7,5 @@ python-decouple
 whitenoise
 django-htmx
 gunicorn
+cloudinary
+django-cloudinary-storage

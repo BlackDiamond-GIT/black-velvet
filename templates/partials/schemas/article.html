@@ -1,3 +1,4 @@
+{% load media_urls %}
 {% if post %}
 <script type="application/ld+json">
 {
@@ -5,7 +6,7 @@
   "@type": "Article",
   "headline": "{{ post.title|escapejs }}",
   "description": "{{ post.excerpt|escapejs }}"{% if post.image %},
-  "image": "{{ SITE_URL }}{{ post.image.url }}"{% endif %},
+  "image": "{{ post.image.url|absolute_media_url|escapejs }}"{% endif %},
   "datePublished": "{{ post.published_at|date:'c' }}",
   "dateModified": "{{ post.updated_at|date:'c' }}",
   "author": {
