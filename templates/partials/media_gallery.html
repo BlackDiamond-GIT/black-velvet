@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n media_urls %}
 {% if primary_image %}
 {% with secondary=secondary_image|default:primary_image %}
 <div class="media-gallery media-gallery--{{ gallery_variant }}" data-media-gallery>
@@ -9,9 +9,9 @@
       tabindex="0"
       aria-label="{% trans 'Galerie fotografií' %}"
     >
-      <div class="media-gallery__slide" data-gallery-slide>
+      <div class="media-gallery__slide is-active" data-gallery-slide>
         <img
-          src="{{ primary_image.url }}"
+          src="{{ primary_image|fill_media_url:gallery_variant }}"
           alt="{{ gallery_alt }}"
           class="media-gallery__img"
           width="{{ gallery_width|default:800 }}"
@@ -21,9 +21,10 @@
           draggable="false"
         >
       </div>
+      {% if gallery_variant != 'card-team' and gallery_variant != 'card-service' %}
       <div class="media-gallery__slide media-gallery__slide--blur" data-gallery-slide>
         <img
-          src="{{ secondary.url }}"
+          src="{{ secondary|fill_media_url:gallery_variant }}"
           alt=""
           class="media-gallery__img media-gallery__img--blur"
           width="{{ gallery_width|default:800 }}"
@@ -33,8 +34,10 @@
           draggable="false"
         >
       </div>
+      {% endif %}
     </div>
   </div>
+  {% if gallery_variant != 'card-team' and gallery_variant != 'card-service' %}
   <div class="media-gallery__dots" data-gallery-dots>
     <span
       role="button"
@@ -52,6 +55,7 @@
       aria-label="{% trans 'Fotografie 2' %}"
     ></span>
   </div>
+  {% endif %}
 </div>
 {% endwith %}
 {% else %}

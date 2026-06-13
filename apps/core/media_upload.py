@@ -9,6 +9,7 @@ def upload_seed_image(instance, field_name, category, slug, src_path):
         str(src_path),
         public_id=public_id,
         overwrite=True,
+        invalidate=True,
         resource_type='image',
     )
 

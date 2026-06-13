@@ -12,6 +12,13 @@
     var slides = gallery.querySelectorAll('[data-gallery-slide]');
     if (!track || !slides.length) return;
 
+    if (slides.length === 1) {
+      slides[0].classList.add('is-active');
+      slides[0].style.transform = 'none';
+      gallery.dataset.galleryBound = '1';
+      return;
+    }
+
     var current = 0;
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var touchStartX = 0;
