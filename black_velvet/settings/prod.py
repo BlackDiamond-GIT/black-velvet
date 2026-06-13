@@ -6,6 +6,7 @@ from decouple import Csv, config
 from .base import *  # noqa: F401,F403
 
 DEBUG = False
+SERVE_MEDIA = config('SERVE_MEDIA', default=True, cast=bool)
 
 database_url = config('DATABASE_URL', default='')
 if database_url:

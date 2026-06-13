@@ -26,7 +26,7 @@ urlpatterns += i18n_patterns(
     prefix_default_language=True,
 )
 
-if settings.DEBUG:
+if settings.DEBUG or settings.SERVE_MEDIA:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'apps.core.views.handler404'
