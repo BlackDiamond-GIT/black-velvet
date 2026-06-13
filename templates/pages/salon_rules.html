@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+  <header class="page-header reveal">
+    <h1>{% trans "Pravidla salonu" %}</h1>
+    <p class="page-text-content__lead">{% trans "Aby byl váš zážitek co nejpříjemnější pro vás i ostatní klienty, prosíme o dodržování následujících zásad." %}</p>
+  </header>
+
+  <div class="page-text-content reveal">
+    <h2>{% trans "Rezervace a dochvilnost" %}</h2>
+    <p>{% trans "Termín rezervujte předem online nebo telefonicky. Doporučujeme dorazit 5–10 minut před začátkem masáže. Při zpoždění může být délka masáže zkrácena bez snížení ceny." %}</p>
+
+    <h2>{% trans "Zrušení termínu" %}</h2>
+    <p>{% trans "Rezervaci zrušte nejpozději 24 hodin předem telefonicky nebo e-mailem. Při pozdním zrušení nebo nedostavení se si vyhrazujeme právo účtovat storno poplatek." %}</p>
+
+    <h2>{% trans "Hygiena a zdraví" %}</h2>
+    <p>{% trans "Před masáží se prosím osprchujte. Při akutních infekcích, horečce nebo kožních onemocněních masáž odložte. Informujte masérku o alergiích, zraněních nebo zdravotních omezeních." %}</p>
+
+    <h2>{% trans "Chování v salonu" %}</h2>
+    <ul class="page-text-content__list">
+      <li>{% trans "Respektujte masérky a ostatní klienty" %}</li>
+      <li>{% trans "V masážní místnosti vypínejte mobilní telefon" %}</li>
+      <li>{% trans "Salon je místem relaxace — prosíme o klidný a diskrétní chování" %}</li>
+      <li>{% trans "Masáž je poskytována výhradně v rámci profesionálních služeb" %}</li>
+    </ul>
+
+    <h2>{% trans "Platba" %}</h2>
+    <p>{% trans "Platbu uhradíte po skončení masáže hotově nebo kartou dle aktuálních možností salonu. Aktuální ceník najdete na stránce" %} <a href="{% url 'pages:prices' %}" class="footer-link">{% trans "Ceník" %}</a>.</p>
+
+    <p>{% trans "Máte dotaz k pravidlům? Kontaktujte nás na" %} <a href="tel:{{ SITE_PHONE|cut:' ' }}" class="footer-link">{{ SITE_PHONE }}</a> {% trans "nebo" %} <a href="mailto:{{ SITE_EMAIL }}" class="footer-link">{{ SITE_EMAIL }}</a>.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% if post %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ post.title|escapejs }}",
+  "description": "{{ post.excerpt|escapejs }}"{% if post.image %},
+  "image": "{{ SITE_URL }}{{ post.image.url }}"{% endif %},
+  "datePublished": "{{ post.published_at|date:'c' }}",
+  "dateModified": "{{ post.updated_at|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ post.author_name|escapejs }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ SITE_NAME }}",
+    "url": "{{ SITE_URL }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ seo.canonical }}"
+  }
+}
+</script>
+{% endif %}

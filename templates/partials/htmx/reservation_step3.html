@@ -1,0 +1,25 @@
+{% load i18n %}
+{% include "partials/htmx/wizard_indicator.html" %}
+<form hx-post="{% url 'reservations:step' step=3 %}" hx-target="#wizard-container" hx-swap="innerHTML">
+  {% csrf_token %}
+  <h2 style="font-family:var(--font-heading);font-size:24px;margin-bottom:24px;">{% trans "Vyberte termín" %}</h2>
+  <div style="margin-bottom:24px;">
+    <label style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-gold);margin-bottom:8px;">{% trans "Datum" %}</label>
+    <input type="date" name="slot_date" class="form-input" required min="{{ available_dates.0|date:'Y-m-d' }}">
+  </div>
+  <div style="margin-bottom:24px;">
+    <label style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-gold);margin-bottom:8px;">{% trans "Čas" %}</label>
+    <div class="wiz-slots-grid">
+      {% for time in available_times %}
+      <label style="display:contents;">
+        <input type="radio" name="slot_time" value="{{ time }}" style="display:none;" required>
+        <span class="wiz-slot-btn">{{ time }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="wizard-actions">
+    <button type="button" class="btn btn--outline" hx-get="{% url 'reservations:step' step=2 %}" hx-target="#wizard-container">← {% trans "Zpět" %}</button>
+    <button type="submit" class="btn btn--primary">{% trans "Pokračovat" %} →</button>
+  </div>
+</form>

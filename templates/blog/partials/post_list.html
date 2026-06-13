@@ -1,0 +1,32 @@
+{% load i18n %}
+{% for post in posts %}
+<a href="{{ post.get_absolute_url }}" class="blog-card reveal">
+  <div class="blog-card__image">
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }} — Black Velvet Blog Praha" width="800" height="500" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+    {% endif %}
+  </div>
+  <div class="blog-card__body">
+    {% if post.tags.first %}
+    <p class="blog-card__cat">{{ post.tags.first.name }}</p>
+    {% endif %}
+    <h2 class="blog-card__title">{{ post.title }}</h2>
+    <p class="blog-card__excerpt">{{ post.excerpt }}</p>
+    <p class="blog-card__date">{{ post.published_at|date:"j. n. Y" }}</p>
+  </div>
+</a>
+{% empty %}
+<p class="text-muted">{% trans "Zatím žádné články." %}</p>
+{% endfor %}
+
+{% if page_obj.has_other_pages %}
+<nav class="pagination" aria-label="{% trans 'Stránkování' %}">
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}" hx-get="?page={{ page_obj.previous_page_number }}" hx-target="#blog-list" hx-swap="innerHTML">←</a>
+  {% endif %}
+  <span class="is-active">{{ page_obj.number }}</span>
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}" hx-get="?page={{ page_obj.next_page_number }}" hx-target="#blog-list" hx-swap="innerHTML">→</a>
+  {% endif %}
+</nav>
+{% endif %}

@@ -1,0 +1,63 @@
+{% load i18n %}
+{% if primary_image %}
+{% with secondary=secondary_image|default:primary_image %}
+<div class="media-gallery media-gallery--{{ gallery_variant }}" data-media-gallery>
+  <div class="media-gallery__viewport">
+    <div
+      class="media-gallery__track"
+      data-gallery-track
+      tabindex="0"
+      aria-label="{% trans 'Galerie fotografií' %}"
+    >
+      <div class="media-gallery__slide" data-gallery-slide>
+        <img
+          src="{{ primary_image.url }}"
+          alt="{{ gallery_alt }}"
+          class="media-gallery__img"
+          width="{{ gallery_width|default:800 }}"
+          height="{{ gallery_height|default:1067 }}"
+          loading="eager"
+          fetchpriority="high"
+          draggable="false"
+        >
+      </div>
+      <div class="media-gallery__slide media-gallery__slide--blur" data-gallery-slide>
+        <img
+          src="{{ secondary.url }}"
+          alt=""
+          class="media-gallery__img media-gallery__img--blur"
+          width="{{ gallery_width|default:800 }}"
+          height="{{ gallery_height|default:1067 }}"
+          loading="lazy"
+          aria-hidden="true"
+          draggable="false"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="media-gallery__dots" data-gallery-dots>
+    <span
+      role="button"
+      tabindex="0"
+      class="media-gallery__dot is-active"
+      data-gallery-dot
+      aria-label="{% trans 'Fotografie 1' %}"
+      aria-current="true"
+    ></span>
+    <span
+      role="button"
+      tabindex="0"
+      class="media-gallery__dot"
+      data-gallery-dot
+      aria-label="{% trans 'Fotografie 2' %}"
+    ></span>
+  </div>
+</div>
+{% endwith %}
+{% else %}
+<div class="media-gallery media-gallery--{{ gallery_variant }} media-gallery--empty">
+  <div class="media-gallery__placeholder">
+    {% if gallery_placeholder %}<span>{{ gallery_placeholder }}</span>{% endif %}
+  </div>
+</div>
+{% endif %}

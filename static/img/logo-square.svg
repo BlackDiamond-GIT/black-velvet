@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Black Velvet">
+  <title>Black Velvet</title>
+  <rect width="512" height="512" fill="#07070B"/>
+  <g fill="none" stroke="#6B1A28" stroke-width="2.2" stroke-linecap="square">
+    <path d="M96 248 L56 288 L56 368 L456 368"/>
+    <path d="M318 176 L388 176 L388 312"/>
+  </g>
+  <text x="96" y="208" fill="#F0E9E0" font-family="'Raleway', 'Arial', sans-serif" font-size="72" font-weight="700" letter-spacing="0.2em">BLACK</text>
+  <text x="176" y="336" fill="#6B1A28" font-family="'Raleway', 'Arial', sans-serif" font-size="72" font-weight="700" letter-spacing="0.2em">VELVET</text>
+</svg>

@@ -1,0 +1,27 @@
+{% if categories %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Ceník masáží — {{ SITE_NAME }}",
+  "url": "{{ seo.canonical }}",
+  "itemListElement": [
+    {% for category in categories %}{% for item in category.items.all %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "item": {
+        "@type": "Offer",
+        "name": "{{ item.service_name|escapejs }}",
+        "description": "{{ category.name|escapejs }} — {{ item.duration|escapejs }}",
+        "price": "{{ item.price|escapejs }}",
+        "priceCurrency": "CZK",
+        "availability": "https://schema.org/InStock"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}{% if not forloop.parentloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

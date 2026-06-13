@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+  <div class="reveal section-header section-header--center">
+    <h1 class="section-heading section-heading--center">{% trans "Tipy a rady o masáži a relaxaci" %}</h1>
+  </div>
+  <div id="blog-list" class="blog-grid">
+    {% include "blog/partials/post_list.html" %}
+  </div>
+</div>
+{% endblock %}

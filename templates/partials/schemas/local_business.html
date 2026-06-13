@@ -1,0 +1,33 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MassageParlor",
+  "name": "{{ SITE_NAME }}",
+  "url": "{{ SITE_URL }}",
+  "telephone": "{{ SITE_PHONE }}",
+  "email": "{{ SITE_EMAIL }}",
+  "priceRange": "Kč Kč",
+  "currenciesAccepted": "CZK",
+  "paymentAccepted": "Cash, Credit Card",
+  "openingHours": ["Mo-Fr 10:00-21:00", "Sa-Su 10:00-19:00"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ SITE_STREET }}",
+    "postalCode": "{{ SITE_POSTAL }}",
+    "addressLocality": "{{ SITE_CITY }}",
+    "addressCountry": "{{ SITE_COUNTRY }}"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "{{ SITE_LAT }}",
+    "longitude": "{{ SITE_LNG }}"
+  }{% if REVIEW_COUNT > 0 %},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ REVIEW_RATING }}",
+    "reviewCount": "{{ REVIEW_COUNT }}",
+    "bestRating": "5",
+    "worstRating": "1"
+  }{% endif %}
+}
+</script>

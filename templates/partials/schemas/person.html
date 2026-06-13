@@ -1,0 +1,19 @@
+{% if masseuse %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ masseuse.name|escapejs }}",
+  "jobTitle": "Masérka",
+  "description": "{{ masseuse.bio|truncatechars:200|escapejs }}"{% if masseuse.photo %},
+  "image": "{{ SITE_URL }}{{ masseuse.photo.url }}"{% endif %},
+  "url": "{{ seo.canonical }}",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "{{ SITE_NAME }}",
+    "url": "{{ SITE_URL }}"
+  },
+  "knowsAbout": [{% for spec in masseuse.specializations_list %}"{{ spec|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}]
+}
+</script>
+{% endif %}

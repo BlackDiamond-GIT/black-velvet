@@ -1,0 +1,124 @@
+.team-list-page .section-header .text-muted {
+  padding-inline: clamp(8px, 3vw, 24px);
+}
+
+.team-list-page .team-grid {
+  width: 100%;
+}
+
+.team-detail__hero {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+.team-detail__photo {
+  overflow: hidden;
+}
+
+.team-detail__name {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4vw, 56px);
+  margin-bottom: 12px;
+}
+
+.team-detail__spec {
+  color: var(--color-gold);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.team-detail__meta {
+  font-size: 11px;
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+}
+
+.team-detail__bio {
+  margin-bottom: 32px;
+}
+
+.team-detail__services-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.team-detail__services {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.team-detail__services li {
+  padding-left: 0;
+}
+
+@media (max-width: 900px) {
+  .team-detail__hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-list-page.container,
+  .team-detail-page.container {
+    padding-left: max(clamp(22px, 5.5vw, 32px), var(--safe-left));
+    padding-right: max(clamp(22px, 5.5vw, 32px), var(--safe-right));
+  }
+
+  .team-list-page .team-grid {
+    gap: clamp(32px, 7vw, 48px);
+  }
+
+  .team-list-page .team-card__body,
+  .team-detail-page .team-card__body {
+    padding: 14px clamp(16px, 4.5vw, 24px) 0;
+  }
+
+  .team-list-header,
+  .page-header {
+    margin-bottom: clamp(32px, 5vw, 48px);
+  }
+
+  .team-detail__hero {
+    gap: clamp(28px, 6vw, 40px);
+    margin-bottom: clamp(40px, 6vw, 56px);
+  }
+
+  .team-detail__content {
+    padding-inline: clamp(4px, 1.5vw, 12px);
+  }
+}
+
+@media (max-width: 640px) {
+  .team-list-page.container,
+  .team-detail-page.container {
+    padding-left: max(clamp(20px, 5vw, 28px), var(--safe-left));
+    padding-right: max(clamp(20px, 5vw, 28px), var(--safe-right));
+  }
+
+  .team-list-page .team-card__body {
+    padding-inline: clamp(14px, 4vw, 22px);
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .team-list-page.container,
+    .team-detail-page.container {
+      padding-left: max(clamp(22px, 5.5vw, 32px), var(--safe-left), 20px);
+      padding-right: max(clamp(22px, 5.5vw, 32px), var(--safe-right), 20px);
+    }
+  }
+}

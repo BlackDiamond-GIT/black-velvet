@@ -1,0 +1,69 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ seo.title }}</title>
+  <meta name="description" content="{{ seo.description }}">
+  <link rel="canonical" href="{{ seo.canonical }}">
+  {% for code, url in hreflang_urls.items %}
+    {% if code != 'x-default' %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+    {% endif %}
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ hreflang_default }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:locale" content="{{ OG_LOCALE }}">
+  <meta property="og:title" content="{{ seo.title }}">
+  <meta property="og:description" content="{{ seo.description }}">
+  <link rel="icon" type="image/png" sizes="180x180" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
+  <meta property="og:image" content="{{ seo.og_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="{{ seo.og_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>{% include 'partials/inline_tokens.css' %}</style>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/logo-nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mobile-nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/gallery.css' %}?v=5">
+  {% block extra_css %}{% endblock %}
+  {% include 'partials/schemas/local_business.html' %}
+  {% if schema_website %}{% include 'partials/schemas/website.html' %}{% endif %}
+  {% if schema_breadcrumb %}{% include 'partials/schemas/breadcrumb.html' %}{% endif %}
+  {% if schema_faq %}{% include 'partials/schemas/faq.html' %}{% endif %}
+  {% if schema_service %}{% include 'partials/schemas/service.html' %}{% endif %}
+  {% if schema_person %}{% include 'partials/schemas/person.html' %}{% endif %}
+  {% if schema_article %}{% include 'partials/schemas/article.html' %}{% endif %}
+  {% if schema_contact %}{% include 'partials/schemas/contact.html' %}{% endif %}
+  {% if schema_howto %}{% include 'partials/schemas/howto.html' %}{% endif %}
+  {% if schema_prices %}{% include 'partials/schemas/prices.html' %}{% endif %}
+  {% if GA4_MEASUREMENT_ID %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA4_MEASUREMENT_ID }}"></script>
+  {% endif %}
+</head>
+<body data-ga4="{{ GA4_MEASUREMENT_ID }}">
+  {% include 'partials/nav.html' %}
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'partials/footer.html' %}
+  {% include 'partials/mobile_bottom_nav.html' %}
+  {% include 'partials/modal_shell.html' %}
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+  <script src="{% static 'js/reveal.js' %}" defer></script>
+  <script src="{% static 'js/modal.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+  <script src="{% static 'js/gallery.js' %}?v=4" defer></script>
+  <script src="{% static 'js/ga4.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

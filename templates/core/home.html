@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero__glow-1" aria-hidden="true"></div>
+  <div class="hero__embers" aria-hidden="true">
+    <span class="ember ember--1"></span>
+    <span class="ember ember--2"></span>
+    <span class="ember ember--3"></span>
+    <span class="ember ember--4"></span>
+    <span class="ember ember--5"></span>
+    <span class="ember ember--6"></span>
+    <span class="ember ember--7"></span>
+    <span class="ember ember--8"></span>
+  </div>
+  <div class="hero__content">
+    <div class="hero__inner">
+      <h1 class="hero__title">{% trans "Masáž a relaxace Praha" %}</h1>
+      <p class="hero__desc">{% trans "Black Velvet Spa — luxusní masážní salon v srdci Prahy. Odhalte svůj vlastní ráj." %}</p>
+      <div class="hero__actions">
+        <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="hero_rezervovat">{% trans "Rezervovat" %}</a>
+        <a href="{% url 'services:list' %}" class="btn btn--outline btn--lg">{% trans "Naše masáže" %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="background:var(--color-surface);">
+  <div class="container">
+    <div class="reveal section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;">
+      <h2 class="section-heading">{% trans "Masáže pro tělo i duši" %}</h2>
+      <a href="{% url 'services:list' %}" class="footer-link" style="font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;">{% trans "Všechny masáže" %} →</a>
+    </div>
+    <div class="services-grid">
+      {% for service in services %}
+        {% include "partials/service_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="reveal section-header section-header--center">
+      <h2 class="section-heading section-heading--center">{% trans "Odbornice pro váš komfort a relaxaci" %}</h2>
+    </div>
+    <div class="team-grid">
+      {% for masseuse in team %}
+        {% include "partials/team_card.html" %}
+      {% endfor %}
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:clamp(48px, 6vw, 72px);">
+      <a href="{% url 'team:list' %}" class="btn btn--outline">{% trans "Všechny masérky" %} →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="background:var(--color-surface-alt);">
+  <div class="container">
+    <div class="reveal section-header section-header--center">
+      <h2 class="section-heading section-heading--center">{% trans "Čtyři kroky k dokonalé relaxaci" %}</h2>
+    </div>
+    <ol class="process-timeline">
+      <li class="process-step reveal">
+        <span class="process-step__dot" aria-hidden="true"></span>
+        <h3 class="process-step__title">{% trans "Vyberte masáž" %}</h3>
+        <p class="process-step__desc">{% trans "Prohlédněte si nabídku a vyberte masáž, která vám nejvíce vyhovuje." %}</p>
+      </li>
+      <li class="process-step reveal rd1">
+        <span class="process-step__dot" aria-hidden="true"></span>
+        <h3 class="process-step__title">{% trans "Rezervujte termín" %}</h3>
+        <p class="process-step__desc">{% trans "Online přes náš systém nebo telefonicky — rychle a jednoduše." %}</p>
+      </li>
+      <li class="process-step reveal rd2">
+        <span class="process-step__dot" aria-hidden="true"></span>
+        <h3 class="process-step__title">{% trans "Přijďte a relaxujte" %}</h3>
+        <p class="process-step__desc">{% trans "Uvítáme vás v salonu a připravíme vše pro dokonalý zážitek." %}</p>
+      </li>
+      <li class="process-step reveal rd3">
+        <span class="process-step__dot" aria-hidden="true"></span>
+        <h3 class="process-step__title">{% trans "Odejděte odpočatí" %}</h3>
+        <p class="process-step__desc">{% trans "Odnesete si hluboký klid a regeneraci pro tělo i mysl." %}</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{% if reviews %}
+<section class="section-pad section-pad--spaced" data-testimonials>
+  <div class="container">
+    <div class="reveal section-header section-header--center">
+      <h2 class="section-heading section-heading--center">{% trans "Co říkají naši klienti" %}</h2>
+    </div>
+    <div class="testimonial-block">
+      <div class="testimonial-track" data-testimonial-track>
+      {% for review in reviews %}
+      <div class="testimonial-slide" data-testimonial-item>
+        <div style="display:flex;justify-content:center;gap:6px;margin-bottom:32px;">
+          {% for i in "12345" %}<span style="color:var(--color-crimson);font-size:16px;">★</span>{% endfor %}
+        </div>
+        <blockquote>{{ review.text }}</blockquote>
+        <p class="testimonial-block__author">{{ review.author }}</p>
+        <p class="testimonial-block__role">{{ review.role }}</p>
+      </div>
+      {% endfor %}
+      </div>
+      <div class="testimonial-dots">
+        {% for review in reviews %}
+        <button type="button" class="testimonial-dot{% if forloop.first %} is-active{% endif %}" data-testimonial-dot aria-label="{{ review.author }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section-pad" style="background:#0C0A14;">
+  <div class="container loc-grid">
+    <button type="button" class="contact-map-trigger reveal" data-contact-modal-trigger
+            data-site-name="{{ SITE_NAME }}"
+            data-site-address="{{ SITE_ADDRESS }}"
+            data-site-phone="{{ SITE_PHONE }}"
+            data-site-email="{{ SITE_EMAIL }}"
+            aria-label="{% trans 'Zobrazit kontakt a mapu' %}">
+      <span class="contact-map-trigger__label">{% trans "Kontakt a mapa" %}<br>{{ SITE_ADDRESS }}</span>
+    </button>
+    <div class="reveal rd1 contact-info">
+      <h2 class="section-heading" style="margin-bottom:32px;">{% trans "Najdete nás v srdci Prahy" %}</h2>
+      <address>
+        <div class="contact-info__row">
+          <div>
+            <p style="font-size:15px;font-weight:500;">{{ SITE_NAME }}</p>
+            <p style="font-size:14px;color:rgba(240,233,224,.45);">{{ SITE_ADDRESS }}</p>
+          </div>
+        </div>
+        <div class="contact-info__row">
+          <a href="tel:{{ SITE_PHONE|cut:' ' }}" style="font-size:15px;font-weight:500;text-decoration:none;">{{ SITE_PHONE }}</a>
+        </div>
+        <div class="contact-info__row">
+          <a href="mailto:{{ SITE_EMAIL }}" style="font-size:14px;color:rgba(240,233,224,.5);text-decoration:none;">{{ SITE_EMAIL }}</a>
+        </div>
+      </address>
+      <div class="contact-hours">
+        <p style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:14px;">{% trans "Otevírací doba" %}</p>
+        <div class="contact-hours-grid">
+          <span style="color:rgba(240,233,224,.45);">{% trans "Po — Pá" %}</span><span>10:00 — 21:00</span>
+          <span style="color:rgba(240,233,224,.45);">{% trans "So — Ne" %}</span><span>10:00 — 19:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/faq_section.html" %}
+
+<section class="cta-banner">
+  <div class="cta-banner__glow" aria-hidden="true"></div>
+  <div class="container" style="position:relative;z-index:1;max-width:700px;text-align:center;">
+    <h2 class="reveal section-heading section-heading--center" style="margin-bottom:36px;">{% trans "Odhalte svůj vlastní ráj" %}</h2>
+    <a href="{% url 'reservations:wizard' %}" class="reveal rd1 btn btn--primary btn--lg" data-track-cta="cta_banner">{% trans "Rezervovat masáž" %}</a>
+  </div>
+</section>
+{% endblock %}

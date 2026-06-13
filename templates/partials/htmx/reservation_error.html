@@ -1,0 +1,5 @@
+{% load i18n %}
+<div class="wizard-success">
+  <p style="color:var(--color-crimson);margin-bottom:16px;">{{ message }}</p>
+  <button type="button" class="btn btn--outline" hx-get="{% url 'reservations:step' step=3 %}" hx-target="#wizard-container">{% trans "Vybrat jiný termín" %}</button>
+</div>

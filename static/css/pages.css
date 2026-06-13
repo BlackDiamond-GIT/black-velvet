@@ -1,0 +1,318 @@
+.prices-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prices-table th,
+.prices-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid rgba(190, 30, 45, 0.1);
+}
+
+.prices-table th {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.prices-table td {
+  font-size: 14px;
+  color: rgba(240, 233, 224, 0.75);
+}
+
+.prices-table tr:hover td {
+  background: rgba(190, 30, 45, 0.04);
+}
+
+.prices-category {
+  margin-bottom: clamp(56px, 7vw, 80px);
+}
+
+.prices-category h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 3vw, 36px);
+  margin-bottom: clamp(28px, 4vw, 40px);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(190, 30, 45, 0.15);
+}
+
+.contact-hero {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.contact-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.contact-hero__intro {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-top: 16px;
+  max-width: 640px;
+  line-height: 1.65;
+}
+
+.contact-quick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--color-card);
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-card:hover,
+.contact-card:focus-visible {
+  border-color: rgba(190, 30, 45, 0.35);
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.contact-card__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.contact-card__value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.contact-card__value--muted {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(240, 233, 224, 0.5);
+}
+
+.contact-card__meta {
+  font-size: 14px;
+  color: rgba(240, 233, 224, 0.45);
+  line-height: 1.5;
+}
+
+.contact-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 720px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.contact-map-card {
+  background: var(--color-card);
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  border-radius: 4px;
+  padding: clamp(24px, 3.5vw, 36px);
+}
+
+.contact-map-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 500;
+  margin-bottom: clamp(20px, 3vw, 28px);
+  color: var(--color-text);
+}
+
+.contact-map-card__embed {
+  height: clamp(220px, 32vw, 320px);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--color-void);
+  border: 1px solid rgba(190, 30, 45, 0.1);
+}
+
+.contact-map-card__embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.contact-map-card__link {
+  width: 100%;
+  margin-top: 16px;
+  min-height: 44px;
+}
+
+.contact-hours-bar {
+  padding: clamp(24px, 3.5vw, 36px);
+  background: var(--color-card);
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  border-radius: 4px;
+}
+
+.contact-hours-bar__title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 224, 0.35);
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+.contact-hours-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.contact-hours-bar__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-hours-bar__day {
+  font-size: 13px;
+  color: rgba(240, 233, 224, 0.45);
+}
+
+.contact-hours-bar__time {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.page-text-content,
+.privacy-content {
+  max-width: 720px;
+  line-height: 1.75;
+  color: rgba(240, 233, 224, 0.65);
+}
+
+.page-text-content__lead {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+.page-text-content h2,
+.privacy-content h2 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  margin: 32px 0 12px;
+  color: var(--color-text);
+}
+
+.page-text-content__list {
+  margin: 0 0 24px;
+  padding-left: 1.25em;
+}
+
+.page-text-content__list li {
+  margin-bottom: 10px;
+}
+
+.page-text-content__list li:last-child {
+  margin-bottom: 0;
+}
+
+.page-text-content__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.page-text-content__cta .btn {
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  .page-text-content h2,
+  .privacy-content h2 {
+    font-size: clamp(20px, 5vw, 24px);
+    margin-top: 28px;
+  }
+
+  .page-text-content__lead {
+    font-size: 15px;
+  }
+
+  .page-text-content__cta {
+    flex-direction: column;
+  }
+
+  .page-text-content__cta .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-main {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-quick {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .prices-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-quick {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hours-bar__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .prices-table th,
+  .prices-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-hero {
+    margin-bottom: clamp(28px, 5vw, 40px);
+  }
+
+  .contact-hero__title {
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.2;
+  }
+
+  .contact-hero__intro {
+    font-size: 15px;
+  }
+
+  .contact-card__value {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}

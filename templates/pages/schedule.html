@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+
+  <header class="schedule-hero reveal">
+    <h1 class="schedule-hero__title">{% trans "Rozvrh masáží" %}</h1>
+    <p class="schedule-hero__intro">{% trans "Vyberte masérku a prohlédněte si její týdenní směny. Volné termíny rezervujte jedním kliknutím." %}</p>
+  </header>
+
+  <section class="schedule-week reveal" aria-labelledby="schedule-week-title">
+    <div class="schedule-week__head">
+      <h2 id="schedule-week-title" class="schedule-section__title">{% trans "Týdenní rozvrh" %}</h2>
+      <div class="schedule-legend">
+        <div class="schedule-legend__item">
+          <span class="schedule-legend__swatch schedule-legend__swatch--avail"></span>
+          <span>{% trans "Volný termín" %}</span>
+        </div>
+        <div class="schedule-legend__item">
+          <span class="schedule-legend__swatch schedule-legend__swatch--booked"></span>
+          <span>{% trans "Obsazeno" %}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="masseuse-tabs" role="tablist" aria-label="{% trans 'Masérky' %}">
+      {% for item in masseuse_schedules %}
+      <button type="button"
+              class="masseuse-tabs__btn{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              id="masseuse-tab-{{ item.masseuse.id }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="masseuse-panel-{{ item.masseuse.id }}"
+              data-masseuse-tab="{{ item.masseuse.id }}">
+        {{ item.masseuse.name }}
+      </button>
+      {% endfor %}
+    </div>
+
+    <div class="masseuse-panels">
+      {% for item in masseuse_schedules %}
+      <article class="masseuse-panel{% if forloop.first %} is-active{% endif %}"
+               id="masseuse-panel-{{ item.masseuse.id }}"
+               role="tabpanel"
+               aria-labelledby="masseuse-tab-{{ item.masseuse.id }}"
+               data-masseuse-panel="{{ item.masseuse.id }}"
+               {% if not forloop.first %}hidden{% endif %}>
+        <header class="masseuse-panel__head">
+          <div class="masseuse-panel__info">
+            <h3 class="masseuse-panel__name">{{ item.masseuse.name }}</h3>
+            <p class="masseuse-panel__spec">{{ item.masseuse.specializations }}</p>
+          </div>
+          <a href="{{ item.masseuse.get_absolute_url }}" class="btn btn--outline masseuse-panel__profile">
+            {% trans "Profil masérky" %}
+          </a>
+        </header>
+
+        <div class="week-grid">
+          {% for day in item.days %}
+          <section class="week-day{% if day.is_today %} week-day--today{% endif %}">
+            <header class="week-day__head">
+              <span class="week-day__label">{{ day.label }}</span>
+              {% if day.is_today %}
+              <span class="week-day__badge">{% trans "Dnes" %}</span>
+              {% endif %}
+            </header>
+
+            {% if day.slots %}
+            <ul class="week-day__slots">
+              {% for slot in day.slots %}
+              <li class="week-slot{% if slot.is_booked %} week-slot--booked{% endif %}">
+                {% if slot.is_booked %}
+                <div class="week-slot__inner">
+                  <span class="week-slot__time">{{ slot.time }}</span>
+                  <span class="week-slot__svc">{{ slot.service_name }}</span>
+                  <span class="week-slot__status">{% trans "Obsazeno" %}</span>
+                </div>
+                {% else %}
+                <a href="{% url 'reservations:wizard' %}" class="week-slot__inner week-slot__link" data-track-cta="schedule_slot">
+                  <span class="week-slot__time">{{ slot.time }}</span>
+                  <span class="week-slot__svc">{{ slot.service_name }}</span>
+                  <span class="week-slot__status week-slot__status--avail">{% trans "Rezervovat" %}</span>
+                </a>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <p class="week-day__empty">{% trans "Volno" %}</p>
+            {% endif %}
+          </section>
+          {% endfor %}
+        </div>
+      </article>
+      {% empty %}
+      <p class="schedule-empty">{% trans "Rozvrh bude brzy k dispozici." %}</p>
+      {% endfor %}
+    </div>
+
+    <p class="schedule-hint">{% trans "Klikněte na volný termín pro přechod k rezervaci." %}</p>
+  </section>
+
+  <div class="schedule-cta reveal">
+    <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="schedule_rezervace">
+      {% trans "Rezervovat masáž" %}
+    </a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/schedule.js' %}" defer></script>
+{% endblock %}

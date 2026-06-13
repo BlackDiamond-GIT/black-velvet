@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/reservation.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad" style="min-height:80svh;">
+  {% include "partials/breadcrumbs.html" %}
+  <div class="page-header reveal" style="text-align:center;">
+    <h1 class="section-heading section-heading--center">{% trans "Rezervujte si masáž online" %}</h1>
+  </div>
+  <div id="wizard-container" class="wizard reveal"
+       hx-get="{% url 'reservations:step' step=wizard_step %}"
+       hx-trigger="load"
+       hx-swap="innerHTML">
+    <p class="text-muted" style="text-align:center;">{% trans "Načítání..." %}</p>
+  </div>
+</div>
+{% endblock %}

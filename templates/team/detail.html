@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/team.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad team-detail-page">
+  {% include "partials/breadcrumbs.html" %}
+  <div class="team-detail__hero reveal">
+    <div class="team-detail__photo">
+      {% include "partials/media_gallery.html" with primary_image=masseuse.photo secondary_image=masseuse.photo gallery_variant="detail-team" gallery_alt=masseuse.name|add:" — masérka Black Velvet Spa Praha" gallery_width=600 gallery_height=800 %}
+    </div>
+    <div class="team-detail__content">
+      <h1 class="team-detail__name">{{ masseuse.name }}</h1>
+      <p class="team-detail__spec">{{ masseuse.specializations }}</p>
+      <p class="team-detail__meta">{{ masseuse.experience_display }} {% trans "praxe" %}</p>
+      <div class="text-muted team-detail__bio">{{ masseuse.bio|linebreaks }}</div>
+      {% if masseuse.services.exists %}
+      <h2 class="team-detail__services-title">{% trans "Specializace" %}</h2>
+      <ul class="team-detail__services">
+        {% for svc in masseuse.services.all %}
+        <li><a href="{{ svc.get_absolute_url }}" class="footer-link">{{ svc.name }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="masseuse_detail_rezervace">{% trans "Rezervovat s touto masérkou" %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

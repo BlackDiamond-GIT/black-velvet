@@ -1,0 +1,158 @@
+.wizard {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wizard-step-indicator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48px;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.wizard-step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.wizard-step__dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wizard-step__label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.wizard-step__line {
+  flex: 1;
+  height: 1px;
+  margin: 0 8px;
+  min-width: 12px;
+}
+
+.wiz-svc-grid,
+.wiz-mas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.wiz-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.wiz-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.wiz-card {
+  padding: 20px;
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  background: transparent;
+  text-align: left;
+  color: var(--color-text);
+  transition: border-color 0.25s ease, background 0.25s ease;
+  min-height: 44px;
+}
+
+.wiz-card:hover,
+.wiz-card.is-selected {
+  border-color: var(--color-crimson);
+  background: rgba(190, 30, 45, 0.08);
+}
+
+.wiz-slot-btn {
+  padding: 12px 8px;
+  border: 1px solid rgba(190, 30, 45, 0.2);
+  border-radius: 2px;
+  background: rgba(190, 30, 45, 0.05);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.wiz-slot-btn.is-selected,
+.wiz-slot-btn:hover {
+  background: var(--color-crimson);
+  border-color: var(--color-crimson);
+  color: #fff;
+}
+
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.wizard-summary {
+  background: rgba(190, 30, 45, 0.05);
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  border-radius: 2px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.wizard-summary dt {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 4px;
+}
+
+.wizard-summary dd {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.wizard-success {
+  text-align: center;
+  padding: 48px 24px;
+  animation: confirm-pop 0.4s ease both;
+}
+
+@media (max-width: 1020px) {
+  .wiz-svc-grid,
+  .wiz-mas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .wiz-svc-grid,
+  .wiz-mas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wiz-slots-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+  <div class="page-header reveal">
+    <h1>{% trans "Zásady ochrany osobních údajů" %}</h1>
+  </div>
+  <div class="page-text-content privacy-content reveal">
+    <p>{% trans "Black Velvet Spa zpracovává osobní údaje v souladu s nařízením GDPR a platnými právními předpisy České republiky." %}</p>
+    <h2>{% trans "Správce údajů" %}</h2>
+    <p>{{ SITE_NAME }}, {{ SITE_ADDRESS }}, {{ SITE_EMAIL }}</p>
+    <h2>{% trans "Účel zpracování" %}</h2>
+    <p>{% trans "Osobní údaje zpracováváme za účelem rezervace masáží, komunikace s klienty a plnění smluvních povinností." %}</p>
+    <h2>{% trans "Vaše práva" %}</h2>
+    <p>{% trans "Máte právo na přístup, opravu, výmaz a přenositelnost údajů. Kontaktujte nás na" %} <a href="mailto:{{ SITE_EMAIL }}" class="footer-link">{{ SITE_EMAIL }}</a>.</p>
+  </div>
+</div>
+{% endblock %}

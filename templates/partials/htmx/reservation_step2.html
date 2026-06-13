@@ -1,0 +1,26 @@
+{% load i18n %}
+{% include "partials/htmx/wizard_indicator.html" %}
+<form hx-post="{% url 'reservations:step' step=2 %}" hx-target="#wizard-container" hx-swap="innerHTML">
+  {% csrf_token %}
+  <h2 style="font-family:var(--font-heading);font-size:24px;margin-bottom:24px;">{% trans "Vyberte masérku" %}</h2>
+  {% if selected_service %}
+  <p class="text-muted" style="margin-bottom:24px;">{% trans "Vybraná masáž:" %} <strong>{{ selected_service.name }}</strong></p>
+  {% endif %}
+  <div class="wiz-mas-grid">
+    <label class="wiz-card">
+      <input type="radio" name="masseuse" value="" style="display:none;" checked>
+      <h3 style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;">{% trans "Libovolná masérka" %}</h3>
+    </label>
+    {% for masseuse in masseuses %}
+    <label class="wiz-card">
+      <input type="radio" name="masseuse" value="{{ masseuse.pk }}" style="display:none;">
+      <h3 style="font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">{{ masseuse.name }}</h3>
+      <p style="font-size:12px;color:var(--color-text-muted);">{{ masseuse.specializations }}</p>
+    </label>
+    {% endfor %}
+  </div>
+  <div class="wizard-actions">
+    <button type="button" class="btn btn--outline" hx-get="{% url 'reservations:step' step=1 %}" hx-target="#wizard-container">← {% trans "Zpět" %}</button>
+    <button type="submit" class="btn btn--primary">{% trans "Pokračovat" %} →</button>
+  </div>
+</form>

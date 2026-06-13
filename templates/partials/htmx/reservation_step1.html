@@ -1,0 +1,20 @@
+{% load i18n %}
+{% include "partials/htmx/wizard_indicator.html" %}
+<form hx-post="{% url 'reservations:step' step=1 %}" hx-target="#wizard-container" hx-swap="innerHTML">
+  {% csrf_token %}
+  <h2 style="font-family:var(--font-heading);font-size:24px;margin-bottom:24px;">{% trans "Vyberte masáž" %}</h2>
+  <div class="wiz-svc-grid">
+    {% for service in services %}
+    <label class="wiz-card">
+      <input type="radio" name="service" value="{{ service.pk }}" style="display:none;" required>
+      <h3 style="font-family:var(--font-heading);font-size:18px;font-style:italic;margin-bottom:8px;">{{ service.name }}</h3>
+      <p style="font-size:12px;color:var(--color-text-muted);margin-bottom:8px;">{{ service.short_desc }}</p>
+      <p style="font-size:11px;color:var(--color-gold);">{{ service.duration_display }} · {{ service.price_label }}</p>
+    </label>
+    {% endfor %}
+  </div>
+  <div class="wizard-actions">
+    <span></span>
+    <button type="submit" class="btn btn--primary">{% trans "Pokračovat" %} →</button>
+  </div>
+</form>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+  <header class="page-header reveal">
+    <h1>{% trans "O nás" %}</h1>
+    <p class="page-text-content__lead">{% trans "Black Velvet Spa — luxusní masážní salon v srdci Prahy, kde se setkává profesionalita s klidem a diskrétní atmosférou." %}</p>
+  </header>
+
+  <div class="page-text-content reveal">
+    <h2>{% trans "Náš příběh" %}</h2>
+    <p>{% trans "Vytvořili jsme prostor, kde se můžete plně uvolnit a na chvíli zapomenout na každodenní shon. Každá masáž je vedena zkušenými masérkami, které dbají na vaše individuální potřeby a komfort." %}</p>
+
+    <h2>{% trans "Co nás odlišuje" %}</h2>
+    <ul class="page-text-content__list">
+      <li>{% trans "Profesionální tým certifikovaných masérek" %}</li>
+      <li>{% trans "Klidné a diskrétní prostředí v centru Prahy 1" %}</li>
+      <li>{% trans "Široká nabídka relaxačních a terapeutických masáží" %}</li>
+      <li>{% trans "Jednoduchá online rezervace termínů" %}</li>
+    </ul>
+
+    <h2>{% trans "Naše hodnoty" %}</h2>
+    <p>{% trans "Respekt, diskrétnost a péče o detail jsou pro nás základem každé návštěvy. Věříme, že kvalitní masáž obnovuje tělo i mysl — a proto klademe důraz na osobní přístup ke každému klientovi." %}</p>
+
+    <div class="page-text-content__cta">
+      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="about_rezervace">{% trans "Rezervovat masáž" %}</a>
+      <a href="{% url 'pages:contact' %}" class="btn btn--outline">{% trans "Kontakt" %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

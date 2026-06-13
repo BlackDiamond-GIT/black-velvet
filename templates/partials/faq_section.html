@@ -1,0 +1,23 @@
+{% load i18n %}
+{% if faqs %}
+<section class="section-pad" style="background:var(--color-surface);">
+  <div class="container" style="max-width:800px;">
+    <div class="reveal section-header section-header--center">
+      <h2 class="section-heading section-heading--center">{% trans "Máte otázky? Máme odpovědi" %}</h2>
+    </div>
+    <div class="reveal">
+      {% for faq in faqs %}
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" aria-expanded="false">
+          <span class="faq-q-text">{{ faq.question }}</span>
+          <span class="faq-diamond" aria-hidden="true">◆</span>
+        </button>
+        <div class="faq-body">
+          <p style="font-size:14px;line-height:1.75;color:rgba(240,233,224,.5);padding:4px 20px 24px;">{{ faq.answer }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

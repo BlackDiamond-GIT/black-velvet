@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block og_type %}article{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% if post.image %}<link rel="preload" as="image" href="{{ post.image.url }}">{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad">
+  {% include "partials/breadcrumbs.html" %}
+  <article class="reveal" style="max-width:800px;margin:0 auto;">
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }} — Black Velvet Blog Praha" class="blog-article__hero" width="1200" height="630" loading="eager" fetchpriority="high">
+    {% endif %}
+    <h1 class="section-heading" style="margin-bottom:16px;">{{ post.title }}</h1>
+    <p class="blog-article__meta">{{ post.published_at|date:"j. n. Y" }} · {{ post.author_name }}</p>
+    <div class="blog-article__content">{{ post.content|safe }}</div>
+  </article>
+  {% if related_posts %}
+  <section class="subsection-header">
+    <h2 class="section-heading">{% trans "Související články" %}</h2>
+    <div class="blog-grid">
+      {% for post in related_posts %}
+      <a href="{{ post.get_absolute_url }}" class="blog-card">
+        <div class="blog-card__body">
+          <h3 class="blog-card__title">{{ post.title }}</h3>
+          <p class="blog-card__excerpt">{{ post.excerpt }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% include "partials/faq_section.html" %}
+{% endblock %}

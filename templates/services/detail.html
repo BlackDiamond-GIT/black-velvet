@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container section-pad service-detail-page">
+  {% include "partials/breadcrumbs.html" %}
+  <article class="service-detail__hero reveal">
+    <div class="service-detail__media">
+      {% include "partials/media_gallery.html" with primary_image=service.image secondary_image=service.image gallery_variant="detail-service" gallery_alt=service.name|add:" Praha — "|add:service.short_desc gallery_width=1200 gallery_height=800 gallery_placeholder=service.name %}
+    </div>
+    <div class="service-detail__aside">
+      <h1 class="service-detail__title">{{ service.name }}</h1>
+      <p class="service-detail__intro">{{ service.short_desc }}</p>
+      <dl class="service-detail__meta">
+        <div class="service-detail__meta-item">
+          <dt>{% trans "Cena od" %}</dt>
+          <dd>{{ service.price_label }}</dd>
+        </div>
+        <div class="service-detail__meta-item">
+          <dt>{% trans "Délka" %}</dt>
+          <dd>{{ service.duration_display }}</dd>
+        </div>
+      </dl>
+      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="service_detail_rezervace">{% trans "Rezervovat masáž" %}</a>
+    </div>
+  </article>
+  <div class="service-detail__content reveal">
+    {{ service.description|linebreaks }}
+  </div>
+  {% if masseuses %}
+  <section class="service-detail__team reveal">
+    <h2 class="service-detail__team-title">{% trans "Masérky pro tuto masáž" %}</h2>
+    <ul class="service-detail__team-list">
+      {% for masseuse in masseuses %}
+      <li><a href="{{ masseuse.get_absolute_url }}" class="footer-link">{{ masseuse.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  {% if related_services %}
+  <section class="subsection-header">
+    <h2 class="section-heading">{% trans "Další masáže" %}</h2>
+    <div class="services-grid">
+      {% for service in related_services %}
+        {% include "partials/service_card.html" %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% include "partials/faq_section.html" %}
+{% endblock %}

@@ -1,0 +1,7 @@
+django>=5.1
+psycopg2-binary
+django-modeltranslation
+pillow
+python-decouple
+whitenoise
+django-htmx

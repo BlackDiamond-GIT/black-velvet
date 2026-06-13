@@ -1,0 +1,47 @@
+{% load i18n %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid" style="margin-bottom:64px;">
+      <div>
+        {% include "partials/logo.html" with logo_class="site-logo--footer" %}
+        <p class="footer-tagline">{% trans "Masáž a relaxace" %}<br>{% trans "v srdci Prahy" %}</p>
+        <address style="font-style:normal;font-size:13px;color:rgba(240,233,224,.38);line-height:1.8;">
+          {{ SITE_ADDRESS }}<br>
+          <a href="tel:{{ SITE_PHONE|cut:' ' }}" class="footer-link">{{ SITE_PHONE }}</a><br>
+          <a href="mailto:{{ SITE_EMAIL }}" class="footer-link">{{ SITE_EMAIL }}</a>
+        </address>
+        {% include "partials/social_links.html" %}
+      </div>
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">{% trans "Navigace" %}</p>
+        <nav style="display:flex;flex-direction:column;gap:12px;">
+          <a href="{% url 'core:home' %}" class="footer-link">{% trans "Hlavní strana" %}</a>
+          <a href="{% url 'team:list' %}" class="footer-link">{% trans "Masérky" %}</a>
+          <a href="{% url 'pages:schedule' %}" class="footer-link">{% trans "Rozvrh" %}</a>
+          <a href="{% url 'blog:list' %}" class="footer-link">{% trans "Blog" %}</a>
+          <a href="{% url 'pages:contact' %}" class="footer-link">{% trans "Kontakt" %}</a>
+          <a href="{% url 'reservations:wizard' %}" class="footer-link">{% trans "Rezervace" %}</a>
+        </nav>
+      </div>
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">{% trans "Masáže" %}</p>
+        <nav style="display:flex;flex-direction:column;gap:12px;">
+          <a href="{% url 'services:list' %}" class="footer-link">{% trans "Všechny masáže" %}</a>
+          <a href="{% url 'pages:prices' %}" class="footer-link">{% trans "Ceník" %}</a>
+        </nav>
+      </div>
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">{% trans "Informace" %}</p>
+        <nav style="display:flex;flex-direction:column;gap:12px;">
+          <a href="{% url 'pages:about' %}" class="footer-link">{% trans "O nás" %}</a>
+          <a href="{% url 'pages:salon_rules' %}" class="footer-link">{% trans "Pravidla salonu" %}</a>
+          <a href="{% url 'pages:privacy' %}" class="footer-link">{% trans "Zásady ochrany" %}</a>
+        </nav>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>© {% now "Y" %} {{ SITE_NAME }}, {{ SITE_CITY }}. {% trans "Všechna práva vyhrazena." %}</p>
+      <p>{{ SITE_ADDRESS }}</p>
+    </div>
+  </div>
+</footer>

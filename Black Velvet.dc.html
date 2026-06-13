@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Raleway',sans-serif;background:#07070B;color:#EFE9DF;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:0.025;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4t5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92ZBKLseWPpQ1kmTmS9Aco/9DuTe6kPTVPZeRzUVrSUzJPkBYJF0JiBVAHg5F5A4FrfjhKWJYChh1qETNQa6CgD9xOeKZQR");background-size:200px 200px;}
+
+@keyframes glow-pulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:.9;transform:scale(1.07);}}
+@keyframes glow-pulse2{0%,100%{opacity:.3;}50%{opacity:.55;}}
+@keyframes hero-in{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ember-rise{0%{transform:translateY(0) translateX(0);opacity:0;}15%{opacity:.65;}85%{opacity:.15;}100%{transform:translateY(-90vh) translateX(var(--drift,24px));opacity:0;}}
+@keyframes scroll-tick{0%,100%{transform:translateY(0);opacity:.9;}50%{transform:translateY(9px);opacity:.2;}}
+@keyframes t-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bar-grow{from{width:0;}to{width:var(--bw,100%);}}
+@keyframes spin-slow{to{transform:rotate(360deg);}}
+@keyframes confirm-pop{0%{opacity:0;transform:scale(.9);}100%{opacity:1;transform:scale(1);}}
+@keyframes line-grow{from{height:0;}to{height:var(--lh,60px);}}
+
+.site-nav{transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;}
+.site-nav.scrolled{--nav-bg:rgba(7,7,11,.93);--nav-border:rgba(190,30,45,.18);backdrop-filter:blur(24px);}
+.nav-link{position:relative;text-decoration:none;}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:#BE1E2D;transition:width .3s ease;}
+.nav-link:hover::after{width:100%;}
+.nav-link:hover{--nl-c:#EFE9DF;}
+
+.mobile-overlay{position:fixed;inset:0;z-index:500;background:#07070B;transform:translateX(100%);transition:transform .45s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.mobile-overlay.open{transform:translateX(0);}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}.rd4{transition-delay:.4s;}
+
+.faq-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1);}
+.faq-diamond{display:inline-block;font-size:9px;color:#C9A98A;transition:transform .4s cubic-bezier(.4,0,.2,1),color .3s ease;line-height:1;}
+.faq-item.open .faq-diamond{transform:rotate(45deg) scale(1.5);color:#BE1E2D;}
+.faq-item.open .faq-q-text,.faq-trigger:hover .faq-q-text{--faq-qc:#EFE9DF;}
+.faq-item.open{--faq-bc:rgba(190,30,45,.5);}
+
+.svc-card-img{transition:transform .7s cubic-bezier(.4,0,.2,1);}
+.svc-card:hover .svc-card-img{transform:scale(1.06);}
+.svc-card-overlay{transition:opacity .4s ease;}
+.svc-card:hover{--svc-ov:1;--svc-iy:0px;--svc-iop:1;}
+.svc-card-info{transition:transform .4s ease,opacity .4s ease;}
+.svc-card-link{transition:color .25s ease,letter-spacing .25s ease;}
+.svc-card-link:hover{color:#BE1E2D !important;letter-spacing:.18em;}
+
+.team-card-img{transition:transform .65s ease;}
+.team-card:hover .team-card-img{transform:scale(1.05);}
+.team-card:hover .team-card-name{color:#C9A98A !important;}
+.team-card-name{transition:color .3s ease;}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;}
+.wiz-svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.wiz-mas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.wiz-slots-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.wiz-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+.wiz-step-indicator{display:flex;align-items:center;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;}
+@media(max-width:900px){.loc-grid{grid-template-columns:1fr;}}
+
+@media(max-width:1020px){.services-grid{grid-template-columns:repeat(2,1fr);}.team-grid{grid-template-columns:repeat(2,1fr);}.process-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:repeat(2,1fr);}.wiz-svc-grid{grid-template-columns:repeat(2,1fr);}.wiz-mas-grid{grid-template-columns:repeat(2,1fr);}.blog-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.services-grid{grid-template-columns:1fr;}.team-grid{grid-template-columns:repeat(2,1fr);}.process-grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}.wiz-svc-grid{grid-template-columns:repeat(2,1fr);}.wiz-mas-grid{grid-template-columns:repeat(2,1fr);}.wiz-slots-grid{grid-template-columns:repeat(4,1fr);}.blog-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){.desktop-nav{display:none !important;}.mobile-menu-btn{display:flex !important;}}
+@media(min-width:769px){.mobile-menu-btn{display:none !important;}}
+
+.form-input{width:100%;background:rgba(190,30,45,.04);border:1px solid rgba(190,30,45,.18);color:#EFE9DF;font-family:'Raleway',sans-serif;font-size:16px;padding:14px 18px;border-radius:2px;outline:none;transition:border-color .25s ease,background .25s ease;}
+.form-input::placeholder{color:rgba(240,233,224,.22);}
+.form-input:focus{border-color:rgba(190,30,45,.6);background:rgba(190,30,45,.07);}
+textarea.form-input{resize:vertical;min-height:120px;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:#07070B;}
+::-webkit-scrollbar-thumb{background:#BE1E2D;border-radius:2px;}
+::selection{background:rgba(190,30,45,.28);color:#EFE9DF;}
+</style>
+</helmet>
+
+<!-- ═══ PROTOTYPE NAV ═══ -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#000;height:32px;display:flex;align-items:center;padding:0 16px;gap:0;overflow-x:auto;border-bottom:1px solid #1A1A1A;flex-shrink:0;">
+  <span style="font-family:monospace;font-size:9px;letter-spacing:.15em;color:#444;text-transform:uppercase;margin-right:20px;white-space:nowrap;flex-shrink:0;">✦ Design Preview</span>
+  <button onClick="{{ goHome }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageHomeColor }};border-bottom:{{ pageHomeBorder }};white-space:nowrap;transition:color .2s ease;">Hlavní</button>
+  <button onClick="{{ goServices }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageServicesColor }};border-bottom:{{ pageServicesBorder }};white-space:nowrap;transition:color .2s ease;">Masáže</button>
+  <button onClick="{{ goTeam }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageTeamColor }};border-bottom:{{ pageTeamBorder }};white-space:nowrap;transition:color .2s ease;">Masérky</button>
+  <button onClick="{{ goPrices }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pagePricesColor }};border-bottom:{{ pagePricesBorder }};white-space:nowrap;transition:color .2s ease;">Ceník</button>
+  <button onClick="{{ goBlog }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageBlogColor }};border-bottom:{{ pageBlogBorder }};white-space:nowrap;transition:color .2s ease;">Blog</button>
+  <button onClick="{{ goContact }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageContactColor }};border-bottom:{{ pageContactBorder }};white-space:nowrap;transition:color .2s ease;">Kontakt</button>
+  <button onClick="{{ goReservation }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageReservationColor }};border-bottom:{{ pageReservationBorder }};white-space:nowrap;transition:color .2s ease;">Rezervace</button>
+  <button onClick="{{ goSystem }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:32px;color:{{ pageSystemColor }};border-bottom:{{ pageSystemBorder }};white-space:nowrap;transition:color .2s ease;">Design System</button>
+</div>
+
+<!-- ═══ SITE NAVIGATION ═══ -->
+<header class="site-nav" style="position:fixed;top:32px;left:0;right:0;z-index:100;background:var(--nav-bg,transparent);border-bottom:1px solid var(--nav-border,transparent);height:72px;display:flex;align-items:center;padding:0 clamp(20px,4vw,60px);padding-left:max(clamp(20px,4vw,60px),env(safe-area-inset-left));padding-right:max(clamp(20px,4vw,60px),env(safe-area-inset-right));">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto;">
+    <!-- Logo -->
+    <a href="#" onClick="{{ goHome }}" style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#EFE9DF;text-decoration:none;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+      <span style="color:#BE1E2D;font-size:8px;">◆</span>
+      BLACK ELIXIR
+      <span style="color:rgba(240,233,224,.2);font-size:8px;">◆</span>
+    </a>
+    <!-- Desktop Nav -->
+    <nav class="desktop-nav" style="display:flex;align-items:center;gap:32px;">
+      <button onClick="{{ goServices }}" class="nav-link" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--nl-c,rgba(240,233,224,.65));">Masáže</button>
+      <button onClick="{{ goTeam }}" class="nav-link" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--nl-c,rgba(240,233,224,.65));">Masérky</button>
+      <button onClick="{{ goPrices }}" class="nav-link" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--nl-c,rgba(240,233,224,.65));">Ceník</button>
+      <button onClick="{{ goBlog }}" class="nav-link" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--nl-c,rgba(240,233,224,.65));">Blog</button>
+      <button onClick="{{ goContact }}" class="nav-link" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--nl-c,rgba(240,233,224,.65));">Kontakt</button>
+    </nav>
+    <!-- Right side -->
+    <div class="desktop-nav" style="display:flex;align-items:center;gap:20px;">
+      <!-- Lang -->
+      <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(190,30,45,.2);border-radius:2px;overflow:hidden;">
+        <button onClick="{{ setCs }}" style="background:{{ csColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ csFg }};padding:6px 10px;transition:background .2s ease;">CS</button>
+        <button onClick="{{ setEn }}" style="background:{{ enColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ enFg }};padding:6px 10px;transition:background .2s ease;">EN</button>
+        <button onClick="{{ setRu }}" style="background:{{ ruColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ ruFg }};padding:6px 10px;transition:background .2s ease;">RU</button>
+      </div>
+      <!-- Rezervace CTA -->
+      <button onClick="{{ goReservation }}" style="background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#EFE9DF;padding:10px 24px;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;min-height:40px;" style-hover="background:#9A1524;box-shadow:0 0 28px rgba(190,30,45,.45);">Rezervace</button>
+    </div>
+    <!-- Mobile hamburger -->
+    <button class="mobile-menu-btn" onClick="{{ toggleMenu }}" style="background:none;border:1px solid rgba(190,30,45,.25);border-radius:2px;cursor:pointer;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;" aria-label="Menu">
+      <span style="display:block;width:18px;height:1px;background:#EFE9DF;"></span>
+      <span style="display:block;width:12px;height:1px;background:#BE1E2D;"></span>
+      <span style="display:block;width:18px;height:1px;background:#EFE9DF;"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══ MOBILE OVERLAY ═══ -->
+<div class="{{ menuClass }}">
+  <div style="padding:calc(32px + env(safe-area-inset-top)) clamp(24px,6vw,48px) 48px;min-height:100svh;display:flex;flex-direction:column;">
+    <!-- Top bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:64px;">
+      <span style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#EFE9DF;">
+        <span style="color:#BE1E2D;font-size:8px;">◆</span> BLACK ELIXIR
+      </span>
+      <button onClick="{{ closeMenu }}" style="background:none;border:1px solid rgba(190,30,45,.25);border-radius:2px;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:rgba(240,233,224,.6);font-size:18px;font-weight:300;" aria-label="Zavřít">✕</button>
+    </div>
+    <!-- Nav links -->
+    <nav style="flex:1;display:flex;flex-direction:column;gap:0;">
+      <a href="#" onClick="{{ closeMenu }}" class="mobile-nav-link" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:400;color:#EFE9DF;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(190,30,45,.1);line-height:1.1;" style-hover="color:#BE1E2D;">Masáže</a>
+      <a href="#" onClick="{{ closeMenu }}" class="mobile-nav-link" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:400;color:#EFE9DF;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(190,30,45,.1);line-height:1.1;" style-hover="color:#BE1E2D;">Masérky</a>
+      <a href="#" onClick="{{ closeMenu }}" class="mobile-nav-link" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:400;color:#EFE9DF;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(190,30,45,.1);line-height:1.1;" style-hover="color:#BE1E2D;">Ceník</a>
+      <a href="#" onClick="{{ closeMenu }}" class="mobile-nav-link" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:400;color:#EFE9DF;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(190,30,45,.1);line-height:1.1;" style-hover="color:#BE1E2D;">Blog</a>
+      <a href="#" onClick="{{ closeMenu }}" class="mobile-nav-link" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:400;color:#EFE9DF;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(190,30,45,.1);line-height:1.1;" style-hover="color:#BE1E2D;">Kontakt</a>
+    </nav>
+    <!-- Bottom -->
+    <div style="padding-top:40px;display:flex;flex-direction:column;gap:20px;">
+      <button onClick="{{ goReservation }}" style="background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;padding:16px 32px;border-radius:2px;min-height:52px;width:100%;">Rezervovat masáž</button>
+      <div style="display:flex;gap:0;border:1px solid rgba(190,30,45,.2);border-radius:2px;overflow:hidden;width:fit-content;">
+        <button onClick="{{ setCs }}" style="background:{{ csColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;color:{{ csFg }};padding:8px 16px;">Česky</button>
+        <button onClick="{{ setEn }}" style="background:{{ enColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;color:{{ enFg }};padding:8px 16px;">English</button>
+        <button onClick="{{ setRu }}" style="background:{{ ruColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;color:{{ ruFg }};padding:8px 16px;">Русский</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ PAGE: HOME ════════════════════════════ -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main style="padding-top:32px;">
+
+  <!-- ── HERO ── -->
+  <section style="position:relative;min-height:calc(100svh - 32px);display:flex;align-items:center;overflow:hidden;background:#07070B;">
+    <!-- Glow layers -->
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 105%,rgba(190,30,45,.32) 0%,transparent 65%);animation:glow-pulse 5s ease-in-out infinite alternate;pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 45% 35% at 15% 90%,rgba(190,30,45,.16) 0%,transparent 55%);animation:glow-pulse2 7s 1.5s ease-in-out infinite alternate;pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 30% 25% at 90% 75%,rgba(201,169,138,.06) 0%,transparent 55%);pointer-events:none;"></div>
+    <!-- Damask-ish background pattern -->
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.025;background-image:repeating-linear-gradient(0deg,rgba(190,30,45,1) 0,rgba(190,30,45,1) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(190,30,45,1) 0,rgba(190,30,45,1) 1px,transparent 1px,transparent 40px);"></div>
+    <!-- Large faded X watermark -->
+    <div aria-hidden="true" style="position:absolute;right:-80px;top:50%;transform:translateY(-52%);font-family:'Cormorant Garamond',serif;font-size:clamp(280px,28vw,480px);font-weight:600;color:rgba(190,30,45,.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-.05em;">X</div>
+    <!-- Ember particles -->
+    <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;">
+      <div style="position:absolute;bottom:8%;left:10%;width:2px;height:2px;border-radius:50%;background:#BE1E2D;--drift:22px;animation:ember-rise 7s .3s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:4%;left:26%;width:1px;height:1px;border-radius:50%;background:#C9A98A;--drift:-18px;animation:ember-rise 9s 1.8s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:6%;left:42%;width:2px;height:2px;border-radius:50%;background:#BE1E2D;--drift:30px;animation:ember-rise 8s 3.2s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:12%;left:60%;width:1px;height:1px;border-radius:50%;background:#C9A98A;--drift:-25px;animation:ember-rise 6s .8s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:3%;left:73%;width:2px;height:2px;border-radius:50%;background:#BE1E2D;--drift:14px;animation:ember-rise 10s 2.4s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:9%;left:85%;width:1px;height:1px;border-radius:50%;background:#C9A98A;--drift:-20px;animation:ember-rise 7.5s 4s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:2%;left:18%;width:1px;height:1px;border-radius:50%;background:#BE1E2D;--drift:16px;animation:ember-rise 11s 1.2s ease-in infinite;"></div>
+      <div style="position:absolute;bottom:7%;left:50%;width:2px;height:2px;border-radius:50%;background:#C9A98A;--drift:-12px;animation:ember-rise 8.5s 5s ease-in infinite;"></div>
+    </div>
+    <!-- Hero content -->
+    <div style="position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:100px clamp(24px,4vw,64px) 60px;">
+      <div style="max-width:600px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:#C9A98A;margin-bottom:32px;display:flex;align-items:center;gap:12px;">
+          <span style="display:inline-block;width:28px;height:1px;background:#C9A98A;"></span>
+          Praha 1 · Masáže &amp; Relaxace
+        </p>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7.5vw,92px);font-weight:500;line-height:1.0;color:#EFE9DF;margin-bottom:28px;">
+          Masáž a<br>
+          <em style="font-style:italic;color:#BE1E2D;">relaxace</em><br>
+          Praha
+        </h1>
+        <p style="font-family:'Raleway',sans-serif;font-size:clamp(15px,1.6vw,18px);font-weight:400;line-height:1.65;color:rgba(240,233,224,.55);margin-bottom:52px;">
+          Black Velvet Spa — luxusní masážní salon<br>v srdci Prahy. Odhalte svůj vlastní ráj.
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <button onClick="{{ goReservation }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 44px;background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;" style-hover="background:#9A1524;box-shadow:0 0 40px rgba(190,30,45,.5);">Rezervovat</button>
+          <button onClick="{{ goServices }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 40px;background:transparent;border:1px solid rgba(240,233,224,.22);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.8);border-radius:2px;transition:border-color .25s ease,background .25s ease;" style-hover="border-color:rgba(190,30,45,.5);background:rgba(190,30,45,.06);">Naše masáže</button>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div style="position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;">
+      <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,233,224,.28);">Scroll</span>
+      <div style="width:1px;height:56px;background:linear-gradient(to bottom,#BE1E2D,transparent);animation:scroll-tick 1.8s ease-in-out infinite;"></div>
+    </div>
+    <!-- Bottom-left location -->
+    <div style="position:absolute;bottom:40px;left:clamp(24px,4vw,64px);z-index:2;display:flex;align-items:center;gap:8px;">
+      <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75A1.75 1.75 0 1 1 6 3.25a1.75 1.75 0 0 1 0 3.5z" fill="rgba(201,169,138,.5)"/></svg>
+      <span style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.14em;color:rgba(240,233,224,.3);text-transform:uppercase;">Praha 1, Česká republika</span>
+    </div>
+  </section>
+
+  <!-- ── SERVICES PREVIEW ── -->
+  <section style="padding:clamp(64px,8vw,120px) 0;background:#0E0C14;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="reveal" style="margin-bottom:56px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;">
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;display:flex;align-items:center;gap:10px;"><span style="display:inline-block;width:20px;height:1px;background:#C9A98A;"></span>Naše masáže</p>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:500;line-height:1.1;color:#EFE9DF;">Masáže pro tělo<br><em style="color:#BE1E2D;">i duši</em></h2>
+        </div>
+        <button onClick="{{ goServices }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.5);display:flex;align-items:center;gap:10px;transition:color .25s ease;white-space:nowrap;" style-hover="color:#BE1E2D;">Všechny masáže <span style="font-size:16px;">→</span></button>
+      </div>
+      <div class="services-grid">
+        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
+          <article class="svc-card reveal" style="position:relative;overflow:hidden;cursor:pointer;background:#12101A;">
+            <!-- Image placeholder -->
+            <div style="position:relative;aspect-ratio:3/4;overflow:hidden;">
+              <div class="svc-card-img" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 60%,rgba(190,30,45,.18) 0%,transparent 60%),linear-gradient(145deg,#1A1320 0%,#0C0A12 100%);">
+                <div style="text-align:center;padding:24px;">
+                  <svg width="48" height="60" viewBox="0 0 48 60" fill="none" style="margin-bottom:12px;opacity:.3;"><rect x="4" y="4" width="40" height="52" rx="1" stroke="#C9A98A" stroke-width="0.8"/><rect x="10" y="14" width="28" height="28" rx="1" stroke="rgba(190,30,45,.6)" stroke-width="0.5"/><circle cx="24" cy="28" r="5" fill="rgba(190,30,45,.2)" stroke="rgba(190,30,45,.4)" stroke-width="0.5"/></svg>
+                  <p style="font-family:monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,169,138,.3);text-transform:uppercase;line-height:1.6;">foto masáže<br>800 × 1067</p>
+                </div>
+              </div>
+              <!-- Overlay -->
+              <div class="svc-card-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,11,.95) 0%,rgba(7,7,11,.4) 45%,transparent 100%);opacity:var(--svc-ov,.72);pointer-events:none;"></div>
+              <!-- Badges -->
+              <div style="position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2;">
+                <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,233,224,.7);background:rgba(7,7,11,.6);border:1px solid rgba(190,30,45,.2);padding:4px 10px;border-radius:1px;backdrop-filter:blur(8px);">{{ svc.duration }}</span>
+              </div>
+              <div style="position:absolute;top:14px;right:14px;z-index:2;">
+                <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;color:#C9A98A;background:rgba(7,7,11,.7);border:1px solid rgba(201,169,138,.2);padding:4px 10px;border-radius:1px;backdrop-filter:blur(8px);">{{ svc.price }}</span>
+              </div>
+            </div>
+            <!-- Card info -->
+            <div class="svc-card-info" style="padding:20px 22px 24px;transform:translateY(var(--svc-iy,4px));opacity:var(--svc-iop,.92);">
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.6vw,22px);font-style:italic;font-weight:500;color:#EFE9DF;margin-bottom:8px;line-height:1.2;">{{ svc.name }}</h3>
+              <p style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.4);line-height:1.5;margin-bottom:14px;">{{ svc.desc }}</p>
+              <span class="svc-card-link" style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.4);">Zjistit více</span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <div style="height:1px;background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(190,30,45,.2) 0%,transparent 100%);"></div>
+
+  <!-- ── TEAM PREVIEW ── -->
+  <section style="padding:clamp(64px,8vw,120px) 0;background:#07070B;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="reveal" style="margin-bottom:56px;text-align:center;">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;">◆ Naše masérky</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:500;line-height:1.1;color:#EFE9DF;">Odbornice pro váš<br><em style="color:#BE1E2D;">komfort a relaxaci</em></h2>
+      </div>
+      <div class="team-grid">
+        <sc-for list="{{ team }}" as="mas" hint-placeholder-count="4">
+          <article class="team-card reveal" style="cursor:pointer;">
+            <!-- Photo -->
+            <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#12101A;border:1px solid rgba(190,30,45,.1);margin-bottom:16px;">
+              <div class="team-card-img" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 20%,rgba(190,30,45,.14) 0%,transparent 55%),linear-gradient(180deg,#14101C 0%,#0A0810 100%);">
+                <div style="text-align:center;">
+                  <svg width="56" height="80" viewBox="0 0 56 80" fill="none"><circle cx="28" cy="22" r="14" stroke="rgba(201,169,138,.2)" stroke-width="0.8" fill="rgba(201,169,138,.04)"/><path d="M4 72 C4 50 12 42 28 42 C44 42 52 50 52 72" stroke="rgba(201,169,138,.2)" stroke-width="0.8" fill="rgba(201,169,138,.03)"/></svg>
+                  <p style="font-family:monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,169,138,.25);text-transform:uppercase;margin-top:8px;">portrét<br>3 × 4</p>
+                </div>
+              </div>
+              <!-- Hover glow -->
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(190,30,45,.25) 0%,transparent 55%);opacity:0;transition:opacity .4s ease;" style-hover="opacity:1;"></div>
+            </div>
+            <!-- Info -->
+            <div style="padding:0 4px;">
+              <h3 class="team-card-name" style="font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#EFE9DF;margin-bottom:6px;">{{ mas.name }}</h3>
+              <p style="font-family:'Raleway',sans-serif;font-size:12px;color:rgba(240,233,224,.4);margin-bottom:8px;line-height:1.5;">{{ mas.spec }}</p>
+              <p style="font-family:'Raleway',sans-serif;font-size:10px;color:#C9A98A;letter-spacing:.1em;">{{ mas.years }} praxe</p>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+      <div class="reveal" style="text-align:center;margin-top:52px;">
+        <button style="background:none;border:1px solid rgba(190,30,45,.25);cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.55);padding:14px 36px;border-radius:2px;transition:border-color .25s ease,color .25s ease;" style-hover="border-color:#BE1E2D;color:#EFE9DF;">Všechny masérky →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section style="padding:clamp(64px,8vw,120px) 0;background:#100E18;background-image:repeating-linear-gradient(0deg,rgba(190,30,45,.03) 0,rgba(190,30,45,.03) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(190,30,45,.03) 0,rgba(190,30,45,.03) 1px,transparent 1px,transparent 40px);">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="reveal" style="text-align:center;margin-bottom:72px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;">◆ Jak to funguje</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:500;line-height:1.1;color:#EFE9DF;">Čtyři kroky k<br><em style="color:#BE1E2D;">dokonalé relaxaci</em></h2>
+      </div>
+      <div class="process-grid">
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="4">
+          <div class="reveal" style="position:relative;padding:32px 28px;background:rgba(7,7,11,.5);border:1px solid rgba(190,30,45,.1);border-radius:2px;overflow:hidden;">
+            <!-- Large faded Roman numeral -->
+            <div aria-hidden="true" style="position:absolute;top:-10px;right:8px;font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:600;color:rgba(190,30,45,.06);line-height:1;pointer-events:none;user-select:none;">{{ step.num }}</div>
+            <!-- Small numeral -->
+            <p style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#BE1E2D;margin-bottom:20px;line-height:1;">{{ step.num }}</p>
+            <h3 style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#EFE9DF;margin-bottom:12px;">{{ step.title }}</h3>
+            <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.4);line-height:1.65;">{{ step.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section style="padding:clamp(64px,8vw,120px) 0;background:#07070B;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="reveal" style="text-align:center;margin-bottom:64px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;">◆ Hodnocení</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:500;line-height:1.1;color:#EFE9DF;">Co říkají<br><em style="color:#BE1E2D;">naši klienti</em></h2>
+      </div>
+      <!-- Testimonial block -->
+      <div style="max-width:780px;margin:0 auto;text-align:center;">
+        <div style="animation:t-in .5s ease both;">
+          <!-- Stars -->
+          <div style="display:flex;justify-content:center;gap:6px;margin-bottom:32px;">
+            <span style="color:#BE1E2D;font-size:16px;">★</span><span style="color:#BE1E2D;font-size:16px;">★</span><span style="color:#BE1E2D;font-size:16px;">★</span><span style="color:#BE1E2D;font-size:16px;">★</span><span style="color:#BE1E2D;font-size:16px;">★</span>
+          </div>
+          <!-- Large quote mark -->
+          <div style="font-family:'Cormorant Garamond',serif;font-size:100px;color:rgba(190,30,45,.15);line-height:.5;margin-bottom:24px;user-select:none;" aria-hidden="true">„</div>
+          <!-- Quote text -->
+          <blockquote style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.4vw,28px);font-style:italic;font-weight:400;color:#EFE9DF;line-height:1.55;margin-bottom:36px;">{{ tText }}</blockquote>
+          <!-- Author -->
+          <p style="font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9A98A;margin-bottom:4px;">{{ tName }}</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.3);">{{ tRole }}</p>
+        </div>
+        <!-- Dots -->
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-top:44px;">
+          <button onClick="{{ prevT }}" style="background:none;border:none;cursor:pointer;color:rgba(240,233,224,.3);font-size:18px;padding:8px;line-height:1;transition:color .25s ease;" style-hover="color:#BE1E2D;" aria-label="Předchozí">←</button>
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ t0dot }};transition:background .4s ease;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ t1dot }};transition:background .4s ease;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ t2dot }};transition:background .4s ease;"></div>
+          <button onClick="{{ nextT }}" style="background:none;border:none;cursor:pointer;color:rgba(240,233,224,.3);font-size:18px;padding:8px;line-height:1;transition:color .25s ease;" style-hover="color:#BE1E2D;" aria-label="Další">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LOCATION / NAP ── -->
+  <section style="padding:clamp(48px,6vw,96px) 0;background:#0C0A14;border-top:1px solid rgba(190,30,45,.1);border-bottom:1px solid rgba(190,30,45,.1);">
+    <div class="loc-grid" style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;">
+      <!-- Map placeholder -->
+      <div class="reveal" style="background:#12101A;border:1px solid rgba(190,30,45,.15);border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(190,30,45,.04) 0,rgba(190,30,45,.04) 1px,transparent 1px,transparent 28px),repeating-linear-gradient(90deg,rgba(190,30,45,.04) 0,rgba(190,30,45,.04) 1px,transparent 1px,transparent 28px);"></div>
+        <div style="position:relative;z-index:1;text-align:center;">
+          <svg width="28" height="32" viewBox="0 0 28 32" fill="none"><path d="M14 0C8.48 0 4 4.48 4 10c0 7.5 10 22 10 22S24 17.5 24 10c0-5.52-4.48-10-10-10zm0 13.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" fill="rgba(190,30,45,.5)"/></svg>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,169,138,.4);margin-top:10px;line-height:1.7;">Google Maps embed<br>Praha 1, Black Velvet</p>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="reveal rd1">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;">◆ Kontakt &amp; adresa</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,46px);font-weight:500;line-height:1.1;color:#EFE9DF;margin-bottom:32px;">Najdete nás<br>v srdci Prahy</h2>
+        <address style="font-style:normal;display:flex;flex-direction:column;gap:16px;margin-bottom:36px;">
+          <div style="display:flex;align-items:flex-start;gap:14px;">
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" style="margin-top:2px;flex-shrink:0;"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11S12 8.75 12 5c0-2.76-2.24-5-5-5zm0 6.75A1.75 1.75 0 1 1 7 3.25a1.75 1.75 0 0 1 0 3.5z" fill="#BE1E2D"/></svg>
+            <div>
+              <p style="font-family:'Raleway',sans-serif;font-size:15px;font-weight:500;color:#EFE9DF;line-height:1.5;">Black Velvet Spa</p>
+              <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.45);line-height:1.5;">Ulice 12, Praha 1, 110 00</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5.5C1.4.5.5 1.4.5 2.5c0 6.6 5.4 12 12 12 1.1 0 2-.9 2-2v-2.5c0-1.1-.9-2-2-2-.9 0-1.7.3-2.4.8-.2.1-.5.1-.7 0C7.2 7 7 5.5 7 4c0-.2.1-.5.2-.7C7.7 2.6 8 1.8 8 .9c0-1.1-.9-2-2-2H3.5z" fill="#BE1E2D" transform="translate(.5 .5)"/></svg>
+            <a href="tel:+420000000000" style="font-family:'Raleway',sans-serif;font-size:15px;font-weight:500;color:#EFE9DF;text-decoration:none;" style-hover="color:#BE1E2D;">+420 XXX XXX XXX</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><rect x=".5" y=".5" width="13" height="10" rx="1.5" stroke="#BE1E2D"/><path d="M1 1l6 4.5L13 1" stroke="#BE1E2D" stroke-linecap="round"/></svg>
+            <a href="mailto:info@black-velvet.cz" style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.5);text-decoration:none;" style-hover="color:#BE1E2D;">info@black-velvet.cz</a>
+          </div>
+        </address>
+        <!-- Hours -->
+        <div style="border-top:1px solid rgba(190,30,45,.1);padding-top:24px;">
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:14px;">Otevírací doba</p>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-family:'Raleway',sans-serif;font-size:13px;">
+            <span style="color:rgba(240,233,224,.45);">Po — Pá</span><span style="color:#EFE9DF;">10:00 — 22:00</span>
+            <span style="color:rgba(240,233,224,.45);">Sobota</span><span style="color:#EFE9DF;">10:00 — 20:00</span>
+            <span style="color:rgba(240,233,224,.45);">Neděle</span><span style="color:#EFE9DF;">12:00 — 18:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section style="padding:clamp(64px,8vw,120px) 0;background:#0E0C14;">
+    <div style="max-width:800px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="reveal" style="text-align:center;margin-bottom:56px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px;">◆ Časté dotazy</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:500;line-height:1.1;color:#EFE9DF;">Máte otázky?<br><em style="color:#BE1E2D;">Máme odpovědi</em></h2>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;gap:0;">
+        <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="5">
+          <div class="faq-item" style="border-left:2px solid var(--faq-bc,rgba(190,30,45,.12));border-bottom:1px solid rgba(190,30,45,.1);transition:border-left-color .3s ease;">
+            <button class="faq-trigger" style="width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:22px 20px;gap:20px;text-align:left;">
+              <span class="faq-q-text" style="font-family:'Raleway',sans-serif;font-size:15px;font-weight:500;color:var(--faq-qc,rgba(240,233,224,.75));line-height:1.45;flex:1;transition:color .25s ease;">{{ faq.q }}</span>
+              <span class="faq-diamond" aria-hidden="true">◆</span>
+            </button>
+            <div class="faq-body">
+              <p style="font-family:'Raleway',sans-serif;font-size:14px;line-height:1.75;color:rgba(240,233,224,.5);padding:4px 20px 24px;">{{ faq.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BANNER ── -->
+  <section style="padding:clamp(64px,8vw,100px) 0;background:#140B0E;border-top:1px solid rgba(190,30,45,.15);position:relative;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 100% at 50% 100%,rgba(190,30,45,.18) 0%,transparent 60%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;max-width:700px;margin:0 auto;padding:0 clamp(24px,4vw,64px);text-align:center;">
+      <p class="reveal" style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:16px;">◆ Rezervujte ještě dnes</p>
+      <h2 class="reveal rd1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,60px);font-weight:500;line-height:1.1;color:#EFE9DF;margin-bottom:36px;">Odhalte svůj<br><em style="color:#BE1E2D;">vlastní ráj</em></h2>
+      <button class="reveal rd2" onClick="{{ goReservation }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 56px;background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#EFE9DF;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;" style-hover="background:#9A1524;box-shadow:0 0 50px rgba(190,30,45,.55);">Rezervovat masáž</button>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer style="background:#07070B;border-top:1px solid rgba(190,30,45,.12);padding:clamp(56px,7vw,96px) 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+      <div class="footer-grid" style="margin-bottom:64px;">
+        <!-- Brand -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#EFE9DF;margin-bottom:6px;"><span style="color:#BE1E2D;font-size:8px;">◆</span> BLACK ELIXIR</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(240,233,224,.4);margin-bottom:24px;line-height:1.5;">Masáž a relaxace<br>v srdci Prahy</p>
+          <address style="font-style:normal;font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.38);line-height:1.8;">
+            Ulice 12, Praha 1<br>+420 XXX XXX XXX<br>info@black-velvet.cz
+          </address>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <a href="#" style="width:36px;height:36px;border:1px solid rgba(190,30,45,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(240,233,224,.4);text-decoration:none;font-size:14px;transition:border-color .25s ease,color .25s ease;" style-hover="border-color:#BE1E2D;color:#EFE9DF;" aria-label="Instagram">IG</a>
+            <a href="#" style="width:36px;height:36px;border:1px solid rgba(190,30,45,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(240,233,224,.4);text-decoration:none;font-size:14px;transition:border-color .25s ease,color .25s ease;" style-hover="border-color:#BE1E2D;color:#EFE9DF;" aria-label="Facebook">FB</a>
+            <a href="#" style="width:36px;height:36px;border:1px solid rgba(190,30,45,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(240,233,224,.4);text-decoration:none;font-size:13px;transition:border-color .25s ease,color .25s ease;" style-hover="border-color:#BE1E2D;color:#EFE9DF;" aria-label="WhatsApp">WA</a>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">Navigace</p>
+          <nav style="display:flex;flex-direction:column;gap:12px;">
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Hlavní strana</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">O nás</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Masérky</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Rozvrh</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Blog</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Kontakt</a>
+          </nav>
+        </div>
+        <!-- Services -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">Masáže</p>
+          <nav style="display:flex;flex-direction:column;gap:12px;">
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Aromaterapeutická</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Klasická</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Sportovní</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Relaxační</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Lymfatická</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Ceník</a>
+          </nav>
+        </div>
+        <!-- Legal + lang -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">Informace</p>
+          <nav style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Zásady ochrany</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Pravidla salonu</a>
+            <a href="#" style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.5);text-decoration:none;transition:color .25s ease;" style-hover="color:#BE1E2D;">Dárkové poukazy</a>
+          </nav>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.25);margin-bottom:12px;">Jazyk</p>
+          <div style="display:flex;gap:0;border:1px solid rgba(190,30,45,.18);border-radius:2px;overflow:hidden;width:fit-content;">
+            <button onClick="{{ setCs }}" style="background:{{ csColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ csFg }};padding:7px 12px;transition:background .2s ease;">CS</button>
+            <button onClick="{{ setEn }}" style="background:{{ enColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ enFg }};padding:7px 12px;transition:background .2s ease;">EN</button>
+            <button onClick="{{ setRu }}" style="background:{{ ruColor }};border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:{{ ruFg }};padding:7px 12px;transition:background .2s ease;">RU</button>
+          </div>
+        </div>
+      </div>
+      <!-- Footer bottom -->
+      <div style="border-top:1px solid rgba(190,30,45,.1);padding:24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.25);">© 2025 Black Velvet Spa, Praha 1. Všechna práva vyhrazena.</p>
+        <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.25);">IČO: XX XXX XXX · Ulice 12, Praha 1, 110 00</p>
+      </div>
+    </div>
+  </footer>
+</main>
+</sc-if>
+
+<!-- ════════════════════════════ PAGE: SERVICES ════════════════════════════ -->
+<sc-if value="{{ isServices }}">
+<main style="padding-top:104px;min-height:100svh;background:#07070B;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+    <!-- Breadcrumbs -->
+    <nav style="padding:0 0 32px;display:flex;align-items:center;gap:8px;" aria-label="Breadcrumb">
+      <button onClick="{{ goHome }}" style="background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);letter-spacing:.1em;transition:color .2s ease;" style-hover="color:#C9A98A;">Domů</button>
+      <span style="color:rgba(190,30,45,.3);font-size:10px;">›</span>
+      <span style="font-family:'Raleway',sans-serif;font-size:11px;color:#C9A98A;letter-spacing:.1em;">Masáže</span>
+    </nav>
+    <!-- H1 -->
+    <div style="margin-bottom:56px;border-left:2px solid #BE1E2D;padding-left:24px;">
+      <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:12px;">◆ Naše masáže</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:500;line-height:1.1;color:#EFE9DF;">Relaxační a terapeutické<br><em style="color:#BE1E2D;">masáže Praha</em></h1>
+      <p style="font-family:'Raleway',sans-serif;font-size:16px;color:rgba(240,233,224,.45);margin-top:16px;line-height:1.65;max-width:520px;">Každá masáž je individuálně přizpůsobena vašim potřebám. Vyberte si tu pravou pro váš dokonalý zážitek.</p>
+    </div>
+    <!-- Services grid -->
+    <div class="services-grid" style="margin-bottom:64px;">
+      <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
+        <article class="svc-card" style="position:relative;overflow:hidden;cursor:pointer;background:#12101A;border:1px solid rgba(190,30,45,.08);transition:border-color .3s ease;" style-hover="border-color:rgba(190,30,45,.3);">
+          <div style="position:relative;aspect-ratio:3/4;overflow:hidden;">
+            <div class="svc-card-img" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 60%,rgba(190,30,45,.18) 0%,transparent 60%),linear-gradient(145deg,#1A1320 0%,#0C0A12 100%);">
+              <div style="text-align:center;padding:24px;opacity:.5;">
+                <svg width="48" height="60" viewBox="0 0 48 60" fill="none"><rect x="4" y="4" width="40" height="52" rx="1" stroke="#C9A98A" stroke-width="0.8"/><circle cx="24" cy="28" r="5" fill="rgba(190,30,45,.2)" stroke="rgba(190,30,45,.4)" stroke-width="0.5"/></svg>
+                <p style="font-family:monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,169,138,.4);text-transform:uppercase;margin-top:8px;line-height:1.6;">foto masáže</p>
+              </div>
+            </div>
+            <div class="svc-card-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,11,.95) 0%,rgba(7,7,11,.3) 50%,transparent 100%);opacity:.7;pointer-events:none;"></div>
+            <div style="position:absolute;top:14px;left:14px;z-index:2;">
+              <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,233,224,.7);background:rgba(7,7,11,.6);border:1px solid rgba(190,30,45,.2);padding:4px 10px;border-radius:1px;backdrop-filter:blur(8px);">{{ svc.duration }}</span>
+            </div>
+          </div>
+          <div class="svc-card-info" style="padding:22px 24px 26px;transform:translateY(var(--svc-iy,4px));opacity:var(--svc-iop,.92);">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(19px,1.8vw,24px);font-style:italic;font-weight:500;color:#EFE9DF;margin-bottom:8px;line-height:1.2;">{{ svc.name }}</h2>
+            <p style="font-family:'Raleway',sans-serif;font-size:13px;color:rgba(240,233,224,.4);margin-bottom:16px;line-height:1.55;">{{ svc.desc }}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;color:#C9A98A;">{{ svc.price }}</span>
+              <span class="svc-card-link" style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.35);">Detail →</span>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <!-- CTA -->
+    <div style="text-align:center;padding:48px 0 80px;border-top:1px solid rgba(190,30,45,.1);">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,36px);font-style:italic;color:rgba(240,233,224,.65);margin-bottom:28px;">Vybrali jste si? Rezervujte online.</p>
+      <button onClick="{{ goReservation }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 52px;background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#EFE9DF;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;" style-hover="background:#9A1524;box-shadow:0 0 40px rgba(190,30,45,.5);">Rezervovat masáž</button>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<!-- ════════════════════════════ PAGE: RESERVATION ════════════════════════════ -->
+<sc-if value="{{ isReservation }}">
+<main style="padding-top:104px;min-height:100svh;background:#07070B;">
+  <div style="max-width:860px;margin:0 auto;padding:0 clamp(24px,4vw,48px) 80px;">
+    <!-- H1 -->
+    <div style="margin-bottom:48px;">
+      <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:12px;">◆ Online rezervace</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,56px);font-weight:500;line-height:1.1;color:#EFE9DF;">Rezervace <em style="color:#BE1E2D;">masáže</em></h1>
+    </div>
+
+    <!-- Step Indicator -->
+    <div style="margin-bottom:48px;background:#0E0C14;border:1px solid rgba(190,30,45,.12);border-radius:4px;padding:24px 28px;">
+      <div class="wiz-step-indicator">
+        <sc-for list="{{ wizIndicator }}" as="wi" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;flex:1;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;">
+              <div style="width:34px;height:34px;border-radius:50%;background:{{ wi.dotBg }};display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;color:{{ wi.dotColor }};transition:background .4s ease;border:1px solid {{ wi.dotBg }};flex-shrink:0;">{{ wi.n }}</div>
+              <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:{{ wi.labelColor }};transition:color .4s ease;white-space:nowrap;">{{ wi.label }}</span>
+            </div>
+            <div style="height:1px;flex:{{ wi.lineFlex }};background:{{ wi.lineColor }};transition:background .4s ease;margin:0 8px;margin-bottom:22px;min-width:0;overflow:hidden;"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: SERVICE ── -->
+    <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#EFE9DF;margin-bottom:8px;">Vyberte <em style="color:#BE1E2D;">masáž</em></h2>
+      <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.4);margin-bottom:28px;">Klikněte na masáž, která vás zajímá</p>
+      <div class="wiz-svc-grid" style="margin-bottom:36px;">
+        <sc-for list="{{ wizServices }}" as="ws" hint-placeholder-count="6">
+          <div data-sel-svc="{{ ws.slug }}" style="padding:20px;background:{{ ws.selBg }};border:1px solid {{ ws.selBorder }};border-radius:4px;cursor:pointer;transition:border-color .25s ease,background .25s ease;position:relative;" style-hover="border-color:rgba(190,30,45,.45);background:rgba(190,30,45,.06);">
+            <div style="position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:#BE1E2D;display:flex;align-items:center;justify-content:center;opacity:{{ ws.checkOpacity }};transition:opacity .25s ease;">
+              <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:500;color:#EFE9DF;margin-bottom:6px;line-height:1.2;padding-right:20px;">{{ ws.name }}</h3>
+            <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.4);margin-bottom:10px;">{{ ws.duration }}</p>
+            <p style="font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;color:#C9A98A;">{{ ws.price }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button onClick="{{ nextWizard }}" style="background:{{ step2BtnColor }};border:none;cursor:{{ step2BtnCursor }};font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;padding:16px 48px;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;min-height:52px;" style-hover="box-shadow:0 0 32px rgba(190,30,45,.45);">Pokračovat →</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ── STEP 2: MASSEUSE ── -->
+    <sc-if value="{{ step2 }}">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#EFE9DF;margin-bottom:8px;">Vyberte <em style="color:#BE1E2D;">masérku</em></h2>
+      <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.4);margin-bottom:28px;">Vyberte si masérku nebo pokračujte bez výběru</p>
+      <div class="wiz-mas-grid" style="margin-bottom:36px;">
+        <sc-for list="{{ wizMasseuses }}" as="wm" hint-placeholder-count="6">
+          <div data-sel-mas="{{ wm.name }}" style="padding:0;background:{{ wm.selBg }};border:1px solid {{ wm.selBorder }};border-radius:4px;cursor:pointer;overflow:hidden;transition:border-color .25s ease,background .25s ease;" style-hover="border-color:rgba(190,30,45,.45);">
+            <!-- Photo -->
+            <div style="aspect-ratio:1/1;background:radial-gradient(ellipse at 50% 20%,rgba(190,30,45,.12) 0%,transparent 55%),#12101A;display:flex;align-items:center;justify-content:center;">
+              <svg width="44" height="60" viewBox="0 0 44 60" fill="none"><circle cx="22" cy="18" r="11" stroke="rgba(201,169,138,.2)" stroke-width="0.8"/><path d="M2 58C2 42 10 36 22 36C34 36 42 42 42 58" stroke="rgba(201,169,138,.2)" stroke-width="0.8"/></svg>
+            </div>
+            <div style="padding:14px 16px 16px;">
+              <h3 style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#EFE9DF;margin-bottom:4px;">{{ wm.name }}</h3>
+              <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Profesionální masérka</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <button onClick="{{ prevWizard }}" style="background:none;border:1px solid rgba(190,30,45,.2);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.5);padding:16px 36px;border-radius:2px;transition:border-color .25s ease,color .25s ease;min-height:52px;" style-hover="border-color:#BE1E2D;color:#EFE9DF;">← Zpět</button>
+        <button onClick="{{ nextWizard }}" style="background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;padding:16px 48px;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;min-height:52px;" style-hover="background:#9A1524;box-shadow:0 0 32px rgba(190,30,45,.45);">Pokračovat →</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ── STEP 3: DATE/TIME ── -->
+    <sc-if value="{{ step3 }}">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#EFE9DF;margin-bottom:8px;">Vyberte <em style="color:#BE1E2D;">termín</em></h2>
+      <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.4);margin-bottom:28px;">Červen 2025</p>
+      <!-- Calendar -->
+      <div style="background:#0E0C14;border:1px solid rgba(190,30,45,.12);border-radius:4px;padding:24px;margin-bottom:24px;">
+        <div class="wiz-cal-grid" style="margin-bottom:8px;">
+          <sc-for list="{{ calDayLabels }}" as="dl" hint-placeholder-count="7">
+            <div style="text-align:center;font-family:'Raleway',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,233,224,.25);padding:8px 0;">{{ dl.v }}</div>
+          </sc-for>
+        </div>
+        <div class="wiz-cal-grid">
+          <sc-for list="{{ wizDays }}" as="wd" hint-placeholder-count="7">
+            <div data-sel-day="{{ wd.idx }}" style="text-align:center;padding:10px 4px;background:{{ wd.bg }};border:1px solid {{ wd.border }};border-radius:3px;cursor:{{ wd.cursor }};transition:background .2s ease,border-color .2s ease;">
+              <div style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;color:{{ wd.color }};line-height:1.3;">{{ wd.n }}</div>
+              <div style="font-family:'Raleway',sans-serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:{{ wd.color }};opacity:.6;margin-top:2px;">{{ wd.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <!-- Time slots -->
+      <div style="background:#0E0C14;border:1px solid rgba(190,30,45,.12);border-radius:4px;padding:24px;margin-bottom:36px;">
+        <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.3);margin-bottom:16px;">Dostupné časy</p>
+        <div class="wiz-slots-grid">
+          <sc-for list="{{ wizSlots }}" as="wt" hint-placeholder-count="10">
+            <div data-sel-slot="{{ wt.time }}" style="text-align:center;padding:10px 6px;background:{{ wt.selBg }};border:1px solid {{ wt.selBorder }};border-radius:3px;cursor:pointer;transition:background .2s ease,border-color .2s ease;font-family:'Raleway',sans-serif;font-size:13px;font-weight:500;color:{{ wt.selColor }};" style-hover="background:rgba(190,30,45,.12);border-color:rgba(190,30,45,.4);">{{ wt.time }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <button onClick="{{ prevWizard }}" style="background:none;border:1px solid rgba(190,30,45,.2);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.5);padding:16px 36px;border-radius:2px;transition:border-color .25s ease,color .25s ease;min-height:52px;" style-hover="border-color:#BE1E2D;color:#EFE9DF;">← Zpět</button>
+        <button onClick="{{ nextWizard }}" style="background:{{ step4BtnColor }};border:none;cursor:{{ step4BtnCursor }};font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;padding:16px 48px;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;min-height:52px;" style-hover="box-shadow:0 0 32px rgba(190,30,45,.45);">Pokračovat →</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ── STEP 4: CONTACT ── -->
+    <sc-if value="{{ step4 }}">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#EFE9DF;margin-bottom:8px;">Vaše <em style="color:#BE1E2D;">kontaktní údaje</em></h2>
+      <p style="font-family:'Raleway',sans-serif;font-size:14px;color:rgba(240,233,224,.4);margin-bottom:36px;">Zadejte kontaktní informace pro potvrzení rezervace</p>
+      <form style="display:flex;flex-direction:column;gap:20px;margin-bottom:36px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <label style="display:block;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.4);margin-bottom:8px;">Jméno a příjmení</label>
+            <input type="text" class="form-input" placeholder="Jana Nováková" autocomplete="name">
+          </div>
+          <div>
+            <label style="display:block;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.4);margin-bottom:8px;">Telefon</label>
+            <input type="tel" class="form-input" placeholder="+420 XXX XXX XXX" autocomplete="tel">
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.4);margin-bottom:8px;">E-mail</label>
+          <input type="email" class="form-input" placeholder="jana@email.cz" autocomplete="email">
+        </div>
+        <div>
+          <label style="display:block;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.4);margin-bottom:8px;">Poznámka (nepovinné)</label>
+          <textarea class="form-input" placeholder="Zvláštní přání, zdravotní omezení..."></textarea>
+        </div>
+        <!-- Summary -->
+        <div style="padding:20px;background:rgba(190,30,45,.04);border:1px solid rgba(190,30,45,.15);border-radius:4px;">
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.3);margin-bottom:12px;">Shrnutí rezervace</p>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:'Raleway',sans-serif;font-size:13px;">
+            <span style="color:rgba(240,233,224,.35);">Masáž</span><span style="color:#EFE9DF;">{{ selectedServiceName }}</span>
+            <span style="color:rgba(240,233,224,.35);">Masérka</span><span style="color:#EFE9DF;">{{ selectedMasseuseName }}</span>
+            <span style="color:rgba(240,233,224,.35);">Termín</span><span style="color:#EFE9DF;">{{ selectedSlotDisplay }}</span>
+          </div>
+        </div>
+      </form>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <button onClick="{{ prevWizard }}" style="background:none;border:1px solid rgba(190,30,45,.2);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.5);padding:16px 36px;border-radius:2px;transition:border-color .25s ease,color .25s ease;min-height:52px;" style-hover="border-color:#BE1E2D;color:#EFE9DF;">← Zpět</button>
+        <button onClick="{{ nextWizard }}" style="background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;padding:16px 48px;border-radius:2px;transition:background .25s ease,box-shadow .25s ease;min-height:52px;" style-hover="background:#9A1524;box-shadow:0 0 32px rgba(190,30,45,.45);">Odeslat rezervaci →</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ── STEP 5: CONFIRMATION ── -->
+    <sc-if value="{{ step5 }}">
+    <div style="text-align:center;padding:40px 0;animation:confirm-pop .6s ease both;">
+      <!-- Success icon -->
+      <div style="width:80px;height:80px;border-radius:50%;border:2px solid #BE1E2D;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;background:rgba(190,30,45,.08);">
+        <svg width="30" height="24" viewBox="0 0 30 24" fill="none"><path d="M2 12l8 8L28 2" stroke="#BE1E2D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C9A98A;margin-bottom:16px;">◆ Rezervace potvrzena</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:500;line-height:1.15;color:#EFE9DF;margin-bottom:20px;">Těšíme se na vás<br><em style="color:#BE1E2D;">v Black Velvet</em></h2>
+      <p style="font-family:'Raleway',sans-serif;font-size:15px;color:rgba(240,233,224,.45);line-height:1.65;max-width:400px;margin:0 auto 12px;">Potvrzení bylo odesláno na váš e-mail. Reservační číslo:</p>
+      <p style="font-family:'Raleway',sans-serif;font-size:22px;font-weight:700;letter-spacing:.2em;color:#EFE9DF;margin-bottom:44px;">BE-2025-0{{ wizardStepStr }}312</p>
+      <div style="background:#0E0C14;border:1px solid rgba(190,30,45,.15);border-radius:4px;padding:24px;max-width:400px;margin:0 auto 36px;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;text-align:left;font-family:'Raleway',sans-serif;font-size:13px;">
+        <span style="color:rgba(240,233,224,.35);">Masáž</span><span style="color:#EFE9DF;">{{ selectedServiceName }}</span>
+        <span style="color:rgba(240,233,224,.35);">Masérka</span><span style="color:#EFE9DF;">{{ selectedMasseuseName }}</span>
+        <span style="color:rgba(240,233,224,.35);">Termín</span><span style="color:#EFE9DF;">{{ selectedSlotDisplay }}</span>
+        <span style="color:rgba(240,233,224,.35);">Adresa</span><span style="color:#EFE9DF;">Ulice 12, Praha 1</span>
+      </div>
+      <button onClick="{{ goHome }}" style="background:none;border:1px solid rgba(190,30,45,.3);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.6);padding:14px 36px;border-radius:2px;transition:border-color .25s ease,color .25s ease;min-height:52px;" style-hover="border-color:#BE1E2D;color:#EFE9DF;">← Zpět na hlavní stranu</button>
+    </div>
+    </sc-if>
+  </div>
+</main>
+</sc-if>
+
+<!-- ════════════════════════════ PAGE: DESIGN SYSTEM ════════════════════════════ -->
+<sc-if value="{{ isSystem }}">
+<main style="padding-top:104px;min-height:100svh;background:#07070B;padding-bottom:80px;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 clamp(24px,4vw,64px);">
+    <div style="margin-bottom:56px;">
+      <p style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;margin-bottom:12px;">◆ Design System</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:500;line-height:1.1;color:#EFE9DF;">Black Velvet<br><em style="color:#BE1E2D;">Component Library</em></h1>
+    </div>
+
+    <!-- Colors -->
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(190,30,45,.1);">Barevná paleta</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;">
+        <div><div style="height:64px;background:#07070B;border-radius:3px;border:1px solid rgba(190,30,45,.15);margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#07070B</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Background Void</p></div>
+        <div><div style="height:64px;background:#0E0C14;border-radius:3px;border:1px solid rgba(190,30,45,.15);margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#0E0C14</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Background Surface</p></div>
+        <div><div style="height:64px;background:#BE1E2D;border-radius:3px;margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#BE1E2D</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Accent Crimson</p></div>
+        <div><div style="height:64px;background:#9A1524;border-radius:3px;margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#9A1524</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Crimson Dark</p></div>
+        <div><div style="height:64px;background:#C9A98A;border-radius:3px;margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#C9A98A</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Gold Accent</p></div>
+        <div><div style="height:64px;background:#EFE9DF;border-radius:3px;margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">#EFE9DF</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Text Primary</p></div>
+        <div><div style="height:64px;background:rgba(240,233,224,.4);border-radius:3px;margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">rgba(EFE9DF, .4)</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Text Muted</p></div>
+        <div><div style="height:64px;background:rgba(190,30,45,.15);border-radius:3px;border:1px solid rgba(190,30,45,.3);margin-bottom:8px;"></div><p style="font-family:monospace;font-size:10px;color:rgba(240,233,224,.5);">rgba(BE1E2D,.15)</p><p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(240,233,224,.35);">Border</p></div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid rgba(190,30,45,.1);">Typografie</h2>
+      <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:32px;">
+        <div style="padding:24px;background:#0E0C14;border-radius:3px;border:1px solid rgba(190,30,45,.1);">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.25);margin-bottom:12px;">Cormorant Garamond 500 — Display H1</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,72px);font-weight:500;line-height:1.05;color:#EFE9DF;">Black <em style="color:#BE1E2D;">Velvet</em></p>
+        </div>
+        <div style="padding:24px;background:#0E0C14;border-radius:3px;border:1px solid rgba(190,30,45,.1);">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.25);margin-bottom:12px;">Cormorant Garamond Italic 500 — Section H2</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:500;font-style:italic;line-height:1.1;color:#EFE9DF;">Masáž a relaxace Praha</p>
+        </div>
+        <div style="padding:24px;background:#0E0C14;border-radius:3px;border:1px solid rgba(190,30,45,.1);">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.25);margin-bottom:12px;">Raleway 700 — Eyebrow</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#C9A98A;">◆ Naše masáže</p>
+        </div>
+        <div style="padding:24px;background:#0E0C14;border-radius:3px;border:1px solid rgba(190,30,45,.1);">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.25);margin-bottom:12px;">Raleway 400 — Body Text (17px, 1.7 lh)</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:17px;font-weight:400;line-height:1.7;color:rgba(240,233,224,.55);">Každá masáž je přizpůsobena individuálním potřebám klienta. Kvalifikované masérky se postarají o vaši plnou relaxaci v luxusním prostředí salonu Black Velvet Spa v Praze.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(190,30,45,.1);">Tlačítka &amp; prvky</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:24px;">
+        <button style="display:inline-flex;align-items:center;min-height:54px;padding:0 44px;background:#BE1E2D;border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#EFE9DF;border-radius:2px;" style-hover="background:#9A1524;box-shadow:0 0 32px rgba(190,30,45,.45);">Primární tlačítko</button>
+        <button style="display:inline-flex;align-items:center;min-height:54px;padding:0 40px;background:transparent;border:1px solid rgba(240,233,224,.22);cursor:pointer;font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.75);border-radius:2px;" style-hover="border-color:rgba(190,30,45,.5);background:rgba(190,30,45,.06);">Ghost tlačítko</button>
+        <button style="display:inline-flex;align-items:center;min-height:44px;padding:0 28px;background:rgba(190,30,45,.08);border:1px solid rgba(190,30,45,.25);cursor:pointer;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.6);border-radius:2px;" style-hover="background:rgba(190,30,45,.15);border-color:rgba(190,30,45,.5);">Sekundární</button>
+      </div>
+      <!-- Badges -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;">
+        <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,233,224,.7);background:rgba(7,7,11,.7);border:1px solid rgba(190,30,45,.25);padding:5px 12px;border-radius:1px;">60 min</span>
+        <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;color:#C9A98A;background:rgba(7,7,11,.7);border:1px solid rgba(201,169,138,.2);padding:5px 12px;border-radius:1px;">od 1 200 Kč</span>
+        <span style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#BE1E2D;background:rgba(190,30,45,.1);border:1px solid rgba(190,30,45,.3);padding:5px 12px;border-radius:1px;">Rezervovat</span>
+      </div>
+      <!-- Language switcher -->
+      <div style="display:inline-flex;border:1px solid rgba(190,30,45,.2);border-radius:2px;overflow:hidden;">
+        <div style="background:#BE1E2D;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:#EFE9DF;padding:7px 14px;">CS</div>
+        <div style="background:transparent;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:rgba(240,233,224,.4);padding:7px 14px;">EN</div>
+        <div style="background:transparent;font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;color:rgba(240,233,224,.4);padding:7px 14px;">RU</div>
+      </div>
+    </section>
+
+    <!-- FAQ Component State -->
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(190,30,45,.1);">FAQ komponenta — stavy</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <!-- Closed state -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(240,233,224,.25);letter-spacing:.12em;margin-bottom:12px;">Zavřeno</p>
+          <div style="border-left:2px solid rgba(190,30,45,.12);border-bottom:1px solid rgba(190,30,45,.1);">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px;gap:20px;">
+              <span style="font-family:'Raleway',sans-serif;font-size:14px;font-weight:500;color:rgba(240,233,224,.6);">Jak probíhá rezervace?</span>
+              <span style="font-size:9px;color:#C9A98A;">◆</span>
+            </div>
+          </div>
+        </div>
+        <!-- Open state -->
+        <div>
+          <p style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(240,233,224,.25);letter-spacing:.12em;margin-bottom:12px;">Otevřeno</p>
+          <div style="border-left:2px solid rgba(190,30,45,.5);border-bottom:1px solid rgba(190,30,45,.1);">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px;gap:20px;">
+              <span style="font-family:'Raleway',sans-serif;font-size:14px;font-weight:500;color:#EFE9DF;">Jak probíhá rezervace?</span>
+              <span style="font-size:9px;color:#BE1E2D;transform:rotate(45deg) scale(1.4);display:inline-block;">◆</span>
+            </div>
+            <p style="font-family:'Raleway',sans-serif;font-size:14px;line-height:1.75;color:rgba(240,233,224,.5);padding:0 20px 20px;">Rezervaci provedete online přes náš rezervační systém nebo telefonicky. Potvrzení dostanete emailem do 30 minut.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Price Table -->
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(190,30,45,.1);">Cenová tabulka</h2>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-family:'Raleway',sans-serif;font-size:14px;">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(190,30,45,.2);">
+              <th style="text-align:left;padding:14px 16px;color:rgba(240,233,224,.35);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">Masáž</th>
+              <th style="text-align:center;padding:14px 16px;color:rgba(240,233,224,.35);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">30 min</th>
+              <th style="text-align:center;padding:14px 16px;color:rgba(240,233,224,.35);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">60 min</th>
+              <th style="text-align:center;padding:14px 16px;color:rgba(240,233,224,.35);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:10px;">90 min</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(190,30,45,.07);" style-hover="background:rgba(190,30,45,.04);">
+              <td style="padding:14px 16px;color:#EFE9DF;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;">Aromaterapeutická masáž</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">500 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:#C9A98A;font-weight:600;">900 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">1 300 Kč</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(190,30,45,.07);" style-hover="background:rgba(190,30,45,.04);">
+              <td style="padding:14px 16px;color:#EFE9DF;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;">Klasická masáž</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">400 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:#C9A98A;font-weight:600;">750 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">1 100 Kč</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(190,30,45,.07);" style-hover="background:rgba(190,30,45,.04);">
+              <td style="padding:14px 16px;color:#EFE9DF;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;">Sportovní masáž</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">—</td>
+              <td style="padding:14px 16px;text-align:center;color:#C9A98A;font-weight:600;">900 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">1 300 Kč</td>
+            </tr>
+            <tr style-hover="background:rgba(190,30,45,.04);">
+              <td style="padding:14px 16px;color:#EFE9DF;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;">Lymfatická masáž</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">—</td>
+              <td style="padding:14px 16px;text-align:center;color:#C9A98A;font-weight:600;">1 100 Kč</td>
+              <td style="padding:14px 16px;text-align:center;color:rgba(240,233,224,.5);">1 600 Kč</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</main>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    page: 'home',
+    mobileOpen: false,
+    lang: 'cs',
+    testimonial: 0,
+    wizardStep: 1,
+    selectedService: null,
+    selectedMasseuse: null,
+    selectedSlot: null,
+    calDay: 1,
+  };
+
+  _services() {
+    return [
+      { slug: 'aromaterapeuticka-masaz', name: 'Aromaterapeutická masáž', duration: '30–90 min', price: 'od 500 Kč', desc: 'Hluboká relaxace s aromatickými oleji a jemnými esencemi' },
+      { slug: 'klasicka-masaz', name: 'Klasická masáž', duration: '30–90 min', price: 'od 400 Kč', desc: 'Tradiční technika pro uvolnění svalů a zlepšení prokrvení' },
+      { slug: 'sportovni-masaz', name: 'Sportovní masáž', duration: '60–90 min', price: 'od 900 Kč', desc: 'Regenerace a příprava pro aktivní sportovce a závodníky' },
+      { slug: 'relaxacni-masaz', name: 'Relaxační masáž', duration: '30–90 min', price: 'od 500 Kč', desc: 'Celkové uvolnění mysli i těla v luxusním prostředí salonu' },
+      { slug: 'lymfaticka-masaz', name: 'Lymfatická masáž', duration: '60–90 min', price: 'od 1 100 Kč', desc: 'Detox a podpora imunitního systému lehkými drenážními pohyby' },
+      { slug: 'relax-masaz', name: 'Relax masáž', duration: '60–90 min', price: 'od 800 Kč', desc: 'Intenzivní relaxace kombinující více terapeutických technik' },
+    ];
+  }
+
+  _team() {
+    return [
+      { name: 'Elena', spec: 'Aromaterapie · Lymfatická', years: '7 let' },
+      { name: 'Lucie', spec: 'Klasická · Sportovní', years: '5 let' },
+      { name: 'Natálie', spec: 'Relaxační · Relax', years: '6 let' },
+      { name: 'Klára', spec: 'Lymfatická · Sportovní', years: '4 roky' },
+    ];
+  }
+
+  _faqs() {
+    return [
+      { q: 'Jak dlouho trvá masáž?', a: 'Nabízíme masáže v délce 30, 60 nebo 90 minut. Doporučujeme vyhradit si navíc 15 minut na přípravu a odpočinek po masáži.' },
+      { q: 'Co si mám přinést na masáž?', a: 'Vše potřebné zajistíme — prémiové ručníky, masážní oleje a jednorázové prádlo. Přijďte pohodlně oblečeni a my se postaráme o zbytek.' },
+      { q: 'Jak probíhá rezervace?', a: 'Rezervaci provedete online přes náš rezervační systém nebo telefonicky na +420 XXX XXX XXX. Potvrzení obdržíte emailem do 30 minut.' },
+      { q: 'Mohu zrušit nebo změnit rezervaci?', a: 'Zrušení je zdarma nejpozději 24 hodin před termínem. Pozdější zrušení může být zpoplatněno ve výši 50 % ceny masáže.' },
+      { q: 'Nabízíte dárkové poukazy?', a: 'Ano, vydáváme dárkové poukazy na libovolnou masáž nebo částku. Dostupné online nebo osobně v salonu po celý rok.' },
+    ];
+  }
+
+  _testimonials() {
+    return [
+      { name: 'Markéta V.', role: 'Stálá klientka', text: 'Nádherná zkušenost. Prostředí salonu je naprosto unikátní a masérka Elena byla profesionální a velmi pozorná. Odcházela jsem jako znovuzrozená.' },
+      { name: 'Tomáš K.', role: 'Pravidelný host', text: 'Sportovní masáž u Lucie mi pomohla po závodě jako nikdy předtím. Salon má fantastickou atmosféru — temnota a klid zároveň. Budu se vracet.' },
+      { name: 'Alena P.', role: 'Klientka', text: 'Rezervace proběhla hladce, personál přivítal profesionálně. Aromaterapeutická masáž překonala má očekávání. Doporučuji všem, kteří hledají pravou luxusní relaxaci.' },
+    ];
+  }
+
+  _steps() {
+    return [
+      { num: 'I', title: 'Vyberte masáž', desc: 'Prohlédněte si nabídku a vyberte masáž, která vám nejvíce vyhovuje.' },
+      { num: 'II', title: 'Rezervujte termín', desc: 'Online přes náš systém nebo telefonicky — rychle a jednoduše.' },
+      { num: 'III', title: 'Přijďte a relaxujte', desc: 'Uvítáme vás v salonu a připravíme vše pro dokonalý zážitek.' },
+      { num: 'IV', title: 'Odejděte odpočatí', desc: 'Odnesete si hluboký klid a regeneraci pro tělo i mysl.' },
+    ];
+  }
+
+  setPage(p) {
+    this.setState({ page: p, mobileOpen: false });
+    setTimeout(() => { try { window.scrollTo(0, 0); } catch(e) {} }, 50);
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this._delegate = (e) => {
+      const ss = e.target.closest('[data-sel-svc]');
+      if (ss) { this.setState({ selectedService: ss.dataset.selSvc }); return; }
+      const sm = e.target.closest('[data-sel-mas]');
+      if (sm) { this.setState({ selectedMasseuse: sm.dataset.selMas }); return; }
+      const sl = e.target.closest('[data-sel-slot]');
+      if (sl) { this.setState({ selectedSlot: sl.dataset.selSlot }); return; }
+      const sd = e.target.closest('[data-sel-day]');
+      if (sd) { this.setState({ calDay: parseInt(sd.dataset.selDay) }); return; }
+    });
+    this._timer = setInterval(() => {
+      this.setState(s => ({ testimonial: (s.testimonial + 1) % 3 }));
+    }, 6500);
+    setTimeout(() => this._setupPage(), 250);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this._delegate);
+    clearInterval(this._timer);
+  }
+
+  componentDidUpdate(pp, ps) {
+    if (ps && ps.page !== this.state.page) {
+      setTimeout(() => this._setupPage(), 100);
+    }
+  }
+
+  _setupPage() {
+    this._setupFAQ();
+    this._setupReveal();
+    this._setupNavScroll();
+  }
+
+  _setupFAQ() {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      const body = item.querySelector('.faq-body');
+      if (!trigger || !body || trigger._faqInit) return;
+      trigger._faqInit = true;
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          const b = i.querySelector('.faq-body');
+          if (b) b.style.maxHeight = '0px';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  _setupReveal() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+  }
+
+  _setupNavScroll() {
+    const nav = document.querySelector('.site-nav');
+    if (!nav || nav._scrollInit) return;
+    nav._scrollInit = true;
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+
+  renderVals() {
+    const { page, mobileOpen, lang, testimonial, wizardStep, selectedService, selectedMasseuse, selectedSlot, calDay } = this.state;
+    const services = this._services();
+    const team = this._team();
+    const faqs = this._faqs();
+    const testimonials = this._testimonials();
+    const steps = this._steps();
+    const masseuses = ['Elena', 'Lucie', 'Natálie', 'Klára', 'Sofia', 'Anna'];
+    const timeSlots = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+    const calDayData = [
+      { d: 'Po', n: '9', avail: true }, { d: 'Út', n: '10', avail: true },
+      { d: 'St', n: '11', avail: false }, { d: 'Čt', n: '12', avail: true },
+      { d: 'Pá', n: '13', avail: true }, { d: 'So', n: '14', avail: true },
+      { d: 'Ne', n: '15', avail: false },
+    ];
+    const calDayLabels = [{ v: 'Po' }, { v: 'Út' }, { v: 'St' }, { v: 'Čt' }, { v: 'Pá' }, { v: 'So' }, { v: 'Ne' }];
+    const t = testimonials[testimonial];
+
+    const crimson = '#BE1E2D';
+    const crimsonFaded = 'rgba(190,30,45,.15)';
+
+    const wizServices = services.map(s => ({
+      ...s,
+      selBorder: s.slug === selectedService ? crimson : crimsonFaded,
+      selBg: s.slug === selectedService ? 'rgba(190,30,45,.08)' : 'transparent',
+      checkOpacity: s.slug === selectedService ? '1' : '0',
+    }));
+
+    const wizMasseuses = masseuses.map(m => ({
+      name: m,
+      selBorder: m === selectedMasseuse ? crimson : crimsonFaded,
+      selBg: m === selectedMasseuse ? 'rgba(190,30,45,.08)' : 'transparent',
+    }));
+
+    const wizSlots = timeSlots.map(t => ({
+      time: t,
+      selBg: t === selectedSlot ? crimson : 'rgba(190,30,45,.05)',
+      selColor: t === selectedSlot ? '#fff' : '#EFE9DF',
+      selBorder: t === selectedSlot ? crimson : 'rgba(190,30,45,.2)',
+    }));
+
+    const wizDays = calDayData.map((d, i) => ({
+      ...d, idx: i,
+      bg: !d.avail ? 'transparent' : i === calDay ? crimson : 'rgba(190,30,45,.05)',
+      color: !d.avail ? 'rgba(240,233,224,.18)' : i === calDay ? '#fff' : '#EFE9DF',
+      border: !d.avail ? 'rgba(190,30,45,.06)' : i === calDay ? crimson : 'rgba(190,30,45,.2)',
+      cursor: d.avail ? 'pointer' : 'not-allowed',
+    }));
+
+    const stepLabels = ['Služba', 'Masérka', 'Termín', 'Kontakt', 'Potvrzení'];
+    const wizIndicator = [1,2,3,4,5].map(n => ({
+      n: String(n),
+      label: stepLabels[n-1],
+      dotBg: n <= wizardStep ? crimson : 'rgba(190,30,45,.12)',
+      dotColor: n <= wizardStep ? '#EFE9DF' : 'rgba(190,30,45,.4)',
+      labelColor: n === wizardStep ? '#EFE9DF' : n < wizardStep ? '#C9A98A' : 'rgba(240,233,224,.25)',
+      lineColor: n < wizardStep ? crimson : 'rgba(190,30,45,.12)',
+      lineFlex: n < 5 ? '1' : '0',
+      showLine: n < 5,
+    }));
+
+    const selSvcObj = services.find(s => s.slug === selectedService);
+    const selectedServiceName = selSvcObj ? selSvcObj.name : 'Nevybráno';
+    const selectedMasseuseName = selectedMasseuse || 'Libovolná masérka';
+    const selectedSlotDisplay = selectedSlot ? `Čt 12. 6. · ${selectedSlot}` : 'Nevybráno';
+
+    const pageBtnActive = 'rgba(190,30,45,.9)';
+    const pageBtnInactive = 'rgba(240,233,224,.35)';
+    const pageBorderActive = '2px solid #BE1E2D';
+    const pageBorderInactive = '2px solid transparent';
+
+    const csActiveLang = lang === 'cs';
+    const enActiveLang = lang === 'en';
+    const ruActiveLang = lang === 'ru';
+
+    return {
+      isHome: page === 'home',
+      isServices: page === 'services',
+      isTeam: page === 'team',
+      isPrices: page === 'prices',
+      isBlog: page === 'blog',
+      isContact: page === 'contact',
+      isReservation: page === 'reservation',
+      isSystem: page === 'system',
+      goHome: () => this.setPage('home'),
+      goServices: () => this.setPage('services'),
+      goTeam: () => this.setPage('team'),
+      goPrices: () => this.setPage('prices'),
+      goBlog: () => this.setPage('blog'),
+      goContact: () => this.setPage('contact'),
+      goReservation: () => this.setPage('reservation'),
+      goSystem: () => this.setPage('system'),
+      pageHomeColor: page === 'home' ? pageBtnActive : pageBtnInactive,
+      pageServicesColor: page === 'services' ? pageBtnActive : pageBtnInactive,
+      pageTeamColor: page === 'team' ? pageBtnActive : pageBtnInactive,
+      pagePricesColor: page === 'prices' ? pageBtnActive : pageBtnInactive,
+      pageBlogColor: page === 'blog' ? pageBtnActive : pageBtnInactive,
+      pageContactColor: page === 'contact' ? pageBtnActive : pageBtnInactive,
+      pageReservationColor: page === 'reservation' ? pageBtnActive : pageBtnInactive,
+      pageSystemColor: page === 'system' ? pageBtnActive : pageBtnInactive,
+      pageHomeBorder: page === 'home' ? pageBorderActive : pageBorderInactive,
+      pageServicesBorder: page === 'services' ? pageBorderActive : pageBorderInactive,
+      pageTeamBorder: page === 'team' ? pageBorderActive : pageBorderInactive,
+      pagePricesBorder: page === 'prices' ? pageBorderActive : pageBorderInactive,
+      pageBlogBorder: page === 'blog' ? pageBorderActive : pageBorderInactive,
+      pageContactBorder: page === 'contact' ? pageBorderActive : pageBorderInactive,
+      pageReservationBorder: page === 'reservation' ? pageBorderActive : pageBorderInactive,
+      pageSystemBorder: page === 'system' ? pageBorderActive : pageBorderInactive,
+      fullTeam: [
+        { name: 'Elena', spec: 'Aromaterapie · Lymfatická', years: '7 let', bio: 'Certifikovaná masérka se specializací na aromaterapii a lymfatickou drenáž.' },
+        { name: 'Lucie', spec: 'Klasická · Sportovní', years: '5 let', bio: 'Odbornice na sportovní regeneraci a klasické masážní techniky.' },
+        { name: 'Natálie', spec: 'Relaxační · Relax', years: '6 let', bio: 'Specialistka na hlubokou relaxaci a kombinované techniky.' },
+        { name: 'Klára', spec: 'Lymfatická · Sportovní', years: '4 roky', bio: 'Expertka na lymfatickou drenáž a sportovní masáže.' },
+        { name: 'Sofia', spec: 'Aromaterapie · Relaxační', years: '3 roky', bio: 'Pasionovaná masérka se zaměřením na aromaterapii.' },
+        { name: 'Anna', spec: 'Klasická · Lymfatická', years: '5 let', bio: 'Zkušená masérka s komplexním přístupem ke každému klientovi.' },
+      ],
+      blogPosts: [
+        { slug: 'lymfaticka-masaz', title: 'Co je lymfatická masáž a komu prospívá?', date: '5. 6. 2025', cat: 'Zdraví', excerpt: 'Lymfatická masáž je jemná technika, která podporuje přirozený odtok lymfy a posiluje imunitní systém.' },
+        { slug: 'prvni-masaz-spa', title: 'Jak se připravit na první masáž ve spa', date: '28. 5. 2025', cat: 'Tipy', excerpt: 'Přijít na svou první masáž může být trochu nervózní. Přinášíme vám praktický průvodce, jak se připravit.' },
+        { slug: 'sportovni-vs-relaxacni', title: 'Rozdíl mezi sportovní a relaxační masáží', date: '15. 5. 2025', cat: 'Masáže', excerpt: 'Obě masáže mají své výhody, ale pro různé potřeby. Poradíme vám, která je pro vás ta pravá.' },
+        { slug: 'aromaterapie-benefity', title: '5 benefitů aromaterapeutické masáže', date: '2. 5. 2025', cat: 'Aromaterapie', excerpt: 'Aromaterapeutická masáž kombinuje léčivou sílu éterických olejů s relaxačními technikami.' },
+        { slug: 'masaz-stres', title: 'Masáž jako lék na stres moderního života', date: '20. 4. 2025', cat: 'Zdraví', excerpt: 'V dnešní uspěchané době je pravidelná masáž jedním z nejlepších způsobů, jak obnovit rovnováhu.' },
+        { slug: 'volba-masaze', title: 'Jak vybrat správnou masáž pro vaše potřeby', date: '8. 4. 2025', cat: 'Tipy', excerpt: 'S tolika druhy masáží může být výběr složitý. Pomůžeme vám najít tu správnou.' },
+      ],
+
+      mobileOpen, menuClass: mobileOpen ? 'mobile-overlay open' : 'mobile-overlay',
+      toggleMenu: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMenu: () => this.setState({ mobileOpen: false }),
+
+      lang, isCs: csActiveLang, isEn: enActiveLang, isRu: ruActiveLang,
+      setCs: () => this.setState({ lang: 'cs' }),
+      setEn: () => this.setState({ lang: 'en' }),
+      setRu: () => this.setState({ lang: 'ru' }),
+      csColor: csActiveLang ? '#BE1E2D' : 'transparent',
+      enColor: enActiveLang ? '#BE1E2D' : 'transparent',
+      ruColor: ruActiveLang ? '#BE1E2D' : 'transparent',
+      csFg: csActiveLang ? '#EFE9DF' : 'rgba(240,233,224,.4)',
+      enFg: enActiveLang ? '#EFE9DF' : 'rgba(240,233,224,.4)',
+      ruFg: ruActiveLang ? '#EFE9DF' : 'rgba(240,233,224,.4)',
+
+      services, team, faqs, testimonials, steps,
+      tText: t.text, tName: t.name, tRole: t.role,
+      testimonialKey: testimonial,
+      t0dot: testimonial === 0 ? crimson : 'rgba(190,30,45,.22)',
+      t1dot: testimonial === 1 ? crimson : 'rgba(190,30,45,.22)',
+      t2dot: testimonial === 2 ? crimson : 'rgba(190,30,45,.22)',
+      prevT: () => this.setState(s => ({ testimonial: (s.testimonial + 2) % 3 })),
+      nextT: () => this.setState(s => ({ testimonial: (s.testimonial + 1) % 3 })),
+
+      wizardStep, wizardStepStr: String(wizardStep), step1: wizardStep === 1, step2: wizardStep === 2,
+      step3: wizardStep === 3, step4: wizardStep === 4, step5: wizardStep === 5,
+      nextWizard: () => this.setState(s => ({ wizardStep: Math.min(5, s.wizardStep + 1) })),
+      prevWizard: () => this.setState(s => ({ wizardStep: Math.max(1, s.wizardStep - 1) })),
+      wizIndicator, wizServices, wizMasseuses, wizSlots, wizDays,
+      calDayLabels,
+      selectedService, selectedMasseuse, selectedSlot,
+      selectedServiceName, selectedMasseuseName, selectedSlotDisplay,
+      step2BtnColor: selectedService ? crimson : 'rgba(190,30,45,.3)',
+      step2BtnCursor: selectedService ? 'pointer' : 'not-allowed',
+      step4BtnColor: selectedSlot ? crimson : 'rgba(190,30,45,.3)',
+      step4BtnCursor: selectedSlot ? 'pointer' : 'not-allowed',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

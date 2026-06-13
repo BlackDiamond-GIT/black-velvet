@@ -1,0 +1,11 @@
+{% load i18n %}
+<a href="{{ masseuse.get_absolute_url }}" class="team-card reveal">
+  <div class="team-card__media">
+    {% include "partials/media_gallery.html" with primary_image=masseuse.photo secondary_image=masseuse.photo gallery_variant="card-team" gallery_alt=masseuse.name|add:" — masérka Black Velvet Spa Praha, "|add:masseuse.specializations gallery_width=600 gallery_height=800 gallery_placeholder=masseuse.name %}
+  </div>
+  <div class="team-card__body">
+    <h3 class="team-card-name">{{ masseuse.name }}</h3>
+    <p class="team-card__spec">{{ masseuse.specializations }}</p>
+    <p class="team-card__exp">{{ masseuse.experience_display }} {% trans "praxe" %}</p>
+  </div>
+</a>

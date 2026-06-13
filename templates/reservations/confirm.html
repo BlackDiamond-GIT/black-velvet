@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container section-pad" style="text-align:center;min-height:60svh;">
+  {% if reservation %}
+  <div class="wizard-success">
+    <p style="font-size:48px;color:var(--color-crimson);margin-bottom:16px;">✓</p>
+    <h1 class="section-heading" style="margin-bottom:16px;">{% trans "Rezervace potvrzena" %}</h1>
+    <p class="text-muted">{{ reservation.service.name }} — {{ reservation.time_slot.date }} {{ reservation.time_slot.time }}</p>
+  </div>
+  {% else %}
+  <h1 class="section-heading">{% trans "Rezervace nenalezena" %}</h1>
+  {% endif %}
+</div>
+{% endblock %}

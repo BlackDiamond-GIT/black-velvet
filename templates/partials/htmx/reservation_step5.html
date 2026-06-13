@@ -1,0 +1,21 @@
+{% load i18n %}
+{% include "partials/htmx/wizard_indicator.html" %}
+<div class="wizard-summary">
+  <h2 style="font-family:var(--font-heading);font-size:24px;margin-bottom:24px;">{% trans "Potvrzení rezervace" %}</h2>
+  <dl>
+    <dt>{% trans "Masáž" %}</dt><dd>{{ summary.service.name }}</dd>
+    <dt>{% trans "Masérka" %}</dt><dd>{% if summary.masseuse %}{{ summary.masseuse.name }}{% else %}{% trans "Libovolná" %}{% endif %}</dd>
+    <dt>{% trans "Termín" %}</dt><dd>{% if summary.slot %}{{ summary.slot.date }} {{ summary.slot.time }}{% endif %}</dd>
+    <dt>{% trans "Jméno" %}</dt><dd>{{ summary.name }}</dd>
+    <dt>{% trans "Email" %}</dt><dd>{{ summary.email }}</dd>
+    <dt>{% trans "Telefon" %}</dt><dd>{{ summary.phone }}</dd>
+    {% if summary.notes %}<dt>{% trans "Poznámka" %}</dt><dd>{{ summary.notes }}</dd>{% endif %}
+  </dl>
+</div>
+<form hx-post="{% url 'reservations:confirm_submit' %}" hx-target="#wizard-container" hx-swap="innerHTML" data-track-form="reservation">
+  {% csrf_token %}
+  <div class="wizard-actions">
+    <button type="button" class="btn btn--outline" hx-get="{% url 'reservations:step' step=4 %}" hx-target="#wizard-container">← {% trans "Zpět" %}</button>
+    <button type="submit" class="btn btn--primary btn--lg">{% trans "Potvrdit rezervaci" %}</button>
+  </div>
+</form>

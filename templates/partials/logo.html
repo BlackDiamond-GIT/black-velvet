@@ -1,0 +1,46 @@
+{% load static i18n %}
+<a href="{% url 'core:home' %}" class="site-logo{% if logo_animated %} site-logo--animated{% endif %}{% if logo_class %} {{ logo_class }}{% endif %}" aria-label="{{ SITE_NAME }}">
+  {% if logo_animated %}
+  <span class="site-logo__frame">
+    <img
+      class="site-logo__img"
+      src="{% static 'img/logo.png' %}"
+      alt="{{ SITE_NAME }}"
+      width="354"
+      height="149"
+      decoding="async"
+    >
+    <svg class="site-logo__overlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 354 149" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+      <path
+        class="site-logo__stroke site-logo__stroke--black"
+        pathLength="100"
+        d="M5 4 L253 4 L248 10 L244 14 L240 20 L235 24 L235 32 L239 36 L243 40 L247 46 L251 50 L254 54 L38 56 L5 54 L5 46 L5 38 L5 30 L5 22 L5 14 L5 6 L5 4"
+      />
+      <path
+        class="site-logo__stroke site-logo__stroke--velvet"
+        pathLength="100"
+        d="M268 54 L346 54 L346 74 L328 80 L328 88 L327 96 L327 104 L327 112 L327 120 L62 124 L59 118 L56 112 L54 106 L51 100 L48 94 L45 88 L43 82 L40 76"
+      />
+      <path
+        class="site-logo__stroke site-logo__stroke--base"
+        pathLength="100"
+        d="M40 37 L50 45 L67 135 L70 142 L346 142"
+      />
+      <path
+        class="site-logo__stroke site-logo__stroke--corner"
+        pathLength="100"
+        d="M265 48 L285 48 L285 58"
+      />
+    </svg>
+  </span>
+  {% else %}
+  <img
+    class="site-logo__img"
+    src="{% static 'img/logo.png' %}"
+    alt="{{ SITE_NAME }}"
+    width="354"
+    height="149"
+    decoding="async"
+  >
+  {% endif %}
+</a>

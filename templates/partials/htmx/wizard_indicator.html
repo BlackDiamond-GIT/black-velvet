@@ -1,0 +1,12 @@
+{% load i18n %}
+<div class="wizard-step-indicator">
+  {% for label in step_labels %}
+  <div class="wizard-step">
+    <div class="wizard-step__dot" style="background:{% if forloop.counter <= wizard_step %}var(--color-crimson){% else %}rgba(190,30,45,.12){% endif %};color:{% if forloop.counter <= wizard_step %}var(--color-text){% else %}rgba(190,30,45,.4){% endif %};">{{ forloop.counter }}</div>
+    <span class="wizard-step__label" style="color:{% if forloop.counter == wizard_step %}var(--color-text){% elif forloop.counter < wizard_step %}var(--color-gold){% else %}rgba(240,233,224,.25){% endif %};">{{ label }}</span>
+    {% if not forloop.last %}
+    <div class="wizard-step__line" style="background:{% if forloop.counter < wizard_step %}var(--color-crimson){% else %}rgba(190,30,45,.12){% endif %};"></div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

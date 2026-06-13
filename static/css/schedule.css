@@ -1,0 +1,414 @@
+.schedule-hero {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.schedule-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.schedule-hero__intro {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-top: 16px;
+  max-width: 640px;
+  line-height: 1.65;
+}
+
+.schedule-section__title {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0;
+}
+
+
+.schedule-week__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: clamp(24px, 3.5vw, 36px);
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.schedule-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(240, 233, 224, 0.5);
+}
+
+.schedule-legend__swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.schedule-legend__swatch--avail {
+  background: var(--color-card);
+  border: 1px solid rgba(201, 169, 138, 0.65);
+}
+
+.schedule-legend__swatch--booked {
+  background: rgba(240, 233, 224, 0.08);
+  opacity: 0.5;
+}
+
+.masseuse-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  padding-bottom: 4px;
+  margin-bottom: clamp(24px, 3.5vw, 32px);
+  scrollbar-width: none;
+}
+
+.masseuse-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.masseuse-tabs__btn {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: var(--color-card);
+  border: 1px solid rgba(190, 30, 45, 0.18);
+  border-radius: 2px;
+  color: rgba(240, 233, 224, 0.55);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.masseuse-tabs__btn:hover,
+.masseuse-tabs__btn:focus-visible {
+  border-color: rgba(190, 30, 45, 0.35);
+  color: var(--color-text);
+  outline: none;
+}
+
+.masseuse-tabs__btn.is-active {
+  border-color: var(--color-crimson);
+  color: var(--color-text);
+  background: rgba(190, 30, 45, 0.12);
+  box-shadow: 0 0 0 1px rgba(190, 30, 45, 0.2);
+}
+
+.masseuse-panels {
+  position: relative;
+}
+
+.masseuse-panel {
+  display: none;
+}
+
+.masseuse-panel.is-active {
+  display: block;
+  animation: schedule-panel-in 0.35s ease both;
+}
+
+@keyframes schedule-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.masseuse-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding-bottom: clamp(20px, 3vw, 28px);
+  margin-bottom: clamp(20px, 3vw, 28px);
+  border-bottom: 1px solid rgba(190, 30, 45, 0.12);
+}
+
+.masseuse-panel__name {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+.masseuse-panel__spec {
+  font-size: 14px;
+  color: rgba(240, 233, 224, 0.45);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.masseuse-panel__profile {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 14px);
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-card);
+  border: 1px solid rgba(190, 30, 45, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.week-day--today {
+  border-color: rgba(190, 30, 45, 0.35);
+  box-shadow: 0 0 0 1px rgba(190, 30, 45, 0.1);
+}
+
+.week-day__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 12px 10px;
+  background: rgba(190, 30, 45, 0.04);
+  border-bottom: 1px solid rgba(190, 30, 45, 0.08);
+}
+
+.week-day--today .week-day__head {
+  background: rgba(190, 30, 45, 0.1);
+}
+
+.week-day__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.week-day__badge {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+  border: 1px solid rgba(190, 30, 45, 0.3);
+  border-radius: 2px;
+  padding: 3px 6px;
+}
+
+.week-day__slots {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.week-slot__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(190, 30, 45, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.week-slot__link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.week-slot__link:hover,
+.week-slot__link:focus-visible {
+  border-color: rgba(190, 30, 45, 0.4);
+  background: rgba(190, 30, 45, 0.08);
+  outline: none;
+}
+
+.week-slot--booked .week-slot__inner {
+  opacity: 0.38;
+  border-color: transparent;
+}
+
+.week-slot__time {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+.week-slot__svc {
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(240, 233, 224, 0.45);
+}
+
+.week-slot__status {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 224, 0.3);
+  margin-top: 2px;
+}
+
+.week-slot__status--avail {
+  color: var(--color-gold);
+}
+
+.week-day__empty {
+  margin: 0;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240, 233, 224, 0.25);
+  flex: 1;
+}
+
+.schedule-empty {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.schedule-hint {
+  font-size: 13px;
+  color: rgba(240, 233, 224, 0.4);
+  margin-top: clamp(24px, 3vw, 32px);
+  text-align: center;
+  line-height: 1.55;
+}
+
+.schedule-cta {
+  margin-top: clamp(48px, 6vw, 72px);
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .week-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .week-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .schedule-week__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .schedule-legend {
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .schedule-hero__intro {
+    font-size: 15px;
+  }
+
+  .masseuse-tabs__btn {
+    font-size: 10px;
+    padding: 10px 14px;
+    letter-spacing: 0.1em;
+  }
+
+  .masseuse-panel__profile {
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+  }
+
+  .masseuse-panel__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .week-day__label {
+    font-size: 10px;
+    word-break: break-word;
+  }
+
+  .week-slot__svc {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 640px) {
+  .week-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .week-day__head {
+    padding: 14px 16px;
+  }
+
+  .week-day__slots {
+    padding: 10px 12px 12px;
+  }
+
+  .week-slot__inner {
+    padding: 12px;
+    min-height: 44px;
+  }
+
+  .masseuse-tabs__btn {
+    padding-inline: 16px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .masseuse-tabs {
+    overscroll-behavior-x: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masseuse-panel.is-active {
+    animation: none;
+  }
+}

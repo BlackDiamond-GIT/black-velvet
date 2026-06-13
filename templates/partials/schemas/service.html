@@ -1,0 +1,25 @@
+{% if service %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "{{ service.name|escapejs }}",
+  "description": "{{ service.short_desc|escapejs }}",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "{{ SITE_NAME }}",
+    "url": "{{ SITE_URL }}"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Praha"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "CZK",
+    "price": "{{ service.price_czk }}",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{% endif %}

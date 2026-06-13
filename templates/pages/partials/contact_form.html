@@ -1,0 +1,19 @@
+{% load i18n %}
+<form method="post"
+      action="{% url 'pages:contact' %}"
+      hx-post="{% url 'pages:contact' %}"
+      hx-target="#contact-form-wrap"
+      hx-swap="innerHTML"
+      data-track-form="contact">
+  {% csrf_token %}
+  <div class="contact-form-card__fields">
+    {{ form.name }}
+    {{ form.email }}
+    {{ form.phone }}
+    {{ form.message }}
+    {% if form.errors %}
+    <p class="contact-form-card__error">{% trans "Zkontrolujte prosím vyplněná pole." %}</p>
+    {% endif %}
+    <button type="submit" class="btn btn--primary btn--lg">{% trans "Odeslat zprávu" %}</button>
+  </div>
+</form>
