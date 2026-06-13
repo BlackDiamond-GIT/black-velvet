@@ -28,7 +28,18 @@
 }
 
 .team-detail__photo {
+  position: relative;
   overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: #0a0810;
+}
+
+.team-detail__photo .media-gallery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .team-detail__name {
