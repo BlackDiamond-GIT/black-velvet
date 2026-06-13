@@ -375,12 +375,17 @@
 
 .svc-card__media {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
+  background: #0a0810;
 }
 
 .svc-card__media .media-gallery {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
   z-index: 3;
 }
 
@@ -486,10 +491,18 @@
 
 .team-card__media {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   margin-bottom: 16px;
-  background: var(--color-card);
+  background: #0a0810;
+}
+
+.team-card__media .media-gallery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .team-card__body {
