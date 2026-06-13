@@ -79,11 +79,20 @@ class Command(BaseCommand):
             )
             masseuse_map[row['id']] = masseuse
 
+        service_ids_by_masseuse = {}
         for link in links:
             masseuse = masseuse_map.get(link['masseuse_id'])
             service = service_map.get(link['service_id'])
             if masseuse and service:
-                masseuse.services.add(service)
+                service_ids_by_masseuse.setdefault(masseuse.id, set()).add(service.id)
+
+        for masseuse in masseuse_map.values():
+            service_ids = service_ids_by_masseuse.get(masseuse.id, set())
+            masseuse.services.set(Service.objects.filter(id__in=service_ids))
+            if not service_ids:
+                self.stdout.write(self.style.WARNING(
+                    f'No services linked for masseuse: {masseuse.slug}'
+                ))
 
         return masseuse_map
 

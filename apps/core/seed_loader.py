@@ -63,6 +63,8 @@ def service_defaults(row):
 
 def masseuse_defaults(row):
     defaults = model_defaults(row, TRANSLATED_FIELDS['masseuses'])
+    if row.get('name'):
+        defaults['name'] = row['name']
     for field in ('years_experience', 'order'):
         if field in row:
             defaults[field] = row[field]
