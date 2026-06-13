@@ -30,7 +30,7 @@ def build_booking_out_url(
 
 
 def build_reservation_url(*, placement: str, page: str = "") -> str:
-    """Return /cs/rezervace/?placement=… (logged in reservation_redirect)."""
+    """Return reservation URL with click-tracking query params."""
     params: dict[str, str] = {"placement": placement}
     if page:
         params["page"] = page[:200]

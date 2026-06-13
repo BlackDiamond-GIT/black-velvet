@@ -27,7 +27,7 @@ urlpatterns += i18n_patterns(
     path('', include('apps.reservations.urls')),
     path('', include('apps.blog.urls')),
     path('', include('apps.pages.urls')),
-    prefix_default_language=True,
+    prefix_default_language=False,
 )
 
 if settings.DEBUG or settings.SERVE_MEDIA:

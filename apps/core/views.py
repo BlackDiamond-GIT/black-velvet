@@ -54,10 +54,15 @@ def robots_txt(request):
         'User-agent: *',
         'Disallow: /admin/',
         'Disallow: /api/',
+        'Disallow: /rezervace/potvrdit/',
+        'Disallow: /rezervace/krok/',
     ]
     for lang_code, _ in settings.LANGUAGES:
-        lines.append(f'Disallow: /{lang_code}/rezervace/potvrdit/')
-        lines.append(f'Disallow: /{lang_code}/rezervace/wizard/')
+        if lang_code == settings.LANGUAGE_CODE:
+            continue
+        prefix = f'/{lang_code}'
+        lines.append(f'Disallow: {prefix}/rezervace/potvrdit/')
+        lines.append(f'Disallow: {prefix}/rezervace/krok/')
     lines += [
         '',
         f'Sitemap: {settings.SITE_URL.rstrip("/")}{reverse("sitemap")}',
