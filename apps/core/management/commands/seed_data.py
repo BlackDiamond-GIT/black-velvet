@@ -1,10 +1,10 @@
 from datetime import date, time, timedelta
 
-from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
 from apps.blog.models import Post, Tag
+from apps.core.media_upload import attach_seed_image
 from apps.core.seed_loader import (
     load_bundle,
     masseuse_defaults,
@@ -35,21 +35,18 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Seed data loaded successfully.'))
 
-    def _attach_image(self, instance, field_name, category, slug, dest_name):
+    def _attach_image(self, instance, field_name, category, slug):
         src = seed_media_path(category, slug)
         if not src:
             self.stdout.write(self.style.WARNING(f'Seed image missing: {category}/{slug}'))
             return
 
-        field = getattr(instance, field_name)
-        if field and field.name:
-            if field.url.startswith('https://res.cloudinary.com/'):
-                return
-            field.delete(save=False)
-
-        storage_name = f'black-velvet/{category}/{slug}.webp'
-        with src.open('rb') as handle:
-            field.save(storage_name, File(handle), save=True)
+        try:
+            url = attach_seed_image(instance, field_name, category, slug, src)
+            self.stdout.write(self.style.SUCCESS(f'Image ready: {category}/{slug} -> {url}'))
+        except Exception as exc:
+            self.stdout.write(self.style.ERROR(f'Image upload failed: {category}/{slug}: {exc}'))
+            raise
 
     def _import_services(self, rows):
         service_map = {}
@@ -63,7 +60,6 @@ class Command(BaseCommand):
                 'image',
                 'services',
                 row['slug'],
-                f"{row['slug']}.webp",
             )
             service_map[row['id']] = service
         return service_map
@@ -80,7 +76,6 @@ class Command(BaseCommand):
                 'photo',
                 'team',
                 row['slug'],
-                f"{row['slug']}.webp",
             )
             masseuse_map[row['id']] = masseuse
 
@@ -123,7 +118,6 @@ class Command(BaseCommand):
                 'image',
                 'blog',
                 row['slug'],
-                f"{row['slug']}.webp",
             )
             tag_ids = post_tag_ids.get(row['id'], [])
             post.tags.set([tag_map[tag_id] for tag_id in tag_ids if tag_id in tag_map])
