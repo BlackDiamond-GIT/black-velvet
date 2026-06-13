@@ -2,26 +2,20 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 
 
-def environment_callback(request):
-    from django.conf import settings
-
-    if settings.DEBUG:
-        return ['Розробка', 'warning']
-    return ['Продакшн', 'success']
-
-
 UNFOLD = {
     'SITE_TITLE': 'Black Velvet Admin',
     'SITE_HEADER': 'Black Velvet Spa',
     'SITE_SUBHEADER': 'Керування контентом',
     'SITE_URL': '/',
-    'SITE_ICON': lambda request: static('img/favicon.png'),
-    'SITE_LOGO': lambda request: static('img/favicon.png'),
+    'SITE_ICON': lambda request: static('img/favicon.svg'),
+    'SITE_LOGO': lambda request: static('img/favicon.svg'),
     'SITE_SYMBOL': 'spa',
     'THEME': 'dark',
     'SHOW_HISTORY': True,
     'SHOW_VIEW_ON_SITE': True,
-    'ENVIRONMENT': 'apps.core.unfold_config.environment_callback',
+    'STYLES': [
+        lambda request: static('css/admin-header.css'),
+    ],
     'COLORS': {
         'primary': {
             '50': 'oklch(97% 0.02 25)',
@@ -100,16 +94,6 @@ UNFOLD = {
                         'link': reverse_lazy('admin:core_contentpage_changelist'),
                     },
                     {
-                        'title': 'Інтерʼєр',
-                        'icon': 'photo_library',
-                        'link': reverse_lazy('admin:core_interiorimage_changelist'),
-                    },
-                    {
-                        'title': 'Етикет',
-                        'icon': 'rule',
-                        'link': reverse_lazy('admin:core_etiquetterule_changelist'),
-                    },
-                    {
                         'title': 'Відгуки гостей',
                         'icon': 'reviews',
                         'link': reverse_lazy('admin:core_guestreview_changelist'),
@@ -129,6 +113,11 @@ UNFOLD = {
                         'title': 'Бібліотека фото',
                         'icon': 'collections',
                         'link': reverse_lazy('admin:media_library_cloudinaryimage_changelist'),
+                    },
+                    {
+                        'title': 'Розклад',
+                        'icon': 'schedule',
+                        'link': reverse_lazy('admin:reservations_timeslot_changelist'),
                     },
                 ],
             },
@@ -161,11 +150,6 @@ UNFOLD = {
                         'title': 'Резервації',
                         'icon': 'event_available',
                         'link': reverse_lazy('admin:reservations_reservation_changelist'),
-                    },
-                    {
-                        'title': 'Терміни',
-                        'icon': 'schedule',
-                        'link': reverse_lazy('admin:reservations_timeslot_changelist'),
                     },
                 ],
             },

@@ -1054,3 +1054,116 @@ msgstr "%(days)s днів"
 msgid "IP-only hash"
 msgstr "Хеш IP (без UA)"
 
+msgid "Active filters"
+msgstr "Обрано"
+
+msgid "Schedule entry"
+msgstr "Запис розкладу"
+
+msgid "Time slot"
+msgstr "Часовий слот"
+
+msgid "Reservations"
+msgstr "Резервації"
+
+msgid "Pending"
+msgstr "Очікує"
+
+msgid "Confirmed"
+msgstr "Підтверджено"
+
+msgid "Cancelled"
+msgstr "Скасовано"
+
+msgid "Booked"
+msgstr "Заброньовано"
+
+msgid "Time"
+msgstr "Час"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Notes"
+msgstr "Примітки"
+
+msgid "Created at"
+msgstr "Створено"
+
+msgid "Guest review"
+msgstr "Відгук гостя"
+
+msgid "Guest reviews"
+msgstr "Відгуки гостей"
+
+msgid "Review"
+msgstr "Відгук"
+
+msgid "Reviews"
+msgstr "Відгуки"
+
+msgid "Contact message"
+msgstr "Повідомлення"
+
+msgid "Contact messages"
+msgstr "Повідомлення"
+
+msgid "Price category"
+msgstr "Категорія цін"
+
+msgid "Price categories"
+msgstr "Категорії цін"
+
+msgid "Price item"
+msgstr "Позиція прайсу"
+
+msgid "Price items"
+msgstr "Позиції прайсу"
+
+msgid "Question"
+msgstr "Питання"
+
+msgid "Answer"
+msgstr "Відповідь"
+
+msgid "Author"
+msgstr "Автор"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Rating"
+msgstr "Оцінка"
+
+msgid "Is read"
+msgstr "Прочитано"
+
+msgid "Rule"
+msgstr "Правило"
+
+msgid "Google"
+msgstr "Google"
+
+msgid "Message template (EN)"
+msgstr "Шаблон повідомлення (EN)"
+
+msgid "Message template (RU)"
+msgstr "Шаблон повідомлення (RU)"
+
+msgid "General / No service"
+msgstr "Загальний / без послуги"
+
+msgid "WhatsApp Template"
+msgstr "Шаблон WhatsApp"
+
+msgid "View site"
+msgstr "Переглянути сайт"
+
+msgid "Change password"
+msgstr "Змінити пароль"
+
+msgid "Log out"
+msgstr "Вийти"

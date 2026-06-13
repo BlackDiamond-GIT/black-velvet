@@ -6,9 +6,9 @@ from django.conf import settings
 register = template.Library()
 
 CARD_TRANSFORMS = {
-    'card-team': 'c_fill,g_auto,h_800,w_600,q_auto,f_auto',
+    'card-team': 'c_fill,g_face,h_800,w_600,q_auto,f_auto',
     'card-service': 'c_fill,g_auto,h_1067,w_800,q_auto,f_auto',
-    'detail-team': 'c_fill,g_auto,h_800,w_600,q_auto,f_auto',
+    'detail-team': 'c_fill,g_face,h_800,w_600,q_auto,f_auto',
     'detail-service': 'c_fill,g_auto,h_800,w_1200,q_auto,f_auto',
 }
 

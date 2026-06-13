@@ -18,29 +18,10 @@
   background: #0a0810;
 }
 
-.media-gallery--card-team .media-gallery__track,
-.media-gallery--card-service .media-gallery__track {
-  display: block;
-}
-
-.media-gallery--card-team .media-gallery__slide,
-.media-gallery--card-service .media-gallery__slide {
-  position: absolute;
-  inset: 0;
-  transform: none;
-}
-
-.media-gallery--card-team .media-gallery__img,
-.media-gallery--card-service .media-gallery__img {
-  object-fit: cover;
-  object-position: center center;
-  transform: scale(1.08);
-  transform-origin: center center;
-}
-
-.team-card:hover .media-gallery--card-team .media-gallery__img,
-.svc-card:hover .media-gallery--card-service .media-gallery__img {
-  transform: scale(1.12);
+.media-gallery--card-team .media-gallery__img:not(.media-gallery__img--blur),
+.media-gallery--card-service .media-gallery__img:not(.media-gallery__img--blur) {
+  object-position: center top;
+  transform-origin: center top;
 }
 
 .media-gallery--card-team::after {

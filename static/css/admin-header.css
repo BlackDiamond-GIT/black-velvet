@@ -1,0 +1,27 @@
+.bv-admin-userlinks nav {
+  row-gap: 0;
+}
+
+.bv-admin-userlinks__link,
+.bv-admin-userlinks__logout {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bv-admin-userlinks__link:focus-visible,
+.bv-admin-userlinks__logout:focus-visible {
+  outline: 2px solid rgba(190, 30, 45, 0.55);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .bv-admin-userlinks nav {
+    gap: 0.65rem 0.85rem;
+  }
+
+  .bv-admin-userlinks__link,
+  .bv-admin-userlinks__logout {
+    min-height: 40px;
+  }
+}

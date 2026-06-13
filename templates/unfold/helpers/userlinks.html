@@ -1,35 +1,37 @@
 {% load i18n static %}
 
-<div class="flex items-center ml-auto">
-    <div class="flex flex-row group items-center leading-none relative">
-        <div class="flex gap-4 items-center">
-            {% if environment %}
-                {% include "unfold/helpers/label.html" with text=environment.0 type=environment.1 %}
-            {% endif %}
+<div class="bv-admin-userlinks flex items-center ml-auto shrink-0">
+  <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-1 text-xs font-semibold tracking-wide">
+    {% get_current_language as CURRENT_LANG %}
+    <a href="{% url 'admin_toggle_lang' %}"
+       class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark"
+       title="{% if CURRENT_LANG == 'uk' %}Switch to English{% else %}Перейти на українську{% endif %}">
+      {% if CURRENT_LANG == 'uk' %}EN{% else %}UA{% endif %}
+    </a>
 
-            {% if extra_userlinks %}
-                {{ extra_userlinks }}
-            {% endif %}
-
-            {# Admin language toggle: EN ↔ UA #}
-            {% get_current_language as CURRENT_LANG %}
-            <a href="{% url 'admin_toggle_lang' %}"
-               class="block cursor-pointer h-[18px] hover:text-base-700 dark:hover:text-base-200"
-               title="{% if CURRENT_LANG == 'uk' %}Switch to English{% else %}Перейти на українську{% endif %}">
-                <span class="text-xs font-semibold leading-[18px] tracking-wide">
-                    {% if CURRENT_LANG == 'uk' %}EN{% else %}UA{% endif %}
-                </span>
-            </a>
-
-            {% include "unfold/helpers/language_switch.html" %}
-
-            {% include "unfold/helpers/theme_switch.html" %}
-
-            {% include "unfold/helpers/account_links.html" %}
-        </div>
-    </div>
-
-    {% if nav_global_side %}
-        {{ nav_global_side }}
+    {% if site_url %}
+      <a href="{{ site_url }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark">
+        {% translate 'View site' %}
+      </a>
     {% endif %}
+
+    {% if user.has_usable_password %}
+      <a href="{% url 'admin:password_change' %}"
+         class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark">
+        {% translate 'Change password' %}
+      </a>
+    {% endif %}
+
+    <form method="post" action="{% url 'admin:logout' %}" class="inline-flex items-center m-0 p-0">
+      {% csrf_token %}
+      <button type="submit"
+              class="bv-admin-userlinks__logout min-h-[44px] inline-flex items-center gap-1 bg-transparent border-0 p-0 cursor-pointer text-sm font-semibold tracking-wide text-red-400 hover:text-red-300 dark:text-red-400 dark:hover:text-red-300">
+        {% translate 'Log out' %}
+        <span class="material-symbols-outlined text-[16px] leading-none" aria-hidden="true">logout</span>
+      </button>
+    </form>
+  </nav>
 </div>

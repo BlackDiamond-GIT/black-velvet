@@ -17,6 +17,7 @@
   <meta property="og:locale" content="{{ OG_LOCALE }}">
   <meta property="og:title" content="{{ seo.title }}">
   <meta property="og:description" content="{{ seo.description }}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
   <link rel="icon" type="image/png" sizes="180x180" href="{% static 'img/favicon.png' %}">
   <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
   <meta property="og:image" content="{{ seo.og_image }}">
@@ -34,7 +35,7 @@
   <link rel="stylesheet" href="{% static 'css/logo-nav.css' %}">
   <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   <link rel="stylesheet" href="{% static 'css/mobile-nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css/gallery.css' %}?v=5">
+  <link rel="stylesheet" href="{% static 'css/gallery.css' %}?v=6">
   {% block extra_css %}{% endblock %}
   {% include 'partials/schemas/local_business.html' %}
   {% if schema_website %}{% include 'partials/schemas/website.html' %}{% endif %}
@@ -63,7 +64,7 @@
   <script src="{% static 'js/reveal.js' %}" defer></script>
   <script src="{% static 'js/modal.js' %}" defer></script>
   <script src="{% static 'js/main.js' %}" defer></script>
-  <script src="{% static 'js/gallery.js' %}?v=5" defer></script>
+  <script src="{% static 'js/gallery.js' %}?v=6" defer></script>
   <script src="{% static 'js/ga4.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>

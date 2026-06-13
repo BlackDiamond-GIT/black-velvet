@@ -11,3 +11,4 @@ django-htmx
 gunicorn
 cloudinary
 django-cloudinary-storage
+Babel>=2.12

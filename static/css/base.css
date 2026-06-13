@@ -107,6 +107,10 @@ a {
   margin-bottom: clamp(40px, 5vw, 64px);
 }
 
+.subsection-header .section-heading {
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
 .page-header .section-heading,
 .page-header h1 {
   font-size: clamp(32px, 4.5vw, 56px);
