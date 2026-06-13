@@ -4,6 +4,19 @@
 
 .team-list-page .team-grid {
   width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1020px) {
+  .team-list-page .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .team-list-page .team-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .team-detail__hero {
