@@ -10,7 +10,7 @@
   {% include "partials/breadcrumbs.html" %}
   <div class="team-detail__hero reveal">
     <div class="team-detail__photo">
-      {% include "partials/media_gallery.html" with primary_image=masseuse.photo secondary_image=masseuse.photo gallery_variant="detail-team" gallery_alt=masseuse.name|add:" — masérka Black Velvet Spa Praha" gallery_width=600 gallery_height=800 %}
+      {% include "partials/media_gallery.html" with primary_image=masseuse.card_photo secondary_image=masseuse.card_photo gallery_variant="detail-team" gallery_alt=masseuse.name|add:" — masérka Black Velvet Spa Praha" gallery_width=600 gallery_height=800 %}
     </div>
     <div class="team-detail__content">
       <h1 class="team-detail__name">{{ masseuse.name }}</h1>

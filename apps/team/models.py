@@ -65,6 +65,14 @@ class Masseuse(models.Model):
         return ''
 
     @property
+    def card_photo(self):
+        if self.main_cloudinary_photo_id:
+            return self.main_cloudinary_photo
+        if self.photo:
+            return self.photo
+        return None
+
+    @property
     def specializations_list(self):
         return [s.strip() for s in self.specializations.split(',') if s.strip()]
 
