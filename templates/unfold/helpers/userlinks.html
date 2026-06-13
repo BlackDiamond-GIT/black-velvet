@@ -1,10 +1,10 @@
 {% load i18n static %}
 
-<div class="bv-admin-userlinks flex items-center ml-auto shrink-0">
-  <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-1 text-xs font-semibold tracking-wide">
+<div class="bv-admin-userlinks">
+  <nav class="bv-admin-userlinks__nav" aria-label="Меню користувача">
     {% get_current_language as CURRENT_LANG %}
     <a href="{% url 'admin_toggle_lang' %}"
-       class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark"
+       class="bv-admin-userlinks__link"
        title="{% if CURRENT_LANG == 'uk' %}Switch to English{% else %}Перейти на українську{% endif %}">
       {% if CURRENT_LANG == 'uk' %}EN{% else %}UA{% endif %}
     </a>
@@ -13,24 +13,23 @@
       <a href="{{ site_url }}"
          target="_blank"
          rel="noopener noreferrer"
-         class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark">
+         class="bv-admin-userlinks__link">
         {% translate 'View site' %}
       </a>
     {% endif %}
 
     {% if user.has_usable_password %}
       <a href="{% url 'admin:password_change' %}"
-         class="bv-admin-userlinks__link min-h-[44px] inline-flex items-center text-font-subtle-light hover:text-font-important-light dark:text-font-subtle-dark dark:hover:text-font-important-dark">
+         class="bv-admin-userlinks__link">
         {% translate 'Change password' %}
       </a>
     {% endif %}
 
-    <form method="post" action="{% url 'admin:logout' %}" class="inline-flex items-center m-0 p-0">
+    <form method="post" action="{% url 'admin:logout' %}" class="bv-admin-userlinks__logout-form">
       {% csrf_token %}
-      <button type="submit"
-              class="bv-admin-userlinks__logout min-h-[44px] inline-flex items-center gap-1 bg-transparent border-0 p-0 cursor-pointer text-sm font-semibold tracking-wide text-red-400 hover:text-red-300 dark:text-red-400 dark:hover:text-red-300">
+      <button type="submit" class="bv-admin-userlinks__logout">
         {% translate 'Log out' %}
-        <span class="material-symbols-outlined text-[16px] leading-none" aria-hidden="true">logout</span>
+        <span class="bv-admin-userlinks__logout-icon material-symbols-outlined" aria-hidden="true">logout</span>
       </button>
     </form>
   </nav>

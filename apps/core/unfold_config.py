@@ -9,12 +9,29 @@ UNFOLD = {
     'SITE_URL': '/',
     'SITE_ICON': lambda request: static('img/favicon.svg'),
     'SITE_LOGO': lambda request: static('img/favicon.svg'),
+    'SITE_FAVICONS': [
+        {
+            'rel': 'icon',
+            'type': 'image/svg+xml',
+            'href': lambda request: static('img/favicon.svg'),
+        },
+        {
+            'rel': 'icon',
+            'type': 'image/png',
+            'sizes': '180x180',
+            'href': lambda request: static('img/favicon.png'),
+        },
+        {
+            'rel': 'apple-touch-icon',
+            'href': lambda request: static('img/favicon.png'),
+        },
+    ],
     'SITE_SYMBOL': 'spa',
     'THEME': 'dark',
     'SHOW_HISTORY': True,
     'SHOW_VIEW_ON_SITE': True,
     'STYLES': [
-        lambda request: static('css/admin-header.css'),
+        lambda request: static('css/admin-header.css?v=2'),
     ],
     'COLORS': {
         'primary': {
