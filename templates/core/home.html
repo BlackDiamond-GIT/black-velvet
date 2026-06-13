@@ -121,14 +121,9 @@
 
 <section class="section-pad" style="background:#0C0A14;">
   <div class="container loc-grid">
-    <button type="button" class="contact-map-trigger reveal" data-contact-modal-trigger
-            data-site-name="{{ SITE_NAME }}"
-            data-site-address="{{ SITE_ADDRESS }}"
-            data-site-phone="{{ SITE_PHONE }}"
-            data-site-email="{{ SITE_EMAIL }}"
-            aria-label="{% trans 'Zobrazit kontakt a mapu' %}">
-      <span class="contact-map-trigger__label">{% trans "Kontakt a mapa" %}<br>{{ SITE_ADDRESS }}</span>
-    </button>
+    <div class="contact-map-embed reveal">
+      {% include "partials/google_map_embed.html" %}
+    </div>
     <div class="reveal rd1 contact-info">
       <h2 class="section-heading" style="margin-bottom:32px;">{% trans "Najdete nás v srdci Prahy" %}</h2>
       <address>
@@ -148,8 +143,14 @@
       <div class="contact-hours">
         <p style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:14px;">{% trans "Otevírací doba" %}</p>
         <div class="contact-hours-grid">
-          <span style="color:rgba(240,233,224,.45);">{% trans "Po — Pá" %}</span><span>10:00 — 21:00</span>
-          <span style="color:rgba(240,233,224,.45);">{% trans "So — Ne" %}</span><span>10:00 — 19:00</span>
+          <div class="contact-hours-grid__item">
+            <span class="contact-hours-grid__day">{% trans "Po — Pá" %}</span>
+            <span class="contact-hours-grid__time">10:00 — 21:00</span>
+          </div>
+          <div class="contact-hours-grid__item">
+            <span class="contact-hours-grid__day">{% trans "So — Ne" %}</span>
+            <span class="contact-hours-grid__time">10:00 — 19:00</span>
+          </div>
         </div>
       </div>
     </div>

@@ -352,38 +352,39 @@
   line-height: 1.6;
 }
 
-.contact-map-trigger {
-  cursor: pointer;
-  border: 1px solid rgba(190, 30, 45, 0.15);
+.contact-map-embed {
   width: 100%;
-  padding: 0;
-  background: var(--color-card);
+  aspect-ratio: 4 / 3;
+  min-height: 220px;
   border-radius: 4px;
-  aspect-ratio: 4/3;
+  overflow: hidden;
+  border: 1px solid rgba(190, 30, 45, 0.15);
+  background: var(--color-card);
+}
+
+.contact-hours-grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: inherit;
-  font: inherit;
-  transition: background 0.25s ease;
-  -webkit-tap-highlight-color: transparent;
+  flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 36px);
 }
 
-.contact-map-trigger:hover,
-.contact-map-trigger:focus-visible {
-  background: rgba(18, 16, 26, 0.85);
-  outline: 2px solid rgba(190, 30, 45, 0.35);
-  outline-offset: 2px;
+.contact-hours-grid__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 120px;
 }
 
-.contact-map-trigger__label {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(201, 169, 138, 0.5);
-  text-align: center;
-  line-height: 1.7;
-  pointer-events: none;
+.contact-hours-grid__day {
+  font-size: 13px;
+  color: rgba(240, 233, 224, 0.45);
+}
+
+.contact-hours-grid__time {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
 }
 
 .cta-banner {

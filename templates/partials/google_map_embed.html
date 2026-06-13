@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="map-embed">
+  <iframe
+    src="https://maps.google.com/maps?q={{ SITE_LAT }},{{ SITE_LNG }}&amp;hl={{ LANGUAGE_CODE }}&amp;z=16&amp;output=embed"
+    title="{% trans 'Mapa — Black Velvet Spa Praha' %}"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen></iframe>
+</div>

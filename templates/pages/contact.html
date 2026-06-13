@@ -37,10 +37,7 @@
     <aside class="contact-map-card reveal">
       <h2 class="contact-map-card__title">{% trans "Kde nás najdete" %}</h2>
       <div class="contact-map-card__embed">
-        <iframe src="https://maps.google.com/maps?q={{ SITE_ADDRESS|urlencode }}&output=embed"
-                title="{% trans 'Mapa — Black Velvet Spa Praha' %}"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        {% include "partials/google_map_embed.html" %}
       </div>
       <a href="https://maps.google.com/?q={{ SITE_ADDRESS|urlencode }}"
          class="btn btn--outline contact-map-card__link"
