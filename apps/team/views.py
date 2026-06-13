@@ -1,8 +1,10 @@
+from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 
 from apps.core.breadcrumbs import crumb, home_crumb
 from apps.core.mixins import SEOMixin
+from apps.core.seed_loader import MASSEUSE_SLUG_RENAMES
 
 from .models import Masseuse
 
@@ -33,6 +35,13 @@ class MasseuseDetailView(SEOMixin, DetailView):
     context_object_name = 'masseuse'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        slug = kwargs.get(self.slug_url_kwarg)
+        new_slug = MASSEUSE_SLUG_RENAMES.get(slug)
+        if new_slug:
+            return redirect('team:detail', slug=new_slug, permanent=True)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         return Masseuse.objects.filter(is_active=True)

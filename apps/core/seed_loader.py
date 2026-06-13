@@ -70,3 +70,35 @@ def masseuse_defaults(row):
             defaults[field] = row[field]
     defaults['is_active'] = bool(row.get('is_active', True))
     return defaults
+
+
+MASSEUSE_SLUG_RENAMES = {
+    'elena': 'julia',
+    'lucie': 'diana',
+    'natalie': 'laura',
+    'klara': 'vanessa',
+    'sofia': 'ella',
+    'anna': 'mira',
+}
+
+
+def migrate_masseuse_slugs(stdout=None, style_success=None, style_warning=None):
+    from apps.team.models import Masseuse
+
+    for old_slug, new_slug in MASSEUSE_SLUG_RENAMES.items():
+        masseuse = Masseuse.objects.filter(slug=old_slug).first()
+        if not masseuse:
+            continue
+
+        duplicate = Masseuse.objects.filter(slug=new_slug).exclude(pk=masseuse.pk).first()
+        if duplicate:
+            duplicate.delete()
+            if stdout and style_warning:
+                stdout.write(style_warning(
+                    f'Removed duplicate masseuse record with slug: {new_slug}'
+                ))
+
+        masseuse.slug = new_slug
+        masseuse.save(update_fields=['slug'])
+        if stdout and style_success:
+            stdout.write(style_success(f'Migrated masseuse slug: {old_slug} -> {new_slug}'))

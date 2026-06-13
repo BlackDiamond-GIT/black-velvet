@@ -8,6 +8,7 @@ from apps.core.media_upload import attach_seed_image
 from apps.core.seed_loader import (
     load_bundle,
     masseuse_defaults,
+    migrate_masseuse_slugs,
     model_defaults,
     seed_media_path,
     service_defaults,
@@ -65,6 +66,11 @@ class Command(BaseCommand):
         return service_map
 
     def _import_masseuses(self, rows, links, service_map):
+        migrate_masseuse_slugs(
+            stdout=self.stdout,
+            style_success=self.style.SUCCESS,
+            style_warning=self.style.WARNING,
+        )
         masseuse_map = {}
         for row in rows:
             masseuse, _ = Masseuse.objects.update_or_create(

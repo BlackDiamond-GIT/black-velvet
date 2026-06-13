@@ -15,12 +15,12 @@ SERVICE_SLUG_MAP = {
 }
 
 MASSEUSE_SLUG_MAP = {
-    'elena': 'elena',
-    'lucie': 'lucie',
-    'natalia': 'natalie',
-    'klara': 'klara',
-    'veronika': 'sofia',
-    'marketa': 'anna',
+    'elena': 'julia',
+    'lucie': 'diana',
+    'natalia': 'laura',
+    'klara': 'vanessa',
+    'veronika': 'ella',
+    'marketa': 'mira',
 }
 
 OLD_BLOG_SLUGS = (
