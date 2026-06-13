@@ -1,15 +1,17 @@
 from datetime import date, time, timedelta
 
+from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
 from apps.blog.models import Post, Tag
-from apps.core.velvet_loader import (
-    OLD_BLOG_SLUGS,
-    ensure_velvet_root,
-    load_blog_posts,
-    load_masseuses,
-    load_services,
+from apps.core.seed_loader import (
+    load_bundle,
+    masseuse_defaults,
+    model_defaults,
+    seed_media_path,
+    service_defaults,
+    TRANSLATED_FIELDS,
 )
 from apps.pages.models import FAQ, PriceCategory, PriceItem, Review
 from apps.reservations.models import TimeSlot
@@ -18,245 +20,171 @@ from apps.team.models import Masseuse
 
 
 class Command(BaseCommand):
-    help = 'Seed initial Black Velvet data'
+    help = 'Seed initial Black Velvet data from bundled JSON'
 
     def handle(self, *args, **options):
-        ensure_velvet_root()
-
-        for item in load_services():
-            Service.objects.update_or_create(
-                slug=item['slug'],
-                defaults={
-                    'name': item['name_cs'],
-                    'name_en': item['name_en'],
-                    'name_ru': item['name_ru'],
-                    'short_desc': item['short_desc_cs'],
-                    'short_desc_en': item['short_desc_en'],
-                    'short_desc_ru': item['short_desc_ru'],
-                    'description': item['description_cs'],
-                    'description_en': item['description_en'],
-                    'description_ru': item['description_ru'],
-                    'price_czk': item['price_czk'],
-                    'duration_min': item['duration'],
-                    'duration_max': item['duration'],
-                    'meta_title': item['meta_title_cs'],
-                    'meta_title_en': item['meta_title_en'],
-                    'meta_title_ru': item['meta_title_ru'],
-                    'meta_description': item['meta_description_cs'],
-                    'meta_description_en': item['meta_description_en'],
-                    'meta_description_ru': item['meta_description_ru'],
-                    'order': item['order'] - 1,
-                    'is_active': True,
-                },
-            )
-
-        for item in load_masseuses():
-            masseuse, _ = Masseuse.objects.update_or_create(
-                slug=item['slug'],
-                defaults={
-                    'name': item['name'],
-                    'specializations': item['specializations_cs'],
-                    'specializations_en': item['specializations_en'],
-                    'specializations_ru': item['specializations_ru'],
-                    'years_experience': item['years_experience'],
-                    'bio': item['bio_cs'],
-                    'bio_en': item['bio_en'],
-                    'bio_ru': item['bio_ru'],
-                    'meta_title': item['meta_title_cs'],
-                    'meta_title_en': item['meta_title_en'],
-                    'meta_title_ru': item['meta_title_ru'],
-                    'meta_description': item['meta_description_cs'],
-                    'meta_description_en': item['meta_description_en'],
-                    'meta_description_ru': item['meta_description_ru'],
-                    'order': item['order'],
-                    'is_active': True,
-                },
-            )
-            services = Service.objects.filter(slug__in=item['service_slugs'])
-            masseuse.services.set(services)
-
-        faqs = [
-            {
-                'question': 'Jak dlouho trvá masáž?',
-                'question_en': 'How long does a massage last?',
-                'question_ru': 'Сколько длится массаж?',
-                'answer': 'Nabízíme masáže v délce 30, 60 nebo 90 minut. Doporučujeme vyhradit si navíc 15 minut na přípravu.',
-                'answer_en': 'We offer massages lasting 30, 60 or 90 minutes. We recommend allowing an extra 15 minutes for preparation.',
-                'answer_ru': 'Мы предлагаем массаж продолжительностью 30, 60 или 90 минут. Рекомендуем заложить дополнительно 15 минут на подготовку.',
-            },
-            {
-                'question': 'Co si mám přinést na masáž?',
-                'question_en': 'What should I bring to a massage?',
-                'question_ru': 'Что нужно взять с собой на массаж?',
-                'answer': 'Vše potřebné zajistíme — prémiové ručníky, masážní oleje a jednorázové prádlo.',
-                'answer_en': 'We provide everything you need — premium towels, massage oils and disposable linens.',
-                'answer_ru': 'Мы предоставляем всё необходимое — премиальные полотенца, массажные масла и одноразовое бельё.',
-            },
-            {
-                'question': 'Jak probíhá rezervace?',
-                'question_en': 'How does booking work?',
-                'question_ru': 'Как проходит бронирование?',
-                'answer': 'Rezervaci provedete online nebo telefonicky. Potvrzení obdržíte emailem do 30 minut.',
-                'answer_en': 'You can book online or by phone. Confirmation will be sent by email within 30 minutes.',
-                'answer_ru': 'Записаться можно онлайн или по телефону. Подтверждение придёт на email в течение 30 минут.',
-            },
-            {
-                'question': 'Mohu zrušit nebo změnit rezervaci?',
-                'question_en': 'Can I cancel or change my booking?',
-                'question_ru': 'Можно ли отменить или изменить бронирование?',
-                'answer': 'Zrušení je zdarma nejpozději 24 hodin před termínem.',
-                'answer_en': 'Cancellation is free up to 24 hours before the appointment.',
-                'answer_ru': 'Отмена бесплатна не позднее чем за 24 часа до записи.',
-            },
-            {
-                'question': 'Nabízíte dárkové poukazy?',
-                'question_en': 'Do you offer gift vouchers?',
-                'question_ru': 'Предлагаете ли вы подарочные сертификаты?',
-                'answer': 'Ano, vydáváme dárkové poukazy na libovolnou masáž nebo částku.',
-                'answer_en': 'Yes, we issue gift vouchers for any massage or amount.',
-                'answer_ru': 'Да, мы выпускаем подарочные сертификаты на любой массаж или сумму.',
-            },
-        ]
-        for i, item in enumerate(faqs):
-            FAQ.objects.update_or_create(
-                question=item['question'],
-                defaults={
-                    'question_en': item['question_en'],
-                    'question_ru': item['question_ru'],
-                    'answer': item['answer'],
-                    'answer_en': item['answer_en'],
-                    'answer_ru': item['answer_ru'],
-                    'page': FAQ.PAGE_HOME,
-                    'order': i,
-                },
-            )
-
-        reviews = [
-            (
-                'Markéta V.',
-                'Stálá klientka',
-                'Regular client',
-                'Постоянная клиентка',
-                'Nádherná zkušenost. Prostředí salonu je naprosto unikátní a masérka Julia byla profesionální.',
-                'A wonderful experience. The salon atmosphere is truly unique and masseuse Julia was professional.',
-                'Прекрасный опыт. Атмосфера салона по-настоящему уникальна, а массажистка Юлия была профессиональной.',
-                5,
-            ),
-            (
-                'Tomáš K.',
-                'Pravidelný host',
-                'Regular guest',
-                'Постоянный гость',
-                'Sportovní masáž u Diany mi pomohla po závodě. Salon má fantastickou atmosféru.',
-                'Sports massage with Diana helped me after a race. The salon has a fantastic atmosphere.',
-                'Спортивный массаж у Дианы помог после соревнований. В салоне фантастическая атмосфера.',
-                5,
-            ),
-            (
-                'Alena P.',
-                'Klientka',
-                'Client',
-                'Клиентка',
-                'Rezervace proběhla hladce. Aromamasáž překonala má očekávání.',
-                'Booking went smoothly. The aromatherapy massage exceeded my expectations.',
-                'Бронирование прошло гладко. Аромамассаж превзошёл мои ожидания.',
-                5,
-            ),
-        ]
-        for i, (author, role, role_en, role_ru, text, text_en, text_ru, rating) in enumerate(reviews):
-            Review.objects.update_or_create(
-                author=author,
-                defaults={
-                    'role': role,
-                    'role_en': role_en,
-                    'role_ru': role_ru,
-                    'text': text,
-                    'text_en': text_en,
-                    'text_ru': text_ru,
-                    'rating': rating,
-                    'order': i,
-                },
-            )
-
-        cat, _ = PriceCategory.objects.update_or_create(
-            name='Masáže',
-            defaults={
-                'name_en': 'Massages',
-                'name_ru': 'Массаж',
-                'order': 0,
-            },
-        )
-        PriceItem.objects.filter(category=cat).delete()
-        for i, svc in enumerate(Service.objects.filter(is_active=True).order_by('order', 'name')):
-            PriceItem.objects.create(
-                category=cat,
-                service_name=svc.name,
-                service_name_en=svc.name_en,
-                service_name_ru=svc.name_ru,
-                duration=svc.duration_display,
-                price=svc.price_label,
-                order=i,
-            )
-
-        tags = {}
-        tag_data = [
-            ('Zdraví', 'Health', 'Здоровье', 'zdravi'),
-            ('Tipy', 'Tips', 'Советы', 'tipy'),
-            ('Masáže', 'Massages', 'Массаж', 'masaze'),
-            ('Aromaterapie', 'Aromatherapy', 'Ароматерапия', 'aromaterapie'),
-        ]
-        for name_cs, name_en, name_ru, slug in tag_data:
-            tag, _ = Tag.objects.update_or_create(
-                slug=slug,
-                defaults={
-                    'name': name_cs,
-                    'name_en': name_en,
-                    'name_ru': name_ru,
-                },
-            )
-            tags[name_cs] = tag
-
-        Post.objects.filter(slug__in=OLD_BLOG_SLUGS).delete()
-
-        tag_map = {
-            'koristi-masazu-pro-zdorovi': tags['Zdraví'],
-            'relaks-meditace-masaz': tags['Tipy'],
-            'spa-retreat-kompletni-pruvodce': tags['Masáže'],
-        }
-
-        for item in load_blog_posts():
-            post, created = Post.objects.update_or_create(
-                slug=item['slug'],
-                defaults={
-                    'title': item['title_cs'],
-                    'title_en': item['title_en'],
-                    'title_ru': item['title_ru'],
-                    'excerpt': item['excerpt_cs'],
-                    'excerpt_en': item['excerpt_en'],
-                    'excerpt_ru': item['excerpt_ru'],
-                    'content': item['content_cs'],
-                    'content_en': item['content_en'],
-                    'content_ru': item['content_ru'],
-                    'author_name': 'Black Velvet',
-                    'published_at': timezone.now(),
-                    'is_published': True,
-                },
-            )
-            if created:
-                post.tags.set([tag_map[item['slug']]])
-
-        today = date.today()
-        masseuses = list(Masseuse.objects.all())
-        times = [time(h, 0) for h in range(10, 20)]
-        for day_offset in range(1, 15):
-            d = today + timedelta(days=day_offset)
-            for masseuse in masseuses:
-                for t in times:
-                    TimeSlot.objects.get_or_create(
-                        masseuse=masseuse,
-                        date=d,
-                        time=t,
-                        defaults={'is_booked': False},
-                    )
+        bundle = load_bundle()
+        service_map = self._import_services(bundle['services'])
+        masseuse_map = self._import_masseuses(bundle['masseuses'], bundle['masseuse_services'], service_map)
+        tag_map = self._import_tags(bundle['tags'])
+        self._import_posts(bundle['posts'], bundle['post_tags'], tag_map)
+        self._import_faqs(bundle['faqs'])
+        self._import_reviews(bundle['reviews'])
+        self._import_prices(bundle['price_categories'], bundle['price_items'])
+        self._import_timeslots(masseuse_map.values())
 
         self.stdout.write(self.style.SUCCESS('Seed data loaded successfully.'))
+
+    def _attach_image(self, instance, field_name, category, slug, dest_name):
+        src = seed_media_path(category, slug)
+        if not src:
+            return
+        current = getattr(instance, field_name)
+        if current:
+            current.delete(save=False)
+        with src.open('rb') as handle:
+            getattr(instance, field_name).save(dest_name, File(handle), save=True)
+
+    def _import_services(self, rows):
+        service_map = {}
+        for row in rows:
+            service, _ = Service.objects.update_or_create(
+                slug=row['slug'],
+                defaults=service_defaults(row),
+            )
+            self._attach_image(
+                service,
+                'image',
+                'services',
+                row['slug'],
+                f"{row['slug']}.webp",
+            )
+            service_map[row['id']] = service
+        return service_map
+
+    def _import_masseuses(self, rows, links, service_map):
+        masseuse_map = {}
+        for row in rows:
+            masseuse, _ = Masseuse.objects.update_or_create(
+                slug=row['slug'],
+                defaults=masseuse_defaults(row),
+            )
+            self._attach_image(
+                masseuse,
+                'photo',
+                'team',
+                row['slug'],
+                f"{row['slug']}.webp",
+            )
+            masseuse_map[row['id']] = masseuse
+
+        for link in links:
+            masseuse = masseuse_map.get(link['masseuse_id'])
+            service = service_map.get(link['service_id'])
+            if masseuse and service:
+                masseuse.services.add(service)
+
+        return masseuse_map
+
+    def _import_tags(self, rows):
+        tag_map = {}
+        for row in rows:
+            tag, _ = Tag.objects.update_or_create(
+                slug=row['slug'],
+                defaults=model_defaults(row, TRANSLATED_FIELDS['tags']),
+            )
+            tag_map[row['id']] = tag
+        return tag_map
+
+    def _import_posts(self, rows, links, tag_map):
+        post_tag_ids = {}
+        for link in links:
+            post_tag_ids.setdefault(link['post_id'], []).append(link['tag_id'])
+
+        for row in rows:
+            defaults = model_defaults(row, TRANSLATED_FIELDS['posts'])
+            defaults.update({
+                'author_name': row.get('author_name') or 'Black Velvet',
+                'published_at': row.get('published_at') or timezone.now(),
+                'is_published': bool(row.get('is_published', True)),
+            })
+            post, _ = Post.objects.update_or_create(
+                slug=row['slug'],
+                defaults=defaults,
+            )
+            self._attach_image(
+                post,
+                'image',
+                'blog',
+                row['slug'],
+                f"{row['slug']}.webp",
+            )
+            tag_ids = post_tag_ids.get(row['id'], [])
+            post.tags.set([tag_map[tag_id] for tag_id in tag_ids if tag_id in tag_map])
+
+    def _import_faqs(self, rows):
+        for row in rows:
+            defaults = model_defaults(row, TRANSLATED_FIELDS['faqs'])
+            defaults.update({
+                'page': row.get('page') or FAQ.PAGE_HOME,
+                'order': row.get('order', 0),
+                'is_active': bool(row.get('is_active', True)),
+            })
+            FAQ.objects.update_or_create(
+                question=row['question'],
+                defaults=defaults,
+            )
+
+    def _import_reviews(self, rows):
+        for row in rows:
+            defaults = model_defaults(row, TRANSLATED_FIELDS['reviews'])
+            defaults.update({
+                'rating': row.get('rating', 5),
+                'is_published': bool(row.get('is_published', True)),
+                'order': row.get('order', 0),
+            })
+            Review.objects.update_or_create(
+                author=row['author'],
+                defaults=defaults,
+            )
+
+    def _import_prices(self, categories, items):
+        category_map = {}
+        for row in categories:
+            category, _ = PriceCategory.objects.update_or_create(
+                name=row['name'],
+                defaults={
+                    **model_defaults(row, TRANSLATED_FIELDS['price_categories']),
+                    'order': row.get('order', 0),
+                },
+            )
+            category_map[row['id']] = category
+
+        for category in category_map.values():
+            category.items.all().delete()
+
+        for row in items:
+            category = category_map.get(row['category_id'])
+            if not category:
+                continue
+            PriceItem.objects.create(
+                category=category,
+                **model_defaults(row, TRANSLATED_FIELDS['price_items']),
+                duration=row['duration'],
+                price=row['price'],
+                order=row.get('order', 0),
+            )
+
+    def _import_timeslots(self, masseuses):
+        today = date.today()
+        times = [time(hour, 0) for hour in range(10, 20)]
+        for day_offset in range(1, 15):
+            slot_date = today + timedelta(days=day_offset)
+            for masseuse in masseuses:
+                for slot_time in times:
+                    TimeSlot.objects.get_or_create(
+                        masseuse=masseuse,
+                        date=slot_date,
+                        time=slot_time,
+                        defaults={'is_booked': False},
+                    )
