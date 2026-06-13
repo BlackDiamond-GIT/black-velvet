@@ -34,6 +34,10 @@ SITE_FACEBOOK = config('SITE_FACEBOOK', default='')
 SITE_WHATSAPP = config('SITE_WHATSAPP', default='')
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.filters',
+    'unfold.contrib.forms',
+    'unfold.contrib.inlines',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.humanize',
     'django_htmx',
+    'tinymce',
 ]
 
 if USE_CLOUDINARY:
@@ -54,9 +59,11 @@ if USE_CLOUDINARY:
 
 INSTALLED_APPS += [
     'apps.core',
+    'apps.media_library',
     'apps.services',
     'apps.team',
     'apps.reservations',
+    'apps.booking',
     'apps.blog',
     'apps.pages',
 ]
@@ -65,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'apps.core.middleware.AdminLocaleMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -163,3 +171,16 @@ GA4_MEASUREMENT_ID = config('GA4_MEASUREMENT_ID', default='')
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'cs'
 MODELTRANSLATION_LANGUAGES = ('cs', 'en', 'ru')
 MODELTRANSLATION_FALLBACK_LANGUAGES = {'default': ('cs', 'en', 'ru')}
+
+from apps.core.unfold_config import UNFOLD  # noqa: E402
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'menubar': False,
+    'plugins': 'link lists autoresize code',
+    'toolbar': 'undo redo | bold italic underline | bullist numlist | link | removeformat | code',
+    'statusbar': False,
+    'branding': False,
+    'skin': 'oxide-dark',
+    'content_css': 'dark',
+}

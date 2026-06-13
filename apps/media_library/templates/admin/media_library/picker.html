@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Бібліотека зображень</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #111827; color: #f9fafb; min-height: 100vh; }
+
+    .picker-header {
+      position: sticky; top: 0; z-index: 10;
+      background: #1f2937; border-bottom: 1px solid #374151;
+      padding: .75rem 1rem; display: flex; gap: .75rem; align-items: center;
+    }
+    .picker-header h2 { font-size: .95rem; font-weight: 600; flex: 1; white-space: nowrap; }
+    .picker-search {
+      flex: 1; max-width: 280px;
+      background: #111827; border: 1px solid #4b5563; border-radius: 6px;
+      color: #f9fafb; padding: .4rem .75rem; font-size: .85rem;
+    }
+    .picker-search::placeholder { color: #6b7280; }
+    .picker-close {
+      background: #374151; border: none; color: #f9fafb;
+      border-radius: 6px; padding: .4rem .9rem; cursor: pointer; font-size: .85rem;
+    }
+    .picker-close:hover { background: #4b5563; }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: .75rem; padding: 1rem;
+    }
+
+    .picker-item {
+      border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+      cursor: pointer; background: #1f2937; transition: border-color .15s;
+      display: flex; flex-direction: column;
+    }
+    .picker-item:hover { border-color: #6366f1; }
+    .picker-item--selected { border-color: #10b981; }
+
+    .picker-item__img-wrap { aspect-ratio: 1; overflow: hidden; background: #0f172a; }
+    .picker-item__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .picker-item__label {
+      padding: .35rem .5rem; font-size: .7rem; color: #9ca3af;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .picker-item__check {
+      display: none; position: absolute; top: 6px; right: 6px;
+      width: 20px; height: 20px; background: #10b981; border-radius: 50%;
+      align-items: center; justify-content: center; font-size: .8rem; color: #fff;
+    }
+    .picker-item { position: relative; }
+    .picker-item--selected .picker-item__check { display: flex; }
+
+    .picker-footer {
+      position: sticky; bottom: 0;
+      background: #1f2937; border-top: 1px solid #374151;
+      padding: .75rem 1rem; display: flex; gap: .75rem; justify-content: flex-end; align-items: center;
+    }
+    .picker-footer__count { font-size: .85rem; color: #9ca3af; flex: 1; }
+    .btn-confirm {
+      background: #4f46e5; color: #fff; border: none;
+      border-radius: 6px; padding: .5rem 1.25rem; cursor: pointer; font-size: .9rem; font-weight: 500;
+    }
+    .btn-confirm:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-confirm:not(:disabled):hover { background: #4338ca; }
+
+    .picker-empty { text-align: center; padding: 3rem 1rem; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="picker-header">
+    <h2>Бібліотека зображень</h2>
+    <form method="get" style="display:contents">
+      <input class="picker-search" name="q" type="search" placeholder="Пошук…" value="{{ query }}" autofocus>
+    </form>
+    <button class="picker-close" type="button" onclick="window.close()">✕ Закрити</button>
+  </div>
+
+  <div class="picker-grid" id="picker-grid">
+    {% for img in images %}
+    <div class="picker-item"
+         data-id="{{ img.pk }}"
+         data-url="{{ img.secure_url }}"
+         data-thumb="{{ img.thumbnail_url }}"
+         data-label="{{ img.title|default:img.public_id }}"
+         onclick="toggleItem(this)">
+      <div class="picker-item__img-wrap">
+        <img class="picker-item__img" src="{{ img.thumbnail_url }}" alt="{{ img.title|default:img.public_id }}" loading="lazy">
+      </div>
+      <div class="picker-item__label">{{ img.title|default:img.public_id }}</div>
+      <div class="picker-item__check">✓</div>
+    </div>
+    {% empty %}
+    <div class="picker-empty" style="grid-column:1/-1">Зображень не знайдено</div>
+    {% endfor %}
+  </div>
+
+  <div class="picker-footer">
+    <span class="picker-footer__count" id="count-label">Нічого не обрано</span>
+    <button class="btn-confirm" id="btn-confirm" type="button" disabled onclick="confirmSelection()">
+      Вибрати
+    </button>
+  </div>
+
+  <script>
+    const selected = new Map(); // id → {id, url, thumb, label}
+    const single = new URLSearchParams(location.search).get('single') === '1';
+
+    function toggleItem(el) {
+      const id = el.dataset.id;
+      if (selected.has(id)) {
+        selected.delete(id);
+        el.classList.remove('picker-item--selected');
+      } else {
+        if (single) {
+          selected.clear();
+          document.querySelectorAll('.picker-item--selected').forEach(e => e.classList.remove('picker-item--selected'));
+        }
+        selected.set(id, {
+          id: id,
+          url: el.dataset.url,
+          thumb: el.dataset.thumb,
+          label: el.dataset.label,
+        });
+        el.classList.add('picker-item--selected');
+      }
+      updateFooter();
+      if (single && selected.size === 1) confirmSelection();
+    }
+
+    function updateFooter() {
+      const n = selected.size;
+      document.getElementById('count-label').textContent =
+        n ? `Обрано: ${n}` : 'Нічого не обрано';
+      document.getElementById('btn-confirm').disabled = n === 0;
+    }
+
+    function confirmSelection() {
+      const items = Array.from(selected.values());
+      if (window.opener && window.opener.cldPickerCallback) {
+        window.opener.cldPickerCallback(items, single);
+        window.close();
+      }
+    }
+  </script>
+</body>
+</html>

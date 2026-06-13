@@ -1,0 +1,234 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% if not cloudinary_config.configured %}
+    <div style="margin-bottom:1rem">
+      <span style="color:#b91c1c;font-size:0.85em">
+        {% trans "CLOUDINARY_URL not set — upload unavailable" %}
+      </span>
+    </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}
+
+{# ── Assignment modal ─────────────────────────────────────────────────────── #}
+{% block footer %}
+  {{ block.super }}
+
+  <div id="cld-assign-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:center;justify-content:center">
+    <div id="cld-assign-modal" style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:1.5rem;width:100%;max-width:420px;z-index:9999;position:relative">
+      <h3 style="margin:0 0 1rem;color:#f9fafb;font-size:1rem">{% trans "Assign image to masseuse" %}</h3>
+
+      <div id="cld-current-assignments" style="margin-bottom:1rem;min-height:28px"></div>
+
+      <label style="display:block;color:#d1d5db;font-size:.85rem;margin-bottom:.4rem">{% trans "Masseuse" %}</label>
+      <select id="cld-masseuse-select" style="width:100%;padding:.5rem;background:#111827;color:#f9fafb;border:1px solid #4b5563;border-radius:4px;margin-bottom:1rem">
+        {% for m in masseuses_list %}
+          <option value="{{ m.id }}">{{ m.name }}</option>
+        {% endfor %}
+      </select>
+
+      <label style="display:block;color:#d1d5db;font-size:.85rem;margin-bottom:.4rem">{% trans "Photo type" %}</label>
+      <div style="display:flex;gap:1rem;margin-bottom:1.25rem">
+        <label style="color:#f9fafb;font-size:.9rem;cursor:pointer">
+          <input type="radio" name="cld-assign-type" value="main" checked style="margin-right:.35rem">
+          {% trans "Main photo" %}
+        </label>
+        <label style="color:#f9fafb;font-size:.9rem;cursor:pointer">
+          <input type="radio" name="cld-assign-type" value="gallery" style="margin-right:.35rem">
+          {% trans "Gallery" %}
+        </label>
+      </div>
+
+      <div style="display:flex;gap:.75rem;justify-content:flex-end">
+        <button type="button" id="cld-assign-cancel" style="cursor:pointer;padding:.45rem 1rem;background:#374151;color:#f9fafb;border:none;border-radius:4px;font-size:.85rem">{% trans "Cancel" %}</button>
+        <button type="button" id="cld-assign-save" style="cursor:pointer;padding:.45rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:4px;font-size:.85rem">{% trans "Save" %}</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <style>
+    /* Hide Unfold FAB — the header "Add" button is sufficient */
+    #unfold-fab { display: none; }
+  </style>
+  {% if cloudinary_config.configured %}
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  {% endif %}
+  <script>
+    (function () {
+      const SIGN_URL    = "{% url 'media_library:sign_upload' %}";
+      const SAVE_URL    = "{% url 'media_library:save_image' %}";
+      const ASSIGN_BASE = "{% url 'media_library:assign_image' image_id=0 %}".replace("/0/", "/");
+      const UNASSIGN_BASE = "{% url 'media_library:unassign_image' image_id=0 %}".replace("/0/", "/");
+      const CSRF        = "{{ csrf_token }}";
+      const CLOUD       = "{{ cloudinary_config.cloud_name }}";
+      const API_KEY     = "{{ cloudinary_config.api_key }}";
+      const CONFIGURED  = {{ cloudinary_config.configured|yesno:"true,false" }};
+
+      /* ── Upload Widget ────────────────────────────────────────────────── */
+      async function saveImage(info) {
+        const body = new URLSearchParams({
+          public_id:           info.public_id,
+          secure_url:          info.secure_url,
+          original_filename:   info.original_filename || "",
+          width:               info.width  || "",
+          height:              info.height || "",
+          format:              info.format || "",
+          bytes:               info.bytes  || "",
+          csrfmiddlewaretoken: CSRF,
+        });
+        await fetch(SAVE_URL, {
+          method: "POST",
+          headers: { "X-CSRFToken": CSRF, "Content-Type": "application/x-www-form-urlencoded" },
+          body: body.toString(),
+        });
+      }
+
+      let widget;
+
+      /* ── Assignment modal ─────────────────────────────────────────────── */
+      let activeImageId = null;
+
+      // Inline assignments embedded in each row via data attributes
+      function getRowAssignments(imageId) {
+        const btn = document.querySelector(`.cld-assign-btn[data-image-id="${imageId}"]`);
+        if (!btn) return [];
+        const raw = btn.closest("tr")
+          .querySelector(".cld-assign-btn")
+          .getAttribute("data-assignments");
+        try { return JSON.parse(raw) || []; } catch { return []; }
+      }
+
+      function buildCurrentHtml(assignments) {
+        if (!assignments.length) {
+          return '<span style="color:#6b7280;font-size:.8rem">{% trans "Not assigned yet" %}</span>';
+        }
+        return assignments.map(a => {
+          const color = a.type === "main" ? "#4f46e5" : "#0e7490";
+          const label = a.type === "main" ? "{% trans 'main' %}" : "{% trans 'gallery' %}";
+          return `<span style="display:inline-flex;align-items:center;gap:4px;background:${color};color:#fff;
+            font-size:.72rem;padding:2px 7px 2px 9px;border-radius:3px;margin:2px">
+            ${a.masseuse_name} — ${label}
+            <button type="button" onclick="unassignImage(${a.masseuse_id},'${a.type}')"
+              style="background:none;border:none;color:#fff;cursor:pointer;font-size:.9rem;line-height:1;padding:0 0 0 3px"
+              title="{% trans 'Remove' %}">×</button>
+          </span>`;
+        }).join("");
+      }
+
+      function openAssignModal(imageId) {
+        activeImageId = imageId;
+        const overlay = document.getElementById("cld-assign-overlay");
+        const div = document.getElementById("cld-current-assignments");
+        // Read assignments from the row's data attribute set by admin
+        const btn = document.querySelector(`.cld-assign-btn[data-image-id="${imageId}"]`);
+        let assignments = [];
+        if (btn) {
+          try { assignments = JSON.parse(btn.getAttribute("data-assignments") || "[]"); } catch {}
+        }
+        div.innerHTML = buildCurrentHtml(assignments);
+        overlay.style.display = "flex";
+      }
+
+      window.unassignImage = async function (masseuseId, type) {
+        if (!activeImageId) return;
+        const res = await fetch(`${UNASSIGN_BASE}${activeImageId}/`, {
+          method: "POST",
+          headers: { "X-CSRFToken": CSRF, "Content-Type": "application/json" },
+          body: JSON.stringify({ masseuse_id: masseuseId, type }),
+        });
+        if (res.ok) window.location.reload();
+      };
+
+      async function saveAssignment() {
+        if (!activeImageId) return;
+        const masseuseId = document.getElementById("cld-masseuse-select").value;
+        const type = document.querySelector('input[name="cld-assign-type"]:checked').value;
+        const res = await fetch(`${ASSIGN_BASE}${activeImageId}/`, {
+          method: "POST",
+          headers: { "X-CSRFToken": CSRF, "Content-Type": "application/json" },
+          body: JSON.stringify({ masseuse_id: masseuseId, type }),
+        });
+        if (res.ok) window.location.reload();
+      }
+
+      /* ── DOM Ready ────────────────────────────────────────────────────── */
+      document.addEventListener("DOMContentLoaded", function () {
+        /* Upload widget */
+        if (CONFIGURED) {
+          widget = cloudinary.createUploadWidget(
+            {
+              cloudName:  CLOUD,
+              apiKey:     API_KEY,
+              uploadSignature: async function (callback, paramsToSign) {
+                const res = await fetch(SIGN_URL, {
+                  method: "POST",
+                  headers: { "X-CSRFToken": CSRF, "Content-Type": "application/json" },
+                  body: JSON.stringify(paramsToSign),
+                });
+                const data = await res.json();
+                callback(data.signature);
+              },
+              folder:       "tantra_club",
+              multiple:     true,
+              cropping:     false,
+              resourceType: "image",
+              clientAllowedFormats: ["jpg", "jpeg", "png", "webp"],
+              maxFileSize:  10485760,
+              showAdvancedOptions: false,
+              sources:      ["local", "url", "camera"],
+              styles: {
+                palette: {
+                  window: "#1f2937", windowBorder: "#374151",
+                  tabIcon: "#f9fafb", menuIcons: "#9ca3af",
+                  textDark: "#111827", textLight: "#f9fafb",
+                  link: "#6366f1", action: "#6366f1",
+                  inactiveTabIcon: "#6b7280", error: "#ef4444",
+                  inProgress: "#6366f1", complete: "#10b981",
+                  sourceBg: "#111827",
+                },
+              },
+            },
+            async function (error, result) {
+              if (!error && result && result.event === "success") {
+                await saveImage(result.info);
+              }
+              if (!error && result && result.event === "queues-end") {
+                window.location.reload();
+              }
+            }
+          );
+
+          document.querySelectorAll('a[href*="/add/"]').forEach(function (link) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              widget.open();
+            });
+          });
+        }
+
+        /* Assign modal — open */
+        document.querySelectorAll(".cld-assign-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            openAssignModal(btn.getAttribute("data-image-id"));
+          });
+        });
+
+        /* Assign modal — close */
+        document.getElementById("cld-assign-cancel").addEventListener("click", function () {
+          document.getElementById("cld-assign-overlay").style.display = "none";
+        });
+        document.getElementById("cld-assign-overlay").addEventListener("click", function (e) {
+          if (e.target === this) this.style.display = "none";
+        });
+
+        /* Assign modal — save */
+        document.getElementById("cld-assign-save").addEventListener("click", saveAssignment);
+      });
+    })();
+  </script>
+{% endblock %}

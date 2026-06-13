@@ -1,6 +1,7 @@
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
@@ -9,7 +10,24 @@ from apps.pages.models import FAQ, Review
 from apps.services.models import Service
 from apps.team.models import Masseuse
 
+from .middleware import _ADMIN_LANG_COOKIE
 from .mixins import SEOMixin
+
+
+@staff_member_required(login_url='/admin/login/')
+def toggle_admin_language(request):
+    redirect_to = request.META.get('HTTP_REFERER', '/admin/')
+    current = request.COOKIES.get(_ADMIN_LANG_COOKIE, 'uk')
+    next_lang = 'en' if current == 'uk' else 'uk'
+    response = redirect(redirect_to)
+    response.set_cookie(
+        _ADMIN_LANG_COOKIE,
+        next_lang,
+        max_age=60 * 60 * 24 * 365,
+        httponly=True,
+        samesite='Lax',
+    )
+    return response
 
 
 class HomeView(SEOMixin, TemplateView):

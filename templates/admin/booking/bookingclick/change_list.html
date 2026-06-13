@@ -1,0 +1,573 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    .bk-dash {
+      margin-bottom: 1.25rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .bk-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.65rem;
+    }
+    .bk-card {
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.02);
+    }
+    html.dark .bk-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(148, 163, 184, 0.2);
+    }
+    .bk-card__value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .bk-card__label {
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+    .bk-card--muted {
+      opacity: 0.88;
+    }
+    .bk-card--muted .bk-card__value {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .bk-card__link {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .bk-panel {
+      padding: 1rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.02);
+    }
+    html.dark .bk-panel {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(148, 163, 184, 0.2);
+    }
+    .bk-panel__title {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .bk-panel__sub {
+      margin: 0 0 0.85rem;
+      font-size: 0.8125rem;
+      opacity: 0.72;
+    }
+    .bk-panel__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+    .bk-filter-bar {
+      width: 100%;
+    }
+    .bk-filter-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 34rem;
+    }
+    .bk-filter-row {
+      display: grid;
+      grid-template-columns: 6.25rem minmax(0, 1fr);
+      column-gap: 0.75rem;
+      align-items: center;
+      width: 100%;
+    }
+    .bk-filter-row--period {
+      grid-template-columns: 6.25rem minmax(10rem, 1fr) minmax(9rem, 10.5rem);
+    }
+    .bk-filters__label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.55;
+      line-height: 1.2;
+      padding-right: 0.15rem;
+    }
+    .bk-date-form {
+      display: block;
+      min-width: 0;
+    }
+    .bk-date-input {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 44px;
+      padding: 0 0.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 16px;
+      background: transparent;
+      color: inherit;
+      color-scheme: light;
+    }
+    html.dark .bk-date-input {
+      color-scheme: dark;
+    }
+    .bk-date-input::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 1;
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-left: 0.15rem;
+      filter: invert(36%) sepia(90%) saturate(1200%) hue-rotate(210deg) brightness(95%);
+    }
+    html.dark .bk-date-input::-webkit-calendar-picker-indicator {
+      filter: invert(78%) sepia(35%) saturate(1800%) hue-rotate(196deg) brightness(104%);
+    }
+    .bk-select {
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      min-height: 44px;
+      padding: 0 1.75rem 0 0.65rem;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 16px;
+      background: transparent;
+      color: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23818cf8' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.65rem center;
+      background-size: 0.65rem auto;
+    }
+    .bk-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 0.8125rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .bk-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+    }
+    .bk-pill.is-active {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: #fff;
+    }
+    .bk-active {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 0.8125rem;
+    }
+    .bk-active__text {
+      opacity: 0.8;
+    }
+    .bk-active__reset {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.8125rem;
+    }
+    .bk-trend {
+      width: 100%;
+      height: 56px;
+      margin-bottom: 0.5rem;
+    }
+    .bk-trend__area {
+      fill: rgba(79, 70, 229, 0.15);
+    }
+    html.dark .bk-trend__area {
+      fill: rgba(129, 140, 248, 0.2);
+    }
+    .bk-trend__line {
+      fill: none;
+      stroke: #818cf8;
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+    .bk-trend__dot {
+      fill: #818cf8;
+    }
+    .bk-trend__dot.is-peak {
+      fill: #f59e0b;
+      stroke: #fff;
+      stroke-width: 0.5;
+    }
+    .bk-chart {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .bk-chart__track {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      min-height: 160px;
+      padding-top: 0.5rem;
+    }
+    .bk-chart__track--hours .bk-chart__col {
+      flex: 1 1 0;
+      min-width: 22px;
+      max-width: 36px;
+    }
+    .bk-chart__track--days .bk-chart__col {
+      flex: 1 1 0;
+      min-width: 28px;
+      max-width: 48px;
+    }
+    .bk-chart__col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .bk-chart__bar-wrap {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .bk-chart__bar {
+      width: 100%;
+      max-width: 28px;
+      border-radius: 4px 4px 2px 2px;
+      background: linear-gradient(180deg, #818cf8 0%, #4f46e5 100%);
+    }
+    .bk-chart__bar.is-peak {
+      background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 100%);
+    }
+    .bk-chart__bar.is-zero {
+      height: 2px;
+      background: rgba(148, 163, 184, 0.3);
+    }
+    .bk-chart__count {
+      font-size: 0.625rem;
+      font-weight: 600;
+      min-height: 0.75rem;
+    }
+    .bk-chart__label {
+      font-size: 0.625rem;
+      text-align: center;
+      opacity: 0.65;
+      line-height: 1.1;
+    }
+    .bk-top {
+      display: grid;
+      gap: 0.35rem;
+    }
+    .bk-top__row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8125rem;
+    }
+    .bk-top__bar-bg {
+      grid-column: 1 / -1;
+      height: 4px;
+      border-radius: 4px;
+      background: rgba(148, 163, 184, 0.2);
+      overflow: hidden;
+    }
+    .bk-top__bar-fill {
+      height: 100%;
+      background: #4f46e5;
+      border-radius: 4px;
+    }
+    .bk-empty {
+      font-size: 0.875rem;
+      opacity: 0.85;
+    }
+    @media (min-width: 768px) {
+      .bk-filter-grid {
+        max-width: 100%;
+      }
+      .bk-filter-row:not(.bk-filter-row--period) {
+        grid-template-columns: 6.25rem minmax(12rem, 22rem);
+      }
+      .bk-filter-row--period {
+        grid-template-columns: 6.25rem minmax(10rem, 14rem) minmax(9rem, 11rem);
+      }
+    }
+    @media (max-width: 767px) {
+      .bk-chart__bar-wrap { height: 88px; }
+      .bk-filter-row,
+      .bk-filter-row--period {
+        grid-template-columns: 6.25rem minmax(0, 1fr);
+      }
+      .bk-filter-row--period .bk-date-form {
+        grid-column: 1 / -1;
+        padding-left: calc(6.25rem + 0.75rem);
+      }
+      .bk-trend { height: 48px; }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% if click_dashboard %}
+    <div class="bk-dash">
+      <div class="bk-cards">
+        <div class="bk-card">
+          <div class="bk-card__value">{{ click_dashboard.total }}</div>
+          <div class="bk-card__label">
+            {% if click_dashboard.active_audience == 'humans' %}
+              {% trans "People clicks" %}
+            {% elif click_dashboard.active_audience == 'bots' %}
+              {% trans "Bot clicks" %}
+            {% else %}
+              {% trans "Total clicks" %}
+            {% endif %}
+          </div>
+        </div>
+        {% if click_dashboard.active_audience == 'humans' and click_dashboard.bot_count %}
+          <div class="bk-card bk-card--muted">
+            <div class="bk-card__value">{{ click_dashboard.bot_count }}</div>
+            <div class="bk-card__label">
+              <a href="{{ click_dashboard.bots_filter_url }}" class="bk-card__link">{% trans "Bot clicks (excluded)" %}</a>
+            </div>
+          </div>
+        {% elif click_dashboard.active_audience == 'bots' and click_dashboard.human_count %}
+          <div class="bk-card bk-card--muted">
+            <div class="bk-card__value">{{ click_dashboard.human_count }}</div>
+            <div class="bk-card__label">
+              <a href="{{ click_dashboard.humans_filter_url }}" class="bk-card__link">{% trans "People clicks" %}</a>
+            </div>
+          </div>
+        {% elif click_dashboard.active_audience == 'all' %}
+          <div class="bk-card bk-card--muted">
+            <div class="bk-card__value">{{ click_dashboard.human_count }}</div>
+            <div class="bk-card__label">{% trans "People clicks" %}</div>
+          </div>
+          <div class="bk-card bk-card--muted">
+            <div class="bk-card__value">{{ click_dashboard.bot_count }}</div>
+            <div class="bk-card__label">{% trans "Bot clicks" %}</div>
+          </div>
+        {% endif %}
+        <div class="bk-card">
+          <div class="bk-card__value">{{ click_dashboard.whatsapp_count }}</div>
+          <div class="bk-card__label">{% trans "WhatsApp buttons" %}</div>
+        </div>
+        <div class="bk-card">
+          <div class="bk-card__value">{{ click_dashboard.reservation_count }}</div>
+          <div class="bk-card__label">{% trans "Reservation links" %}</div>
+        </div>
+        <div class="bk-card">
+          <div class="bk-card__value">{{ click_dashboard.peak_label }}</div>
+          <div class="bk-card__label">{% trans "Busiest time" %}</div>
+        </div>
+        <div class="bk-card">
+          <div class="bk-card__value">{{ click_dashboard.avg_per_bucket }}</div>
+          <div class="bk-card__label">
+            {% if click_dashboard.chart_mode == 'daily' %}
+              {% trans "Avg per day" %}
+            {% else %}
+              {% trans "Avg per hour" %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <section class="bk-panel bk-panel--filters" aria-label="{% trans 'Filters' %}">
+        <div class="bk-filter-bar">
+          <div class="bk-filter-grid">
+            <div class="bk-filter-row bk-filter-row--period">
+              <span class="bk-filters__label">{% trans "Period" %}</span>
+              <select class="bk-select"
+                      aria-label="{% trans 'Period' %}"
+                      onchange="if(this.value){window.location.href=this.value;}">
+                <option value="{{ click_dashboard.today_url }}"
+                        {% if click_dashboard.is_today_active %}selected{% endif %}>
+                  {% trans "Today" %}
+                </option>
+                <option value="{{ click_dashboard.yesterday_url }}"
+                        {% if click_dashboard.is_yesterday_active %}selected{% endif %}>
+                  {% trans "Yesterday" %}
+                </option>
+                {% for link in click_dashboard.period_links %}
+                  <option value="{{ link.url }}"{% if link.active %} selected{% endif %}>{{ link.label }}</option>
+                {% endfor %}
+                {% if click_dashboard.active_date and not click_dashboard.is_today_active and not click_dashboard.is_yesterday_active and click_dashboard.period_kind == 'day' %}
+                  <option value="" selected disabled>
+                    {{ click_dashboard.active_date|date:"d.m.Y" }}
+                  </option>
+                {% endif %}
+              </select>
+              <form class="bk-date-form" method="get" action="">
+                {% if click_dashboard.active_audience != 'humans' %}
+                  <input type="hidden" name="audience" value="{{ click_dashboard.active_audience }}">
+                {% endif %}
+                {% if click_dashboard.active_channel %}
+                  <input type="hidden" name="channel__exact" value="{{ click_dashboard.active_channel }}">
+                {% endif %}
+                {% if click_dashboard.active_placement %}
+                  <input type="hidden" name="placement__exact" value="{{ click_dashboard.active_placement }}">
+                {% endif %}
+                {% if click_dashboard.chart_mode and click_dashboard.period_kind == 'range' %}
+                  <input type="hidden" name="chart" value="{{ click_dashboard.chart_mode }}">
+                {% endif %}
+                <input type="date"
+                       name="date"
+                       class="bk-date-input"
+                       value="{{ click_dashboard.date_input_value }}"
+                       max="{{ click_dashboard.date_input_max }}"
+                       aria-label="{% trans 'Pick a date' %}"
+                       onchange="this.form.submit()">
+              </form>
+            </div>
+
+            <div class="bk-filter-row">
+              <span class="bk-filters__label">{% trans "Audience" %}</span>
+              <select class="bk-select"
+                      aria-label="{% trans 'Audience' %}"
+                      onchange="if(this.value){window.location.href=this.value;}">
+                {% for link in click_dashboard.audience_links %}
+                  <option value="{{ link.url }}"{% if link.active %} selected{% endif %}>{{ link.label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="bk-filter-row">
+              <span class="bk-filters__label">{% trans "Channel" %}</span>
+              <select class="bk-select"
+                      aria-label="{% trans 'Channel' %}"
+                      onchange="if(this.value){window.location.href=this.value;}">
+                {% for link in click_dashboard.channel_links %}
+                  <option value="{{ link.url }}"{% if link.active %} selected{% endif %}>{{ link.label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="bk-filter-row">
+              <span class="bk-filters__label">{% trans "Button" %}</span>
+              <select class="bk-select"
+                      aria-label="{% trans 'Button' %}"
+                      onchange="if(this.value){window.location.href=this.value;}">
+                {% for link in click_dashboard.placement_links %}
+                  <option value="{{ link.url }}"{% if link.active %} selected{% endif %}>{{ link.label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="bk-active">
+          <span class="bk-active__text">
+            {% trans "Active" %}:
+            {{ click_dashboard.active_summary_parts|join:" · " }}
+          </span>
+          <a href="{{ click_dashboard.reset_url }}" class="bk-active__reset">{% trans "Reset all" %}</a>
+        </div>
+      </section>
+
+      <section class="bk-panel bk-panel--chart">
+        <div class="bk-panel__head">
+          <div>
+            <h2 class="bk-panel__title">{{ click_dashboard.chart_title }}</h2>
+            <p class="bk-panel__sub">
+              {{ click_dashboard.chart_subtitle }}
+              {% if click_dashboard.period_kind == 'range' %}
+                · {{ click_dashboard.period_start|date:"j.n.Y H:i" }} – {{ click_dashboard.period_end|date:"j.n.Y H:i" }}
+              {% endif %}
+            </p>
+          </div>
+          {% if click_dashboard.chart_mode_links %}
+            <nav class="bk-filters" aria-label="{% trans 'Chart type' %}">
+              {% for link in click_dashboard.chart_mode_links %}
+                <a href="{{ link.url }}" class="bk-pill{% if link.active %} is-active{% endif %}">{{ link.label }}</a>
+              {% endfor %}
+            </nav>
+          {% endif %}
+        </div>
+
+        {% if click_dashboard.total %}
+          {% if click_dashboard.trend_line_points %}
+            <svg class="bk-trend" viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label="{% trans 'Click trend' %}">
+              {% if click_dashboard.trend_area_points %}
+                <polygon class="bk-trend__area" points="{{ click_dashboard.trend_area_points }}"></polygon>
+              {% endif %}
+              <polyline class="bk-trend__line" points="{{ click_dashboard.trend_line_points }}"></polyline>
+              {% for point in click_dashboard.trend_points %}
+                {% if point.count %}
+                  <circle class="bk-trend__dot{% if point.is_peak %} is-peak{% endif %}"
+                          cx="{{ point.x_pct }}"
+                          cy="{{ point.svg_y }}"
+                          r="{% if point.is_peak %}1.8{% else %}0.8{% endif %}">
+                    <title>{{ point.label }}: {{ point.count }}</title>
+                  </circle>
+                {% endif %}
+              {% endfor %}
+            </svg>
+          {% endif %}
+
+          <div class="bk-chart">
+            <div class="bk-chart__track{% if click_dashboard.chart_mode == 'daily' %} bk-chart__track--days{% else %} bk-chart__track--hours{% endif %}"
+                 role="img"
+                 aria-label="{{ click_dashboard.chart_title }}">
+              {% for bar in click_dashboard.bars %}
+                <div class="bk-chart__col">
+                  <span class="bk-chart__count">{% if bar.count %}{{ bar.count }}{% else %}&nbsp;{% endif %}</span>
+                  <div class="bk-chart__bar-wrap">
+                    <span class="bk-chart__bar{% if not bar.count %} is-zero{% elif bar.is_peak %} is-peak{% endif %}"
+                          style="{% if bar.count %}height: {{ bar.height_pct }}%;{% endif %}"
+                          title="{{ bar.title }}"></span>
+                  </div>
+                  <span class="bk-chart__label">{{ bar.label }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <p class="bk-empty">
+            {% trans "No clicks for the selected filters." %}
+            {% trans "Try a different period, audience, or channel." %}
+          </p>
+        {% endif %}
+      </section>
+
+      {% if click_dashboard.top_placements %}
+        <section class="bk-panel">
+          <h2 class="bk-panel__title">{% trans "Top buttons" %}</h2>
+          <div class="bk-top">
+            {% for row in click_dashboard.top_placements %}
+              <div class="bk-top__row">
+                <span>{{ row.label }}</span>
+                <span>{{ row.count }}</span>
+                <span>{{ row.pct }}%</span>
+                <div class="bk-top__bar-bg" aria-hidden="true">
+                  <div class="bk-top__bar-fill" style="width: {{ row.pct }}%;"></div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}

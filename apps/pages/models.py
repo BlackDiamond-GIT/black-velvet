@@ -16,6 +16,7 @@ class FAQ(models.Model):
     page = models.CharField(max_length=20, choices=PAGE_CHOICES, default=PAGE_GENERAL)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    include_in_schema = models.BooleanField('У schema.org', default=True)
 
     class Meta:
         ordering = ['order']

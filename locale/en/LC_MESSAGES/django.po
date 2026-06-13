@@ -975,11 +975,11 @@ msgstr "Legal notice"
 
 #: templates/partials/legal_notice.html:5
 msgid ""
-"Salon Tantra Club neposkytuje žádné sexuální služby v žádném rozsahu a "
+"Salon Black Velvet neposkytuje žádné sexuální služby v žádném rozsahu a "
 "slouží pouze jako inzerce jednotlivých masérek. Podmínkou inzerce je "
 "pronájem prostor masážního salonu. Vstup je povolen osobám starším 18 let."
 msgstr ""
-"The Tantra Club salon does not provide any sexual services in any form and "
+"Black Velvet salon does not provide any sexual services in any form and "
 "serves only as advertising for individual masseuses. A condition of "
 "advertising is renting space in the massage salon. Entry is permitted to "
 "persons over 18 years of age."

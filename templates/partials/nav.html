@@ -4,6 +4,7 @@
     {% include "partials/logo.html" with logo_animated=True %}
 
     <nav class="desktop-nav" aria-label="{% trans 'Hlavní navigace' %}">
+      <a href="{% url 'core:home' %}" class="nav-link">{% trans "Hlavní strana" %}</a>
       <a href="{% url 'services:list' %}" class="nav-link">{% trans "Masáže" %}</a>
       <a href="{% url 'team:list' %}" class="nav-link">{% trans "Masérky" %}</a>
       <a href="{% url 'pages:schedule' %}" class="nav-link">{% trans "Rozvrh" %}</a>

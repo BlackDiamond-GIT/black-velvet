@@ -1,0 +1,1056 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Site Settings"
+msgstr "Налаштування сайту"
+
+msgid "Legacy Redirects"
+msgstr "Старі редіректи"
+
+msgid "Masseuses"
+msgstr "Масажистки"
+
+msgid "Schedule"
+msgstr "Розклад"
+
+msgid "No results found"
+msgstr "Результати відсутні"
+
+msgid "This page yielded into no results. Create a new item or reset your filters."
+msgstr "На цій сторінці немає результатів. Додайте новий запис або скиньте фільтри."
+
+msgid "Reset filters"
+msgstr "Скинути фільтри"
+
+msgid "Photo Library"
+msgstr "Бібліотека зображень"
+
+msgid "Upload images"
+msgstr "Завантажити зображення"
+
+msgid "CLOUDINARY_URL not set — upload unavailable"
+msgstr "CLOUDINARY_URL не задано — завантаження недоступне"
+
+msgid "Image"
+msgstr "Зображення"
+
+msgid "Images"
+msgstr "Зображення"
+
+msgid "Media Library"
+msgstr "Медіабібліотека"
+
+msgid "Cloudinary public_id"
+msgstr "Cloudinary public_id"
+
+msgid "Secure URL"
+msgstr "URL зображення"
+
+msgid "Title / label"
+msgstr "Назва / мітка"
+
+msgid "Width (px)"
+msgstr "Ширина (px)"
+
+msgid "Height (px)"
+msgstr "Висота (px)"
+
+msgid "File size (bytes)"
+msgstr "Розмір файлу (байт)"
+
+msgid "Uploaded at"
+msgstr "Завантажено"
+
+msgid "Full preview"
+msgstr "Повне превʼю"
+
+msgid "Dimensions"
+msgstr "Розміри"
+
+msgid "Main photo (library)"
+msgstr "Головне фото (бібліотека)"
+
+msgid "Gallery (library)"
+msgstr "Галерея (бібліотека)"
+
+msgid "Main photo (file upload)"
+msgstr "Головне фото (файл)"
+
+msgid "Gallery image URLs (legacy)"
+msgstr "URL галереї (застарілі)"
+
+msgid "Photos — Cloudinary Library"
+msgstr "Фото — бібліотека Cloudinary"
+
+msgid "Photos — Legacy (file / URL)"
+msgstr "Фото — застарілі (файл / URL)"
+
+msgid "Services"
+msgstr "Послуги"
+
+msgid "Massage Types"
+msgstr "Види масажу"
+
+msgid "Prices"
+msgstr "Ціни"
+
+msgid "Extras"
+msgstr "Додаткові послуги"
+
+msgid "HashTags"
+msgstr "Хештеги"
+
+msgid "Languages"
+msgstr "Мови"
+
+msgid "Content"
+msgstr "Контент"
+
+msgid "Blog Posts"
+msgstr "Статті блогу"
+
+msgid "FAQ"
+msgstr "Поширені питання"
+
+msgid "Booking"
+msgstr "Бронювання"
+
+msgid "WhatsApp Templates"
+msgstr "Шаблони WhatsApp"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "Slug"
+msgstr "Слаг"
+
+msgid "Order"
+msgstr "Порядок"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Meta title"
+msgstr "Meta-заголовок"
+
+msgid "Meta description"
+msgstr "Meta-опис"
+
+msgid "Published"
+msgstr "Опубліковано"
+
+msgid "Published at"
+msgstr "Дата публікації"
+
+msgid "Blog Post"
+msgstr "Стаття блогу"
+
+msgid "Price"
+msgstr "Ціна"
+
+msgid "Extra Service"
+msgstr "Додаткова послуга"
+
+msgid "Extra Services"
+msgstr "Додаткові послуги"
+
+msgid "Massage Type"
+msgstr "Вид масажу"
+
+msgid "Masseuse"
+msgstr "Масажистка"
+
+msgid "Schedule Entry"
+msgstr "Запис розкладу"
+
+msgid "Schedule Entries"
+msgstr "Записи розкладу"
+
+msgid "Legacy Redirect"
+msgstr "Старий редірект"
+
+msgid "Primary phone"
+msgstr "Основний телефон"
+
+msgid "Secondary phone"
+msgstr "Додатковий телефон"
+
+msgid "Contact email"
+msgstr "Контактний email"
+
+msgid "Address"
+msgstr "Адреса"
+
+msgid "Map URL"
+msgstr "URL карти"
+
+msgid "Core"
+msgstr "Ядро"
+
+msgid "Blog"
+msgstr "Блог"
+
+msgid "WP Importer"
+msgstr "Імпортер WP"
+
+msgid "Contact"
+msgstr "Контакти"
+
+msgid "Opening Hours"
+msgstr "Години роботи"
+
+msgid "Social"
+msgstr "Соцмережі"
+
+msgid "SEO defaults"
+msgstr "SEO за замовчуванням"
+
+msgid "Identity"
+msgstr "Ідентифікація"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Physical"
+msgstr "Параметри"
+
+msgid "Photos"
+msgstr "Фото"
+
+msgid "Translated content"
+msgstr "Перекладений контент"
+
+msgid "Services & Attributes"
+msgstr "Послуги та характеристики"
+
+msgid "SEO"
+msgstr "SEO"
+
+msgid "Photo"
+msgstr "Фото"
+
+msgid "Sched."
+msgstr "Розкл."
+
+msgid "New"
+msgstr "Нов."
+
+msgid "Defaults"
+msgstr "За замовчуванням"
+
+msgid "Preview"
+msgstr "Превʼю"
+
+msgid "Names"
+msgstr "Назви"
+
+msgid "Price notes"
+msgstr "Примітки до цін"
+
+msgid "Labels"
+msgstr "Мітки"
+
+msgid "Search apps and model..."
+msgstr "Пошук застосунків і моделей..."
+
+msgid "Type to search"
+msgstr "Введіть для пошуку"
+
+msgid "Access attempts"
+msgstr "Спроби доступу"
+
+msgid "Access failures"
+msgstr "Невдалі спроби доступу"
+
+msgid "Access logs"
+msgstr "Журнал доступу"
+
+msgid "access attempt"
+msgstr "спроба доступу"
+
+msgid "access attempts"
+msgstr "спроби доступу"
+
+msgid "access failure"
+msgstr "невдала спроба доступу"
+
+msgid "access failures"
+msgstr "невдалі спроби доступу"
+
+msgid "access log"
+msgstr "журнал доступу"
+
+msgid "access logs"
+msgstr "журнал доступу"
+
+msgid "access attempt expiration"
+msgstr "термін спроби доступу"
+
+msgid "access attempt expirations"
+msgstr "терміни спроб доступу"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "From"
+msgstr "Від"
+
+msgid "To"
+msgstr "До"
+
+msgid "Is extra service"
+msgstr "Є додатковою послугою"
+
+msgid "Show as busy"
+msgstr "Показувати як зайняту"
+
+msgid "Currently at location"
+msgstr "Зараз на локації"
+
+msgid "Filters"
+msgstr "Фільтри"
+
+msgid "Google Maps embed URL"
+msgstr "URL вбудованої Google Maps"
+
+msgid "Opening hours (Czech — default fallback)"
+msgstr "Години роботи (чеська — базовий fallback)"
+
+msgid "Opening hours (English)"
+msgstr "Години роботи (англійська)"
+
+msgid "Opening hours (Russian)"
+msgstr "Години роботи (російська)"
+
+msgid "Default meta title"
+msgstr "Meta title за замовчуванням"
+
+msgid "Default meta description"
+msgstr "Meta description за замовчуванням"
+
+msgid "OG image URL"
+msgstr "URL OG-зображення"
+
+msgid "Require age confirmation"
+msgstr "Вимагати підтвердження віку"
+
+msgid "WhatsApp number (no +, no spaces)"
+msgstr "Номер WhatsApp (без + і пробілів)"
+
+msgid "e.g. 420722123111 — used in wa.me/ links"
+msgstr "наприклад 420722123111 — використовується в посиланнях wa.me/"
+
+msgid "Apple/Google Maps link displayed on the contacts page"
+msgstr "Посилання Apple/Google Maps, що відображається на сторінці контактів"
+
+msgid "Paste only the iframe src from Google Maps: Share → Embed a map (long https://www.google.com/maps/embed?pb=… URL)."
+msgstr "Вставте лише значення src з iframe Google Maps: Поділитися → Вбудувати карту (довгий URL https://www.google.com/maps/embed?pb=…)."
+
+msgid "Shown when English/Russian texts below are empty."
+msgstr "Показується, коли поля англійською/російською нижче порожні."
+
+msgid "Old path"
+msgstr "Старий шлях"
+
+msgid "New path"
+msgstr "Новий шлях"
+
+msgid "e.g. /cs/nuru-masaz/ or /klasicka-eroticka-masaz/"
+msgstr "наприклад /cs/nuru-masaz/ або /klasicka-eroticka-masaz/"
+
+msgid "Leave blank to redirect to /. Use full path e.g. /cs/services/nuru/"
+msgstr "Залиште порожнім для редіректу на /. Використовуйте повний шлях, наприклад /cs/services/nuru/"
+
+msgid "Has schedule entry today"
+msgstr "Має запис у розкладі на сьогодні"
+
+msgid "New masseuse badge"
+msgstr "Позначка нової масажистки"
+
+msgid "Main photo URL (external)"
+msgstr "URL головного фото (зовнішній)"
+
+msgid "Gallery image URLs"
+msgstr "URL фото галереї"
+
+msgid "Languages spoken"
+msgstr "Мови спілкування"
+
+msgid "Offers (delam)"
+msgstr "Надає"
+
+msgid "Loves (miluju)"
+msgstr "Подобається"
+
+msgid "Hashtags / characteristics"
+msgstr "Хештеги / характеристики"
+
+msgid "Shown with 'Available today' badge."
+msgstr "Показується з бейджем 'Доступна сьогодні'."
+
+msgid "When enabled, the public card shows a Busy badge. Default is Available."
+msgstr "Коли увімкнено, публічна картка показує бейдж Busy. За замовчуванням — Available."
+
+msgid "If enabled, empty translated fields fall back to Czech content."
+msgstr "Якщо увімкнено, порожні перекладені поля беруть значення з чеської версії."
+
+msgid "One URL per line."
+msgstr "Один URL на рядок."
+
+msgid "Extra services are shown separately on the price page."
+msgstr "Додаткові послуги показуються окремо на сторінці цін."
+
+msgid "e.g. 'Projednáme' (on request)"
+msgstr "наприклад 'Projednáme' (за запитом)"
+
+msgid "Use {masseuse} and {duration} placeholders."
+msgstr "Використовуйте плейсхолдери {masseuse} та {duration}."
+
+msgid "Czech"
+msgstr "Чеська"
+
+msgid "English"
+msgstr "Англійська"
+
+msgid "Russian"
+msgstr "Російська"
+
+msgid "Template — Czech"
+msgstr "Шаблон — чеська"
+
+msgid "Template — English"
+msgstr "Шаблон — англійська"
+
+msgid "Template — Russian"
+msgstr "Шаблон — російська"
+
+msgid "Vložte pouze hodnotu atributu src z Google Maps: Sdílet → Vložit mapu (dlouhá adresa https://www.google.com/maps...)"
+msgstr "Вставте лише значення атрибуту src з Google Maps: Поділитися → Вбудувати карту (довга адреса https://www.google.com/maps...)"
+
+msgid "Name (CS)"
+msgstr "Назва (CS)"
+
+msgid "Name (EN)"
+msgstr "Назва (EN)"
+
+msgid "Name (RU)"
+msgstr "Назва (RU)"
+
+msgid "ISO code"
+msgstr "ISO код"
+
+msgid "Flag emoji"
+msgstr "Прапор-емодзі"
+
+msgid "Price (CZK)"
+msgstr "Ціна (CZK)"
+
+msgid "Featured (shown first)"
+msgstr "Рекомендовано (показувати першим)"
+
+msgid "Include in FAQ Schema"
+msgstr "Додавати у FAQ Schema"
+
+msgid "True"
+msgstr "Так"
+
+msgid "Service key"
+msgstr "Ключ послуги"
+
+msgid "Message template (CS)"
+msgstr "Шаблон повідомлення (CS)"
+
+msgid "Search apps and models..."
+msgstr "Пошук застосунків і моделей..."
+
+msgid "Assign image to masseuse"
+msgstr "Призначити зображення масажистці"
+
+msgid "Assign"
+msgstr "Призначити"
+
+msgid "Assigned to"
+msgstr "Призначено"
+
+msgid "Photo type"
+msgstr "Тип фото"
+
+msgid "Main photo"
+msgstr "Основне фото"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Not assigned yet"
+msgstr "Ще не призначено"
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "main"
+msgstr "основне"
+
+msgid "gallery"
+msgstr "галерея"
+
+msgid "Price list"
+msgstr "Ціни"
+
+msgid "Interior"
+msgstr "Інтер'єр"
+
+msgid "First visit"
+msgstr "Перший візит"
+
+msgid "Price list of erotic massages at Tantra Prague — durations, rates and extra services."
+msgstr "Ціни еротичних масажів Tantra Prague — тривалість, тарифи та додаткові послуги."
+
+msgid "All massage types and durations in one place."
+msgstr "Усі види масажів і тривалість в одному місці."
+
+msgid "Massage prices"
+msgstr "Ціни на масаж"
+
+msgid "Tantra Prague salon interior — discreet luxury massage rooms in Prague."
+msgstr "Інтер'єр салону Tantra Prague — дискретні люксові кімнати в Празі."
+
+msgid "Luxurious rooms designed for relaxation and complete discretion."
+msgstr "Розкішні кімнати для релаксу та повної конфіденційності."
+
+msgid "Salon interior photos"
+msgstr "Фото інтер'єру салону"
+
+msgid "Choose photo"
+msgstr "Обрати фото"
+
+msgid "Previous photo"
+msgstr "Попереднє фото"
+
+msgid "Next photo"
+msgstr "Наступне фото"
+
+msgid "Tantra Prague offers four massage rooms with a calm, elegant atmosphere. The salon location guarantees complete discretion for every client."
+msgstr "Tantra Prague — чотири масажні кімнати зі спокійною атмосферою. Локація гарантує повну конфіденційність."
+
+msgid "Lužická 1416/29, Prague 2 — Vinohrady"
+msgstr "Lužická 1416/29, Прага 2 — Виногради"
+
+msgid "Opletalova 1566/30, Prague 1"
+msgstr "Opletalova 1566/30, Прага 1"
+
+msgid "Guide to your first erotic massage at Tantra Prague — booking, arrival and what to expect."
+msgstr "Гід із першого еротичного масажу в Tantra Prague — бронювання, приїзд і очікування."
+
+msgid "Everything you need before your first erotic massage."
+msgstr "Усе необхідне перед першим еротичним масажем."
+
+msgid "Privacy policy of Tantra Prague — personal data processing and your rights."
+msgstr "Політика конфіденційності Tantra Prague — обробка даних і ваші права."
+
+msgid "Reservation"
+msgstr "Резервація"
+
+# --- core: Page Content & Interior (admin only) ---
+msgid "Page Content"
+msgstr "Контент сторінок"
+
+msgid "Page"
+msgstr "Сторінка"
+
+msgid "Privacy Policy"
+msgstr "Політика конфіденційності"
+
+msgid "First Visit"
+msgstr "Перший візит"
+
+msgid "Interior Photos"
+msgstr "Фото інтер'єру"
+
+msgid "Interior photo"
+msgstr "Фото інтер'єру"
+
+msgid "Interior photos"
+msgstr "Фото інтер'єру"
+
+msgid "Body (Czech, HTML)"
+msgstr "Текст (чеська, HTML)"
+
+msgid "Body (English, HTML)"
+msgstr "Текст (англійська, HTML)"
+
+msgid "Body (Russian, HTML)"
+msgstr "Текст (російська, HTML)"
+
+msgid "Hero subtitle (Czech)"
+msgstr "Підзаголовок (чеська)"
+
+msgid "Hero subtitle (English)"
+msgstr "Підзаголовок (англійська)"
+
+msgid "Hero subtitle (Russian)"
+msgstr "Підзаголовок (російська)"
+
+msgid "Optional. Shown under the page title when filled."
+msgstr "Необов'язково. Показується під заголовком сторінки, якщо заповнено."
+
+msgid "Sort order"
+msgstr "Порядок"
+
+msgid "Cloudinary image"
+msgstr "Зображення Cloudinary"
+
+msgid "Uploaded image"
+msgstr "Завантажене зображення"
+
+msgid "Static file path"
+msgstr "Шлях до static-файлу"
+
+msgid "Relative to static/, e.g. src/img/interior/photo.jpg"
+msgstr "Відносно static/, напр. src/img/interior/photo.jpg"
+
+msgid "Alt text (Czech)"
+msgstr "Alt-текст (чеська)"
+
+msgid "Alt text (English)"
+msgstr "Alt-текст (англійська)"
+
+msgid "Alt text (Russian)"
+msgstr "Alt-текст (російська)"
+
+msgid "Alt text"
+msgstr "Alt-текст"
+
+msgid "Source"
+msgstr "Джерело"
+
+msgid "Upload"
+msgstr "Завантаження"
+
+msgid "Static"
+msgstr "Static-файл"
+
+msgid "Meta"
+msgstr "Службове"
+
+msgid "Add a Cloudinary image, upload a file, or set a static path."
+msgstr "Додайте зображення Cloudinary, завантажте файл або вкажіть шлях до static."
+
+msgid "Question (CS)"
+msgstr "Питання (чеська)"
+
+msgid "Question (EN)"
+msgstr "Питання (англійська)"
+
+msgid "Question (RU)"
+msgstr "Питання (російська)"
+
+msgid "Answer (CS)"
+msgstr "Відповідь (чеська)"
+
+msgid "Answer (EN)"
+msgstr "Відповідь (англійська)"
+
+msgid "Answer (RU)"
+msgstr "Відповідь (російська)"
+
+msgid "Select value"
+msgstr "Оберіть значення"
+
+msgid "Choose file to upload"
+msgstr "Оберіть файл для завантаження"
+
+msgid "No file chosen"
+msgstr "Файл не обрано"
+
+msgid "Weekly schedule"
+msgstr "Тижневий розклад"
+
+msgid "Week navigation"
+msgstr "Навігація тижнем"
+
+msgid "Schedule navigation"
+msgstr "Навігація розкладом"
+
+msgid "Previous week"
+msgstr "Попередній тиждень"
+
+msgid "Previous 7 days"
+msgstr "Попередні 7 днів"
+
+msgid "Next week"
+msgstr "Наступний тиждень"
+
+msgid "Next 7 days"
+msgstr "Наступні 7 днів"
+
+msgid "Today"
+msgstr "Сьогодні"
+
+msgid "No entries for this day."
+msgstr "Немає записів на цей день."
+
+msgid "Availability for %(date)s"
+msgstr "Доступність %(date)s"
+
+msgid "Add schedule for week"
+msgstr "Додати розклад на тиждень"
+
+msgid "Week schedule grid"
+msgstr "Сітка тижневого розкладу"
+
+msgid "Week start (Monday)"
+msgstr "Початок тижня (понеділок)"
+
+msgid "Days of week"
+msgstr "Дні тижня"
+
+msgid "Monday"
+msgstr "Понеділок"
+
+msgid "Tuesday"
+msgstr "Вівторок"
+
+msgid "Wednesday"
+msgstr "Середа"
+
+msgid "Thursday"
+msgstr "Четвер"
+
+msgid "Friday"
+msgstr "П'ятниця"
+
+msgid "Saturday"
+msgstr "Субота"
+
+msgid "Sunday"
+msgstr "Неділя"
+
+msgid "Created %(count)d schedule entries."
+msgstr "Створено записів розкладу: %(count)d."
+
+msgid "Skipped %(count)d duplicate entries."
+msgstr "Пропущено дублікатів: %(count)d."
+
+msgid "No entries were created."
+msgstr "Записи не створено."
+
+msgid "All entries"
+msgstr "Усі записи"
+
+msgid "Add slot"
+msgstr "Додати слот"
+
+msgid "No active masseuses."
+msgstr "Немає активних масажисток."
+
+msgid "Current week"
+msgstr "Поточний тиждень"
+
+# --- masseuses admin (model fields) ---
+
+msgid "Age"
+msgstr "Вік"
+
+msgid "Height (cm)"
+msgstr "Зріст (см)"
+
+msgid "Weight (kg)"
+msgstr "Вага (кг)"
+
+msgid "Bust"
+msgstr "Груди"
+
+msgid "Loves / personality"
+msgstr "Характер / уподобання"
+
+msgid "Use default language content"
+msgstr "Використовувати контент мови за замовчуванням"
+
+msgid "Extra services"
+msgstr "Додаткові послуги"
+
+msgid "One URL per line. Prefer the library above."
+msgstr "Один URL на рядок. Краще використовуйте бібліотеку вище."
+
+msgid "Masseuse Translation"
+msgstr "Переклад профілю масажистки"
+
+# --- booking click tracking (admin dashboard) ---
+
+msgid "Booking click"
+msgstr "Клік бронювання"
+
+msgid "Booking clicks"
+msgstr "Кліки бронювання"
+
+msgid "Clicked at"
+msgstr "Час кліку"
+
+msgid "Channel"
+msgstr "Канал"
+
+msgid "Placement"
+msgstr "Розміщення"
+
+msgid "Page path"
+msgstr "Шлях сторінки"
+
+msgid "Masseuse slug"
+msgstr "Слаг масажистки"
+
+msgid "Service slug"
+msgstr "Слаг послуги"
+
+msgid "Duration (min)"
+msgstr "Тривалість (хв)"
+
+msgid "IP hash"
+msgstr "Хеш IP"
+
+msgid "Time (Prague)"
+msgstr "Час (Прага)"
+
+msgid "Button"
+msgstr "Кнопка"
+
+msgid "Counts only clicks on tantra-prague.com (WhatsApp and Reservation buttons). Traffic from eroticspa.cz, Google Chat, or saved contacts is not included here."
+msgstr "Рахуються лише кліки на tantra-prague.com (кнопки WhatsApp і Rezervace). Трафік з eroticspa.cz, Google Chat або збережених контактів сюди не входить."
+
+msgid "Total clicks"
+msgstr "Усього кліків"
+
+msgid "WhatsApp buttons"
+msgstr "Кнопки WhatsApp"
+
+msgid "Reservation links"
+msgstr "Посилання Rezervace"
+
+msgid "Busiest time"
+msgstr "Найактивніший час"
+
+msgid "Period"
+msgstr "Період"
+
+msgid "Chart"
+msgstr "Графік"
+
+msgid "Chart type"
+msgstr "Тип графіка"
+
+msgid "No clicks for the selected filters."
+msgstr "Немає кліків за обраними фільтрами."
+
+msgid "Top buttons"
+msgstr "Топ кнопок"
+
+msgid "Last 24 hours (by hour)"
+msgstr "Останні 24 години (погодинно)"
+
+msgid "Each bar = one hour, Prague time"
+msgstr "Кожен стовпчик = одна година, празький час"
+
+msgid "Clicks by day"
+msgstr "Кліки по днях"
+
+msgid "Each bar = one calendar day"
+msgstr "Кожен стовпчик = один календарний день"
+
+msgid "Peak hours (0–23)"
+msgstr "Пікові години (0–23)"
+
+msgid "Summed over the selected period · Prague time"
+msgstr "Сумарно за обраний період · празький час"
+
+msgid "24 hours"
+msgstr "24 години"
+
+msgid "7 days"
+msgstr "7 днів"
+
+msgid "14 days"
+msgstr "14 днів"
+
+msgid "30 days"
+msgstr "30 днів"
+
+msgid "All channels"
+msgstr "Усі канали"
+
+msgid "All buttons"
+msgstr "Усі кнопки"
+
+msgid "Peak hours"
+msgstr "Пікові години"
+
+msgid "By day"
+msgstr "По днях"
+
+msgid "WhatsApp button"
+msgstr "Кнопка WhatsApp"
+
+msgid "Reservation link"
+msgstr "Посилання Rezervace"
+
+msgid "WhatsApp in header"
+msgstr "WhatsApp у шапці"
+
+msgid "Reservation in header"
+msgstr "Rezervace у шапці"
+
+msgid "Reservation in footer"
+msgstr "Rezervace у футері"
+
+msgid "WhatsApp in footer"
+msgstr "WhatsApp у футері"
+
+msgid "Reservation in menu"
+msgstr "Rezervace в меню"
+
+msgid "WhatsApp in mobile nav"
+msgstr "WhatsApp у моб. меню"
+
+msgid "Floating WhatsApp button"
+msgstr "Плаваюча кнопка WhatsApp"
+
+msgid "Home — hero button"
+msgstr "Головна — hero-кнопка"
+
+msgid "Home — bottom CTA"
+msgstr "Головна — нижній CTA"
+
+msgid "Contact page"
+msgstr "Сторінка контактів"
+
+msgid "About page"
+msgstr "Сторінка «Про нас»"
+
+msgid "Price list page"
+msgstr "Сторінка цін"
+
+msgid "Jobs page"
+msgstr "Сторінка вакансій"
+
+msgid "First visit page"
+msgstr "Сторінка першого візиту"
+
+msgid "CMS contacts"
+msgstr "CMS контакти"
+
+msgid "Masseuse card"
+msgstr "Картка масажистки"
+
+msgid "Masseuse page — main button"
+msgstr "Сторінка масажистки — головна кнопка"
+
+msgid "Masseuse page — service"
+msgstr "Сторінка масажистки — послуга"
+
+msgid "Masseuse page — sticky bar"
+msgstr "Сторінка масажистки — sticky-панель"
+
+msgid "Service page — top"
+msgstr "Сторінка послуги — зверху"
+
+msgid "Service page — CTA"
+msgstr "Сторінка послуги — CTA"
+
+msgid "Price card button"
+msgstr "Кнопка на картці ціни"
+
+msgid "Schedule row"
+msgstr "Рядок розкладу"
+
+msgid "Direct /rezervace/ link"
+msgstr "Пряме посилання /rezervace/"
+
+msgid "Other"
+msgstr "Інше"
+
+msgid "People clicks"
+msgstr "Кліки людей"
+
+msgid "Bot clicks"
+msgstr "Кліки ботів"
+
+msgid "Bot clicks (excluded)"
+msgstr "Кліки ботів (виключено)"
+
+msgid "Avg per hour"
+msgstr "Середнє за годину"
+
+msgid "Avg per day"
+msgstr "Середнє за день"
+
+msgid "Yesterday"
+msgstr "Вчора"
+
+msgid "Audience"
+msgstr "Аудиторія"
+
+msgid "People"
+msgstr "Люди"
+
+msgid "Bots"
+msgstr "Боти"
+
+msgid "All traffic"
+msgstr "Увесь трафік"
+
+msgid "Clicks on %(date)s (by hour)"
+msgstr "Кліки за %(date)s (по годинах)"
+
+msgid "%(time)s — %(count)s clicks"
+msgstr "%(time)s — %(count)s кліків"
+
+msgid "Avg per %(unit)s: %(avg)s"
+msgstr "Сер. за %(unit)s: %(avg)s"
+
+msgid "%(count)s bot clicks excluded"
+msgstr "%(count)s кліків ботів виключено"
+
+msgid "Reset all"
+msgstr "Скинути все"
+
+msgid "Pick a date"
+msgstr "Обрати дату"
+
+msgid "Try a different period, audience, or channel."
+msgstr "Спробуйте інший період, аудиторію або канал."
+
+msgid "Click trend"
+msgstr "Тренд кліків"
+
+msgid "Bot"
+msgstr "Бот"
+
+msgid "Bot traffic"
+msgstr "Бот-трафік"
+
+msgid "hour"
+msgstr "год"
+
+msgid "day"
+msgstr "день"
+
+msgid "%(days)s days"
+msgstr "%(days)s днів"
+
+msgid "IP-only hash"
+msgstr "Хеш IP (без UA)"
+
