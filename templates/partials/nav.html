@@ -3,7 +3,7 @@
   <div class="site-nav__inner">
     {% include "partials/logo.html" with logo_animated=True %}
 
-    <nav class="desktop-nav" aria-label="{% trans 'Hlavní navigace' %}">
+    <nav class="desktop-nav desktop-nav--links" aria-label="{% trans 'Hlavní navigace' %}">
       <a href="{% url 'core:home' %}" class="nav-link">{% trans "Hlavní strana" %}</a>
       <a href="{% url 'services:list' %}" class="nav-link">{% trans "Masáže" %}</a>
       <a href="{% url 'team:list' %}" class="nav-link">{% trans "Masérky" %}</a>
@@ -13,7 +13,7 @@
       <a href="{% url 'pages:contact' %}" class="nav-link">{% trans "Kontakt" %}</a>
     </nav>
 
-    <div class="desktop-nav">
+    <div class="desktop-nav desktop-nav--actions">
       {% include "partials/lang_switch.html" %}
       <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="nav_rezervace">{% trans "Rezervace" %}</a>
     </div>

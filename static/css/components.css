@@ -24,14 +24,34 @@
 }
 
 .site-nav__inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
+  gap: clamp(12px, 2vw, 24px);
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
   min-height: calc(var(--nav-height) - 20px);
-  overflow: hidden;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.desktop-nav--links {
+  justify-content: center;
+  justify-self: center;
+  gap: clamp(16px, 2vw, 28px);
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.desktop-nav--actions {
+  justify-self: end;
+  gap: clamp(12px, 1.5vw, 20px);
+  flex-shrink: 0;
 }
 
 .site-logo {
@@ -81,12 +101,6 @@
   line-height: 1.5;
 }
 
-.desktop-nav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
@@ -95,6 +109,13 @@
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
   text-decoration: none;
   background: none;
   border: none;
@@ -170,6 +191,45 @@
 .lang-switch__btn:focus-visible {
   color: var(--color-text);
   outline: none;
+}
+
+/* Russian: longer nav labels */
+html[lang="ru"] .desktop-nav--links {
+  gap: clamp(8px, 1vw, 14px);
+}
+
+html[lang="ru"] .nav-link {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+html[lang="ru"] .desktop-nav--actions .btn {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 0 clamp(12px, 1.5vw, 18px);
+}
+
+html[lang="ru"] .lang-switch__btn {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  padding: 6px 8px;
+  min-width: 36px;
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  html[lang="ru"] .site-logo__img {
+    max-width: min(160px, 28vw);
+    height: clamp(30px, 4vw, 40px);
+  }
+
+  html[lang="ru"] .desktop-nav--links {
+    gap: 8px;
+  }
+
+  html[lang="ru"] .nav-link {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
 }
 
 .lang-switch--overlay {
