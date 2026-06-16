@@ -78,13 +78,13 @@
                 {% if slot.is_booked %}
                 <div class="week-slot__inner">
                   <span class="week-slot__time">{{ slot.time }}</span>
-                  <span class="week-slot__svc">{{ slot.service_name }}</span>
+                  <span class="week-slot__svc">{{ slot.period_label }}</span>
                   <span class="week-slot__status">{% trans "Obsazeno" %}</span>
                 </div>
                 {% else %}
                 <a href="{% url 'reservations:wizard' %}" class="week-slot__inner week-slot__link" data-track-cta="schedule_slot">
                   <span class="week-slot__time">{{ slot.time }}</span>
-                  <span class="week-slot__svc">{{ slot.service_name }}</span>
+                  <span class="week-slot__svc">{{ slot.period_label }}</span>
                   <span class="week-slot__status week-slot__status--avail">{% trans "Rezervovat" %}</span>
                 </a>
                 {% endif %}

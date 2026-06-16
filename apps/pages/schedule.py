@@ -1,10 +1,8 @@
-import math
 from datetime import datetime
 
 from apps.team.models import Masseuse
 
-# Black Velvet: apps/schedule/schedule_data.py
-TIMES = ['09:00', '11:00', '18:30', '20:30', '02:00', '04:00', '06:00']
+from .schedule_data import PERIOD_LABELS, WEEKLY_SHIFTS
 
 DAYS_SHORT = {
     'cs': ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'],
@@ -17,80 +15,61 @@ def today_weekday_index():
     return datetime.now().weekday()
 
 
-def _srand(seed):
-    x = math.sin(seed + 1) * 10000
-    return x - math.floor(x)
+def _period_label(period, lang):
+    labels = PERIOD_LABELS.get(period, {})
+    return labels.get(lang) or labels.get('cs', period)
 
 
-def _slot_dict(slot_id, masseuse, service, is_booked):
-    return {
-        'id': slot_id,
-        'masseuse_id': masseuse.id,
-        'masseuse_name': masseuse.name,
-        'service_name': service.name,
-        'is_booked': is_booked,
-    }
+def _shift_time_display(shift):
+    return f"{shift['start']}–{shift['end']}"
 
 
-def build_demo_grid(masseuses):
-    grid = {day: {time: [] for time in TIMES} for day in range(7)}
-    seed = 77
+def build_schedule_grid(masseuses, lang='cs'):
+    slug_map = {m.slug: m for m in masseuses}
+    grid = {day: [] for day in range(7)}
     slot_id = 1
 
-    for masseuse in masseuses:
-        services = list(masseuse.services.filter(is_active=True))
-        if not services:
+    for slug, days in WEEKLY_SHIFTS.items():
+        masseuse = slug_map.get(slug)
+        if not masseuse:
             continue
 
-        for day in range(7):
-            for time in TIMES:
-                seed += 1
-                if _srand(seed) <= 0.42:
-                    continue
-
-                seed += 1
-                service = services[int(_srand(seed + 500) * len(services)) % len(services)]
-                seed += 1
-                is_booked = _srand(seed + 1000) > 0.52
-
-                grid[day][time].append(
-                    _slot_dict(slot_id, masseuse, service, is_booked)
-                )
+        for day_idx, shifts in days.items():
+            for shift in shifts:
+                grid[day_idx].append({
+                    'id': slot_id,
+                    'masseuse_id': masseuse.id,
+                    'masseuse_name': masseuse.name,
+                    'time': _shift_time_display(shift),
+                    'period': shift['period'],
+                    'period_label': _period_label(shift['period'], lang),
+                    'is_booked': False,
+                })
                 slot_id += 1
 
     return grid
 
 
-def build_schedule_rows(grid, today_idx):
-    rows = []
-    for time in TIMES:
-        cells = []
-        for day in range(7):
-            cells.append({
-                'day': day,
-                'is_today': day == today_idx,
-                'slots': grid[day][time],
-            })
-        rows.append({'time': time, 'cells': cells})
-    return rows
-
-
-def build_masseuse_schedules(grid, masseuses, days_short, today_idx):
+def build_masseuse_schedules(masseuses, lang, days_short, today_idx):
     schedules = []
+    scheduled_slugs = set(WEEKLY_SHIFTS.keys())
 
     for masseuse in masseuses:
+        if masseuse.slug not in scheduled_slugs:
+            continue
+
+        day_shifts = WEEKLY_SHIFTS.get(masseuse.slug, {})
         days = []
+
         for day_idx in range(7):
             slots = []
-            for time in TIMES:
-                for slot in grid[day_idx][time]:
-                    if slot['masseuse_id'] != masseuse.id:
-                        continue
-                    slots.append({
-                        'time': time,
-                        'service_name': slot['service_name'],
-                        'is_booked': slot['is_booked'],
-                    })
+            for shift in day_shifts.get(day_idx, []):
+                slots.append({
+                    'time': _shift_time_display(shift),
+                    'period': shift['period'],
+                    'period_label': _period_label(shift['period'], lang),
+                    'is_booked': False,
+                })
 
             days.append({
                 'index': day_idx,
@@ -108,13 +87,18 @@ def build_masseuse_schedules(grid, masseuses, days_short, today_idx):
 
 
 def get_schedule_context(lang='cs'):
-    masseuses = Masseuse.objects.filter(is_active=True).prefetch_related('services')
+    scheduled_slugs = list(WEEKLY_SHIFTS.keys())
+    masseuses = (
+        Masseuse.objects.filter(is_active=True, slug__in=scheduled_slugs)
+        .prefetch_related('services')
+    )
     today_idx = today_weekday_index()
-    grid = build_demo_grid(masseuses)
     days_short = DAYS_SHORT.get(lang, DAYS_SHORT['cs'])
 
     return {
         'masseuses': masseuses,
-        'masseuse_schedules': build_masseuse_schedules(grid, masseuses, days_short, today_idx),
+        'masseuse_schedules': build_masseuse_schedules(
+            masseuses, lang, days_short, today_idx
+        ),
         'today_idx': today_idx,
     }
