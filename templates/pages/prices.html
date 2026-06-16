@@ -18,18 +18,26 @@
   <section class="prices-tabs-section reveal" aria-labelledby="prices-tabs-title">
     <h2 id="prices-tabs-title" class="sr-only">{% trans "Ceník podle délky masáže" %}</h2>
 
-    <div class="duration-tabs" role="tablist" aria-label="{% trans 'Délka masáže' %}">
-      {% for panel in duration_panels %}
-      <button type="button"
-              class="duration-tabs__btn{% if forloop.first %} is-active{% endif %}"
-              role="tab"
-              id="duration-tab-{{ panel.minutes }}"
-              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-              aria-controls="duration-panel-{{ panel.minutes }}"
-              data-duration-tab="{{ panel.minutes }}">
-        {{ panel.minutes }} {% trans "min" %}
-      </button>
-      {% endfor %}
+    <div class="prices-toolbar">
+      <div class="duration-tabs" role="tablist" aria-label="{% trans 'Délka masáže' %}">
+        {% for panel in duration_panels %}
+        <button type="button"
+                class="duration-tabs__btn{% if forloop.first %} is-active{% endif %}"
+                role="tab"
+                id="duration-tab-{{ panel.minutes }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-controls="duration-panel-{{ panel.minutes }}"
+                data-duration-tab="{{ panel.minutes }}">
+          {{ panel.minutes }} {% trans "min" %}
+        </button>
+        {% endfor %}
+      </div>
+
+      <div class="currency-tabs" role="tablist" aria-label="{% trans 'Měna' %}">
+        <button type="button" class="currency-tabs__btn is-active" role="tab" data-currency-tab="czk" aria-selected="true">Kč</button>
+        <button type="button" class="currency-tabs__btn" role="tab" data-currency-tab="eur" aria-selected="false">€</button>
+        <button type="button" class="currency-tabs__btn" role="tab" data-currency-tab="usd" aria-selected="false">$</button>
+      </div>
     </div>
 
     <div class="duration-panels">
@@ -51,7 +59,12 @@
               <span class="price-row__duration">{{ entry.item.duration }}</span>
             </div>
             <div class="price-row__side">
-              <span class="price-row__price">{{ entry.item.price }}</span>
+              <span class="price-row__price"
+                    data-price-czk="{{ entry.item.price_czk }}"
+                    data-price-eur="{{ entry.item.price_eur }}"
+                    data-price-usd="{{ entry.item.price_usd }}">
+                {{ entry.item.formatted_price }}
+              </span>
               <a href="{% url 'reservations:wizard' %}" class="price-row__cta" data-track-cta="prices_rezervace">
                 {% trans "Rezervovat" %}
               </a>

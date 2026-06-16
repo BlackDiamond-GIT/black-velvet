@@ -187,6 +187,9 @@ class Command(BaseCommand):
                 **model_defaults(row, TRANSLATED_FIELDS['price_items']),
                 duration=row['duration'],
                 price=row['price'],
+                price_czk=row.get('price_czk', 0),
+                price_eur=row.get('price_eur', 0),
+                price_usd=row.get('price_usd', 0),
                 order=row.get('order', 0),
             )
 

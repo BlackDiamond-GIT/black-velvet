@@ -1,5 +1,6 @@
 # Black Velvet weekly shifts — source: https://tantra-prague.com/cs/rozvrh/
 # Only Black Velvet 🖤 entries; weekday 0 = Monday … 6 = Sunday.
+# Address: Lužická 1416/29 (see SITE_ADDRESS in settings).
 
 TANTRA_SLUG_MAP = {
     'julia': 'julia',

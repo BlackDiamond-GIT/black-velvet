@@ -12,7 +12,30 @@
   <header class="schedule-hero reveal">
     <h1 class="schedule-hero__title">{% trans "Rozvrh masáží" %}</h1>
     <p class="schedule-hero__intro">{% trans "Vyberte masérku a prohlédněte si její týdenní směny. Volné termíny rezervujte jedním kliknutím." %}</p>
+    <p class="schedule-hero__address">{{ SITE_ADDRESS }}</p>
   </header>
+
+  {% if active_shifts %}
+  <section class="schedule-now reveal" aria-labelledby="schedule-now-title">
+    <div class="schedule-now__head">
+      <h2 id="schedule-now-title" class="schedule-section__title">{% trans "Právě na směně" %}</h2>
+      <span class="schedule-now__time">{{ current_time }}</span>
+    </div>
+    <ul class="schedule-now__list">
+      {% for shift in active_shifts %}
+      <li class="schedule-now__item">
+        <div class="schedule-now__main">
+          <span class="schedule-now__name">{{ shift.masseuse.name }}</span>
+          <span class="schedule-now__time-range">{{ shift.time }}</span>
+        </div>
+        <div class="schedule-now__meta">
+          <span class="week-slot__period week-slot__period--{{ shift.period }}">{{ shift.period_label }}</span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
 
   <section class="schedule-week reveal" aria-labelledby="schedule-week-title">
     <div class="schedule-week__head">
@@ -25,6 +48,10 @@
         <div class="schedule-legend__item">
           <span class="schedule-legend__swatch schedule-legend__swatch--booked"></span>
           <span>{% trans "Obsazeno" %}</span>
+        </div>
+        <div class="schedule-legend__item">
+          <span class="schedule-legend__swatch schedule-legend__swatch--night"></span>
+          <span>{% trans "Noční směna" %}</span>
         </div>
       </div>
     </div>
@@ -74,17 +101,22 @@
             {% if day.slots %}
             <ul class="week-day__slots">
               {% for slot in day.slots %}
-              <li class="week-slot{% if slot.is_booked %} week-slot--booked{% endif %}">
+              <li class="week-slot{% if slot.is_booked %} week-slot--booked{% endif %}{% if slot.is_overnight_tail %} week-slot--overnight{% endif %}">
                 {% if slot.is_booked %}
                 <div class="week-slot__inner">
                   <span class="week-slot__time">{{ slot.time }}</span>
-                  <span class="week-slot__svc">{{ slot.period_label }}</span>
+                  <span class="week-slot__svc">
+                    <span class="week-slot__period week-slot__period--{{ slot.period }}">{{ slot.period_label }}</span>
+                  </span>
                   <span class="week-slot__status">{% trans "Obsazeno" %}</span>
                 </div>
                 {% else %}
                 <a href="{% url 'reservations:wizard' %}" class="week-slot__inner week-slot__link" data-track-cta="schedule_slot">
                   <span class="week-slot__time">{{ slot.time }}</span>
-                  <span class="week-slot__svc">{{ slot.period_label }}</span>
+                  <span class="week-slot__svc">
+                    <span class="week-slot__period week-slot__period--{{ slot.period }}">{{ slot.period_label }}</span>
+                    {% if slot.is_overnight_tail %}<span class="week-slot__overnight">{% trans "Pokračování noci" %}</span>{% endif %}
+                  </span>
                   <span class="week-slot__status week-slot__status--avail">{% trans "Rezervovat" %}</span>
                 </a>
                 {% endif %}

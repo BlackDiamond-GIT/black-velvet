@@ -5,13 +5,29 @@ from unfold.admin import ModelAdmin, TabularInline
 from apps.core.admin_forms import rich_text_widgets
 from apps.core.velvet_admin import VelvetModelAdmin
 
-from .models import ContactMessage, FAQ, PriceCategory, PriceItem, Review
+from .models import (
+    ContactMessage,
+    FAQ,
+    MasseuseShift,
+    PriceCategory,
+    PriceItem,
+    Review,
+)
 
 
 class PriceItemInline(TabularInline):
     model = PriceItem
     extra = 1
-    fields = ('service_name', 'duration', 'price', 'note', 'order')
+    fields = (
+        'service_name',
+        'duration',
+        'price_czk',
+        'price_eur',
+        'price_usd',
+        'price',
+        'note',
+        'order',
+    )
     ordering = ('order',)
 
 
@@ -46,6 +62,24 @@ class PriceCategoryAdmin(VelvetModelAdmin, TabbedTranslationAdmin):
     list_display = ('name', 'order')
     list_editable = ('order',)
     inlines = [PriceItemInline]
+
+
+@admin.register(MasseuseShift)
+class MasseuseShiftAdmin(VelvetModelAdmin):
+    list_display = (
+        'masseuse',
+        'weekday',
+        'start_time',
+        'end_time',
+        'period',
+        'is_active',
+        'order',
+    )
+    list_filter = ('period', 'weekday', 'is_active')
+    list_editable = ('is_active', 'order')
+    search_fields = ('masseuse__name',)
+    autocomplete_fields = ('masseuse',)
+    ordering = ('weekday', 'order', 'start_time')
 
 
 @admin.register(ContactMessage)

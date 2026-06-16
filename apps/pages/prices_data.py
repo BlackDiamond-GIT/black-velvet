@@ -1,6 +1,6 @@
 import re
 
-DURATION_TABS = (30, 60, 90)
+DURATION_TABS = (30, 45, 60, 90)
 
 
 def _duration_minutes(duration):
@@ -14,6 +14,8 @@ def _tab_for_duration(duration):
         return None
     if minutes <= 30:
         return 30
+    if minutes <= 45:
+        return 45
     if minutes <= 60:
         return 60
     return 90

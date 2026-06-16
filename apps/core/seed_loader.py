@@ -51,7 +51,7 @@ def model_defaults(row, field_names):
 def service_defaults(row):
     fields = (
         'name', 'short_desc', 'description', 'duration_min', 'duration_max',
-        'price_czk', 'price_label', 'meta_title', 'meta_description', 'order',
+        'price_czk', 'price_eur', 'price_usd', 'price_label', 'meta_title', 'meta_description', 'order',
     )
     defaults = model_defaults(row, TRANSLATED_FIELDS['services'])
     for field in fields:

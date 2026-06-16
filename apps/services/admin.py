@@ -21,7 +21,7 @@ class ServiceAdmin(ImagePreviewMixin, VelvetModelAdmin, TabbedTranslationAdmin):
             'fields': ('name', 'slug', 'short_desc', 'description', 'image', 'get_image_preview'),
         }),
         ('Ціна та тривалість', {
-            'fields': ('duration_min', 'duration_max', 'price_czk', 'price_label'),
+            'fields': ('duration_min', 'duration_max', 'price_czk', 'price_eur', 'price_usd', 'price_label'),
         }),
         ('SEO', {
             'fields': ('meta_title', 'meta_description'),

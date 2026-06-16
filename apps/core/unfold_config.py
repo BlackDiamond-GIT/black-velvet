@@ -136,6 +136,11 @@ UNFOLD = {
                         'icon': 'schedule',
                         'link': reverse_lazy('admin:reservations_timeslot_changelist'),
                     },
+                    {
+                        'title': 'Тижневі зміни',
+                        'icon': 'calendar_month',
+                        'link': reverse_lazy('admin:pages_masseuseshift_changelist'),
+                    },
                 ],
             },
             {
