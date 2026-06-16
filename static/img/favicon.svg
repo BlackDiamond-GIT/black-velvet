@@ -1,5 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Black Velvet">
-  <rect width="32" height="32" fill="#07070B"/>
-  <text x="5" y="23" fill="#EFE9DF" font-family="'Source Sans 3', Arial, sans-serif" font-size="17" font-weight="700">B</text>
-  <text x="17" y="23" fill="#BE1E2D" font-family="'Source Sans 3', Arial, sans-serif" font-size="17" font-weight="700">V</text>
+  <title>Black Velvet</title>
+  <rect width="32" height="32" rx="7" fill="#07070B"/>
+  <defs>
+    <linearGradient id="enso" x1="8" y1="6" x2="26" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C9A98A"/>
+      <stop offset="48%" stop-color="#BE1E2D"/>
+      <stop offset="100%" stop-color="#9A1524"/>
+    </linearGradient>
+  </defs>
+  <path
+    fill="none"
+    stroke="url(#enso)"
+    stroke-width="2.25"
+    stroke-linecap="round"
+    d="M 16 7.2
+       A 8.8 8.8 0 1 1 7.4 19.8"
+  />
 </svg>
