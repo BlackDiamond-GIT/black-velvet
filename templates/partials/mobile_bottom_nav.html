@@ -8,9 +8,9 @@
      class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'team' %} is-active{% endif %}">
     <span class="mobile-bottom-nav__label">{% trans "Masérky" %}</span>
   </a>
-  <a href="{% url 'pages:schedule' %}"
-     class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'pages' and request.resolver_match.url_name == 'schedule' %} is-active{% endif %}">
-    <span class="mobile-bottom-nav__label">{% trans "Rozvrh" %}</span>
+  <a href="{% url 'pages:prices' %}"
+     class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'pages' and request.resolver_match.url_name == 'prices' %} is-active{% endif %}">
+    <span class="mobile-bottom-nav__label">{% trans "Ceník" %}</span>
   </a>
   <a href="{% url 'reservations:wizard' %}"
      class="mobile-bottom-nav__link mobile-bottom-nav__link--rezerv{% if request.resolver_match.namespace == 'reservations' %} is-active{% endif %}"
