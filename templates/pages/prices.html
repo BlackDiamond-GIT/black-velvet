@@ -14,24 +14,10 @@
     <p class="prices-hero__intro">{% trans "Transparentní ceny všech masáží v Black Velvet Spa. Všechny ceny jsou uvedeny včetně DPH." %}</p>
   </header>
 
-  {% if duration_panels %}
-  <section class="prices-tabs-section reveal" aria-labelledby="prices-tabs-title">
-    <h2 id="prices-tabs-title" class="sr-only">{% trans "Ceník podle délky masáže" %}</h2>
-
+  {% if price_items %}
+  <section class="prices-list-section reveal" aria-labelledby="prices-list-title">
     <div class="prices-toolbar">
-      <div class="duration-tabs" role="tablist" aria-label="{% trans 'Délka masáže' %}">
-        {% for panel in duration_panels %}
-        <button type="button"
-                class="duration-tabs__btn{% if forloop.first %} is-active{% endif %}"
-                role="tab"
-                id="duration-tab-{{ panel.minutes }}"
-                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                aria-controls="duration-panel-{{ panel.minutes }}"
-                data-duration-tab="{{ panel.minutes }}">
-          {{ panel.minutes }} {% trans "min" %}
-        </button>
-        {% endfor %}
-      </div>
+      <h2 id="prices-list-title" class="prices-list-section__title">{% trans "Ceník masáží" %}</h2>
 
       <div class="currency-tabs" role="tablist" aria-label="{% trans 'Měna' %}">
         <button type="button" class="currency-tabs__btn is-active" role="tab" data-currency-tab="czk" aria-selected="true">Kč</button>
@@ -40,41 +26,30 @@
       </div>
     </div>
 
-    <div class="duration-panels">
-      {% for panel in duration_panels %}
-      <div class="duration-panel{% if forloop.first %} is-active{% endif %}"
-           id="duration-panel-{{ panel.minutes }}"
-           role="tabpanel"
-           aria-labelledby="duration-tab-{{ panel.minutes }}"
-           data-duration-panel="{{ panel.minutes }}"
-           {% if not forloop.first %}hidden{% endif %}>
-        <ul class="price-list">
-          {% for entry in panel.entries %}
-          <li class="price-row reveal">
-            <div class="price-row__main">
-              <h3 class="price-row__name">{{ entry.item.service_name }}</h3>
-              {% if entry.item.note %}
-              <p class="price-row__note">{{ entry.item.note }}</p>
-              {% endif %}
-              <span class="price-row__duration">{{ entry.item.duration }}</span>
-            </div>
-            <div class="price-row__side">
-              <span class="price-row__price"
-                    data-price-czk="{{ entry.item.price_czk }}"
-                    data-price-eur="{{ entry.item.price_eur }}"
-                    data-price-usd="{{ entry.item.price_usd }}">
-                {{ entry.item.formatted_price }}
-              </span>
-              <a href="{% url 'reservations:wizard' %}" class="price-row__cta" data-track-cta="prices_rezervace">
-                {% trans "Rezervovat" %}
-              </a>
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+    <ul class="price-list">
+      {% for entry in price_items %}
+      <li class="price-row reveal">
+        <div class="price-row__main">
+          <h3 class="price-row__name">{{ entry.item.service_name }}</h3>
+          {% if entry.item.note %}
+          <p class="price-row__note">{{ entry.item.note }}</p>
+          {% endif %}
+          <span class="price-row__duration">{{ entry.item.duration }}</span>
+        </div>
+        <div class="price-row__side">
+          <span class="price-row__price"
+                data-price-czk="{{ entry.item.price_czk }}"
+                data-price-eur="{{ entry.item.price_eur }}"
+                data-price-usd="{{ entry.item.price_usd }}">
+            {{ entry.item.formatted_price }}
+          </span>
+          <a href="{% url 'reservations:wizard' %}" class="price-row__cta" data-track-cta="prices_rezervace">
+            {% trans "Rezervovat" %}
+          </a>
+        </div>
+      </li>
       {% endfor %}
-    </div>
+    </ul>
   </section>
   {% else %}
   <p class="prices-empty text-muted reveal">{% trans "Ceník bude brzy k dispozici." %}</p>

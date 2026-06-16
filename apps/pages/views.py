@@ -10,7 +10,7 @@ from apps.core.mixins import SEOMixin
 
 from .forms import ContactForm
 from .models import FAQ, PriceCategory
-from .prices_data import build_duration_panels
+from .prices_data import build_price_list
 from .schedule import get_schedule_context
 
 
@@ -26,7 +26,7 @@ class PricesView(SEOMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         categories = PriceCategory.objects.prefetch_related('items').all()
         context['categories'] = categories
-        context['duration_panels'] = build_duration_panels(categories)
+        context['price_items'] = build_price_list(categories)
         context['breadcrumbs'] = [home_crumb(), crumb(_('Ceník'))]
         context['schema_breadcrumb'] = True
         context['schema_prices'] = True
