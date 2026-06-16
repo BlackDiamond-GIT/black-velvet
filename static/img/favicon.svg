@@ -1,19 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Black Velvet">
   <title>Black Velvet</title>
   <rect width="32" height="32" rx="7" fill="#07070B"/>
-  <defs>
-    <linearGradient id="enso" x1="8" y1="6" x2="26" y2="28" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#C9A98A"/>
-      <stop offset="48%" stop-color="#BE1E2D"/>
-      <stop offset="100%" stop-color="#9A1524"/>
-    </linearGradient>
-  </defs>
   <path
+    d="M 4.5 10.5 Q 16 6.5 27.5 10.5"
     fill="none"
-    stroke="url(#enso)"
-    stroke-width="2.25"
+    stroke="#C9A98A"
+    stroke-width="1.5"
     stroke-linecap="round"
-    d="M 16 7.2
-       A 8.8 8.8 0 1 1 7.4 19.8"
+  />
+  <path
+    d="M 12 19.5 L 12 11.5
+       M 16 19.5 L 16 9.8
+       M 20 19.5 L 20 11.5
+       M 10.2 19.8 Q 16 23.5 21.8 19.8"
+    fill="none"
+    stroke="#BE1E2D"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
 </svg>
