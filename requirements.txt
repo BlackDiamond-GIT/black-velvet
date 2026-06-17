@@ -12,3 +12,4 @@ gunicorn
 cloudinary
 django-cloudinary-storage
 Babel>=2.12
+requests>=2.32,<3
