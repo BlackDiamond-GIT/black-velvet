@@ -16,7 +16,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from apps.hub_client.client import HubClient
-from apps.hub_client.exceptions import HubUnavailableError
+from apps.hub_client.exceptions import HubAPIError, HubUnavailableError
 from apps.pages.models import MasseuseShift, WorkLocation
 from apps.team.models import Masseuse
 
@@ -49,9 +49,22 @@ class Command(BaseCommand):
         client = HubClient()
         try:
             raw_entries = client.fetch_schedule_json(days=days)
+        except HubAPIError as exc:
+            if exc.status_code == 401:
+                self.stderr.write(
+                    self.style.ERROR(
+                        "Hub API authentication failed (401). "
+                        "Set HUB_API_KEY on the black-velvet web service in Render "
+                        "(value from SiteConfig.api_key for slug black-velvet on tantra-prague.com). "
+                        "Cron inherits this key via render.yaml."
+                    )
+                )
+            else:
+                self.stderr.write(self.style.ERROR(str(exc)))
+            raise SystemExit(1) from exc
         except HubUnavailableError as exc:
             self.stderr.write(self.style.ERROR(f"Hub unreachable: {exc}"))
-            return
+            raise SystemExit(1) from exc
 
         masseuse_by_slug = {
             m.slug: m for m in Masseuse.objects.filter(is_active=True)

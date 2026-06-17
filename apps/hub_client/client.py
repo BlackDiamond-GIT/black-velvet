@@ -53,6 +53,17 @@ class HubClient:
     def _headers(self) -> dict[str, str]:
         return {"X-Site-Key": self.api_key, "Accept": "application/json"}
 
+    def _ensure_configured(self) -> None:
+        if not self.base_url:
+            raise HubAPIError("HUB_API_URL is not configured", status_code=0)
+        if not self.site_slug:
+            raise HubAPIError("HUB_SITE_SLUG is not configured", status_code=0)
+        if not self.api_key:
+            raise HubAPIError(
+                "HUB_API_KEY is not configured — set the SiteConfig.api_key from tantra-prague.com",
+                status_code=401,
+            )
+
     def _url(self, path: str) -> str:
         return f"{self.base_url}/api/v1/{self.site_slug}/{path.lstrip('/')}"
 
@@ -65,6 +76,8 @@ class HubClient:
         url = self._url(path)
         key = _cache_key(path, str(params))
         stale_key = key + _STALE_SUFFIX
+
+        self._ensure_configured()
 
         try:
             resp = requests.get(

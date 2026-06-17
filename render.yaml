@@ -71,4 +71,7 @@ services:
       - key: HUB_API_URL
         value: https://tantra-prague.com
       - key: HUB_API_KEY
-        sync: false
+        fromService:
+          type: web
+          name: black-velvet
+          envVarKey: HUB_API_KEY
