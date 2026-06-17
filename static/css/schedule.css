@@ -37,49 +37,7 @@
 
 
 .schedule-week__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px 24px;
   margin-bottom: clamp(24px, 3.5vw, 36px);
-}
-
-.schedule-legend {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(12px, 2vw, 20px);
-}
-
-.schedule-legend__item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: rgba(240, 233, 224, 0.5);
-}
-
-.schedule-legend__swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-}
-
-.schedule-legend__swatch--avail {
-  background: var(--color-card);
-  border: 1px solid rgba(201, 169, 138, 0.65);
-}
-
-.schedule-legend__swatch--booked {
-  background: rgba(240, 233, 224, 0.08);
-  opacity: 0.5;
-}
-
-.schedule-legend__swatch--night {
-  background: rgba(88, 72, 140, 0.45);
-  border: 1px solid rgba(140, 120, 200, 0.35);
 }
 
 .schedule-now {
@@ -488,13 +446,7 @@
   }
 
   .schedule-week__head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .schedule-legend {
-    font-size: 11px;
-    gap: 8px;
+    margin-bottom: 20px;
   }
 
   .schedule-hero__intro {
