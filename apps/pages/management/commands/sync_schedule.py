@@ -1,7 +1,7 @@
 """Sync schedule from tantra-prague.com Hub API into local MasseuseShift records.
 
 Falls back to WEEKLY_SHIFTS in schedule_data.py when the hub is unreachable
-or HUB_API_KEY is not configured (cron stays green on Render).
+or returns no matching patterns (cron stays green on Render).
 """
 
 from __future__ import annotations
@@ -12,10 +12,11 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from apps.core.seed_loader import MASSEUSE_SLUG_RENAMES
 from apps.hub_client.client import HubClient
 from apps.hub_client.exceptions import HubAPIError, HubUnavailableError
 from apps.pages.models import MasseuseShift, WorkLocation
-from apps.pages.schedule_data import WEEKLY_SHIFTS
+from apps.pages.schedule_data import TANTRA_SLUG_MAP, WEEKLY_SHIFTS
 from apps.team.models import Masseuse
 
 
@@ -24,18 +25,42 @@ def _parse_time(value: str) -> datetime.time:
     return datetime.time(hour, minute)
 
 
-def _patterns_from_hub(raw_entries, masseuse_by_slug, default_location):
+def _masseuse_lookup():
+    """Active masseuses keyed by slug, including legacy slug aliases."""
+    by_slug = {m.slug: m for m in Masseuse.objects.filter(is_active=True)}
+    lookup = dict(by_slug)
+    for old_slug, new_slug in MASSEUSE_SLUG_RENAMES.items():
+        old_m = by_slug.get(old_slug)
+        new_m = by_slug.get(new_slug)
+        if new_m:
+            lookup.setdefault(old_slug, new_m)
+        if old_m:
+            lookup.setdefault(new_slug, old_m)
+    return lookup
+
+
+def _resolve_masseuse(slug: str, lookup: dict):
+    local_slug = TANTRA_SLUG_MAP.get(slug, slug)
+    return lookup.get(local_slug)
+
+
+def _patterns_from_hub(raw_entries, lookup, default_location):
     patterns = {}
     for entry in raw_entries:
-        slug = entry["masseuse_slug"]
-        masseuse = masseuse_by_slug.get(slug)
+        masseuse = _resolve_masseuse(entry["masseuse_slug"], lookup)
         if not masseuse:
             continue
 
         entry_date = datetime.date.fromisoformat(entry["date"])
         weekday = entry_date.weekday()
         period = "night" if entry.get("shift_type") == "night" else "day"
-        key = (slug, weekday, entry["time_from"], entry["time_to"], period)
+        key = (
+            masseuse.slug,
+            weekday,
+            entry["time_from"],
+            entry["time_to"],
+            period,
+        )
         patterns[key] = {
             "masseuse": masseuse,
             "weekday": weekday,
@@ -47,15 +72,15 @@ def _patterns_from_hub(raw_entries, masseuse_by_slug, default_location):
     return patterns
 
 
-def _patterns_from_weekly_shifts(masseuse_by_slug, default_location):
+def _patterns_from_weekly_shifts(lookup, default_location):
     patterns = {}
     for slug, days in WEEKLY_SHIFTS.items():
-        masseuse = masseuse_by_slug.get(slug)
+        masseuse = _resolve_masseuse(slug, lookup)
         if not masseuse:
             continue
         for weekday, shifts in days.items():
             for shift in shifts:
-                key = (slug, weekday, shift["start"], shift["end"], shift["period"])
+                key = (masseuse.slug, weekday, shift["start"], shift["end"], shift["period"])
                 patterns[key] = {
                     "masseuse": masseuse,
                     "weekday": weekday,
@@ -121,9 +146,7 @@ class Command(BaseCommand):
         dry_run = options["dry_run"]
         hub_only = options["hub_only"]
 
-        masseuse_by_slug = {
-            m.slug: m for m in Masseuse.objects.filter(is_active=True)
-        }
+        lookup = _masseuse_lookup()
         default_location = WorkLocation.objects.filter(is_active=True).first()
 
         source = "hub"
@@ -151,27 +174,39 @@ class Command(BaseCommand):
                     raise SystemExit(1) from exc
                 source = "local"
 
+        patterns = {}
         if source == "hub":
-            patterns = _patterns_from_hub(
-                raw_entries, masseuse_by_slug, default_location
-            )
-        else:
+            patterns = _patterns_from_hub(raw_entries, lookup, default_location)
+            if not patterns:
+                hub_error = hub_error or (
+                    f"Hub returned {len(raw_entries)} entries but none matched "
+                    f"local masseuses ({', '.join(sorted(lookup.keys())) or 'none'})"
+                )
+                if hub_only:
+                    self.stderr.write(self.style.ERROR(hub_error))
+                    raise SystemExit(1)
+                source = "local"
+
+        if source == "local":
             if hub_error:
                 self.stderr.write(
                     self.style.WARNING(
-                        f"Hub sync skipped ({hub_error}). "
-                        "Using local WEEKLY_SHIFTS. "
-                        "To enable hub sync, set HUB_API_KEY on the black-velvet "
-                        "web service in Render (SiteConfig.api_key for black-velvet)."
+                        f"Hub sync skipped ({hub_error}). Using local WEEKLY_SHIFTS."
                     )
                 )
-            patterns = _patterns_from_weekly_shifts(
-                masseuse_by_slug, default_location
-            )
+            patterns = _patterns_from_weekly_shifts(lookup, default_location)
 
         if not patterns:
-            self.stderr.write(self.style.ERROR("No schedule patterns to sync."))
-            raise SystemExit(1)
+            active_count = MasseuseShift.objects.filter(is_active=True).count()
+            self.stderr.write(
+                self.style.WARNING(
+                    "No schedule patterns to sync. "
+                    f"Active masseuse slugs in DB: {', '.join(sorted(lookup.keys())) or 'none'}. "
+                    f"Keeping {active_count} existing shift(s) unchanged. "
+                    "Run seed_data if masseuses are missing."
+                )
+            )
+            return
 
         if dry_run:
             self.stdout.write(
