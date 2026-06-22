@@ -834,6 +834,60 @@ textarea.form-input {
   .blog-grid {
     grid-template-columns: 1fr;
   }
+
+  .svc-card__link {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .svc-card__media {
+    aspect-ratio: unset;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .svc-card__media::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: 125%;
+  }
+
+  .svc-card__badges {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+
+  .svc-card__badge {
+    font-size: 10px;
+    padding: 5px 11px;
+    flex-shrink: 0;
+  }
+
+  .svc-card-info {
+    padding: 16px 18px 10px;
+    flex-shrink: 0;
+    background: var(--color-card);
+    position: relative;
+    z-index: 1;
+  }
+
+  .svc-card__title {
+    font-size: clamp(18px, 4.8vw, 22px);
+    margin-bottom: 10px;
+  }
+
+  .svc-card__desc {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .svc-card__footer {
+    padding: 0 18px 20px;
+  }
 }
 
 @media (max-width: 1020px) {

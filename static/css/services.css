@@ -130,6 +130,13 @@
   }
 }
 
+@media (max-width: 1020px) {
+  .services-grid .svc-card__media {
+    width: 100%;
+    flex-shrink: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .service-detail-page.container {
     padding-left: max(clamp(22px, 5.5vw, 32px), var(--safe-left));
@@ -137,7 +144,16 @@
   }
 
   .page-header {
-    margin-bottom: clamp(32px, 5vw, 48px);
+    margin-bottom: clamp(28px, 5vw, 44px);
+  }
+
+  .page-header .service-detail__intro {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .services-grid {
+    gap: 20px;
   }
 
   .service-detail__content h2 {
