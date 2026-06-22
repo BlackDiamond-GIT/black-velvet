@@ -69,7 +69,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  contain: strict;
+  contain: layout style paint;
 }
 
 .media-gallery__track {
@@ -95,6 +95,7 @@
 
 .media-gallery__slide.is-active {
   z-index: 2;
+  transform: translate3d(0, 0, 0);
 }
 
 .media-gallery__track.is-dragging .media-gallery__slide {
@@ -282,12 +283,11 @@
   color: rgba(201, 169, 138, 0.35);
 }
 
-.media-gallery__img--failed {
-  opacity: 0;
-  visibility: hidden;
-}
-
 @media (max-width: 768px) {
+  .media-gallery--card-service,
+  .media-gallery--card-team {
+    min-height: 100%;
+  }
   .media-gallery--detail-service {
     max-height: 45vh;
     aspect-ratio: auto;

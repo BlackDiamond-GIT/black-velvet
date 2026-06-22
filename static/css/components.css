@@ -845,6 +845,7 @@ textarea.form-input {
   .svc-card__media {
     aspect-ratio: unset;
     width: 100%;
+    min-height: clamp(200px, 56vw, 320px);
     flex-shrink: 0;
   }
 
