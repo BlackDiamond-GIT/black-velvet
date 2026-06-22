@@ -2,15 +2,48 @@
 
 from __future__ import annotations
 
+import re
+
+_MEDIA_FOLDERS = ('services', 'team', 'blog', 'interior')
+_TEAM_SLUGS = frozenset({'julia', 'diana', 'laura', 'vanessa', 'ella', 'mira'})
+_BARE_MEDIA_PATH = re.compile(
+    r'/media/(?!services/|team/|blog/|interior/)([a-z0-9_-]+)\.(webp|jpe?g|png)',
+    re.IGNORECASE,
+)
+
+
+def _infer_media_folder(slug: str) -> str | None:
+    slug = slug.lower()
+    if 'masaz' in slug:
+        return 'services'
+    if slug in _TEAM_SLUGS:
+        return 'team'
+    if slug.startswith(('koristi-', 'relaks-', 'spa-')):
+        return 'blog'
+    return None
+
 
 def normalize_cloudinary_url(url: str) -> str:
-    """Collapse duplicated folder segments in Cloudinary delivery paths."""
+    """Repair common Cloudinary path mistakes in delivery URLs."""
     if not url:
         return ''
-    for folder in ('services', 'team', 'blog', 'interior'):
+
+    for folder in _MEDIA_FOLDERS:
         doubled = f'/media/{folder}/{folder}/'
         single = f'/media/{folder}/'
         url = url.replace(doubled, single)
+
+    match = _BARE_MEDIA_PATH.search(url)
+    if match:
+        slug = match.group(1)
+        ext = match.group(2)
+        folder = _infer_media_folder(slug)
+        if folder:
+            url = url.replace(
+                f'/media/{slug}.{ext}',
+                f'/media/{folder}/{slug}.{ext}',
+            )
+
     return url
 
 

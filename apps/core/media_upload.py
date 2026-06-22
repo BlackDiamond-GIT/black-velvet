@@ -14,7 +14,12 @@ def upload_seed_image(instance, field_name, category, slug, src_path):
     )
 
     field = getattr(instance, field_name)
-    field.name = f'{slug}.webp'
+    fmt = result.get('format', 'webp')
+    stored_public_id = result.get('public_id', public_id)
+    if stored_public_id.startswith('media/'):
+        field.name = f'{stored_public_id[len("media/"):]}.{fmt}'
+    else:
+        field.name = f'{category}/{slug}.{fmt}'
     instance.save(update_fields=[field_name])
     return result['secure_url']
 
