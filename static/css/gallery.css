@@ -111,6 +111,10 @@
   object-fit: cover;
   object-position: center top;
   display: block;
+  overflow: hidden;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
   transform-origin: center top;
   transition:
     transform 0.65s ease,
@@ -278,11 +282,20 @@
   color: rgba(201, 169, 138, 0.35);
 }
 
+.media-gallery__img--failed {
+  opacity: 0;
+  visibility: hidden;
+}
+
 @media (max-width: 768px) {
   .media-gallery--detail-service {
     max-height: 45vh;
     aspect-ratio: auto;
     min-height: 200px;
+  }
+
+  .media-gallery--card-service .media-gallery__dots {
+    display: none;
   }
 
   .media-gallery__dots {

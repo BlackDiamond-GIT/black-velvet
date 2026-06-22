@@ -455,6 +455,7 @@ html[lang="ru"] .lang-switch__btn {
 }
 
 .svc-card__link {
+  position: relative;
   text-decoration: none;
   color: inherit;
   display: block;
@@ -851,13 +852,15 @@ textarea.form-input {
     content: '';
     display: block;
     width: 100%;
-    padding-top: 125%;
+    padding-top: 75%;
   }
 
   .svc-card__badges {
-    top: 12px;
-    left: 12px;
-    right: 12px;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    padding: 0 0 12px;
     gap: 10px;
   }
 
