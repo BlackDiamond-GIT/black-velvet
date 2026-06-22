@@ -7,7 +7,7 @@
   data-service-duration="{{ service.duration_display }}"
   data-service-url="{{ service.get_absolute_url }}"
   data-reserve-url="{% url 'reservations:wizard' %}"
-  {% if service.image %}data-service-image="{{ service.image.url }}"{% endif %}>
+  {% if service.image %}data-service-image="{{ service.image|fill_media_url:'card-service' }}"{% endif %}>
   <a href="{{ service.get_absolute_url }}" class="svc-card__link">
     <div class="svc-card__media">
       {% include "partials/media_gallery.html" with primary_image=service.image secondary_image=service.image gallery_variant="card-service" gallery_alt=service.name gallery_width=800 gallery_height=1067 gallery_placeholder=service.name %}

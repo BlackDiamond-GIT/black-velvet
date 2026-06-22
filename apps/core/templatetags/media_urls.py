@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from apps.media_library.cloudinary_urls import apply_cloudinary_transform
+from apps.media_library.cloudinary_urls import apply_cloudinary_transform, normalize_cloudinary_url
 
 register = template.Library()
 
@@ -24,13 +24,14 @@ def _image_url(image) -> str:
         url = image
     else:
         return ''
-    return url or ''
+    return normalize_cloudinary_url(url or '')
 
 
 @register.filter
 def absolute_media_url(url):
     if not url:
         return ''
+    url = normalize_cloudinary_url(url)
     if url.startswith(('http://', 'https://')):
         return url
     return f'{settings.SITE_URL.rstrip("/")}{url}'

@@ -14,7 +14,7 @@ def upload_seed_image(instance, field_name, category, slug, src_path):
     )
 
     field = getattr(instance, field_name)
-    field.name = f'{category}/{slug}.webp'
+    field.name = f'{slug}.webp'
     instance.save(update_fields=[field_name])
     return result['secure_url']
 
@@ -30,5 +30,5 @@ def attach_seed_image(instance, field_name, category, slug, src_path):
         field.delete(save=False)
 
     with src_path.open('rb') as handle:
-        field.save(f'{category}/{slug}.webp', File(handle), save=True)
+        field.save(f'{slug}.webp', File(handle), save=True)
     return field.url

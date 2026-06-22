@@ -3,6 +3,7 @@ from django.views.generic import DetailView, ListView
 
 from apps.core.breadcrumbs import crumb, home_crumb
 from apps.core.mixins import SEOMixin
+from apps.media_library.cloudinary_urls import normalize_cloudinary_url
 from apps.pages.models import FAQ
 from apps.team.models import Masseuse
 
@@ -49,7 +50,8 @@ class ServiceDetailView(SEOMixin, DetailView):
 
     def get_seo_og_image(self):
         if self.object.image:
-            return self.request.build_absolute_uri(self.object.image.url)
+            url = normalize_cloudinary_url(self.object.image.url)
+            return self.request.build_absolute_uri(url)
         return None
 
     def get_context_data(self, **kwargs):
