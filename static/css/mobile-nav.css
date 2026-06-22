@@ -15,11 +15,12 @@
 }
 
 .lang-switch--mobile-header .lang-switch__btn {
-  min-width: 34px;
-  min-height: 34px;
-  padding: 4px 6px;
-  font-size: 9px;
+  min-width: 40px;
+  min-height: 44px;
+  padding: 6px 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
+  color: rgba(240, 233, 224, 0.62);
 }
 
 .lang-switch--mobile-header .lang-switch__btn.is-active {
@@ -117,14 +118,13 @@
 @media (max-width: 768px) {
   .site-nav__mobile-actions {
     display: flex;
+    grid-column: 2;
+    justify-self: end;
   }
 
   .site-nav__inner {
+    grid-template-columns: auto 1fr;
     gap: clamp(8px, 2vw, 12px);
-  }
-
-  .lang-switch--mobile-header {
-    order: -1;
   }
 
   .mobile-overlay__inner {
