@@ -50,6 +50,15 @@
   {% if GA4_MEASUREMENT_ID %}
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA4_MEASUREMENT_ID }}"></script>
   {% endif %}
+
+  <!-- Google tag (gtag.js) — Google Ads AW-18232185016 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18232185016"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18232185016');
+  </script>
 </head>
 <body data-ga4="{{ GA4_MEASUREMENT_ID }}">
   {% include 'partials/nav.html' %}
