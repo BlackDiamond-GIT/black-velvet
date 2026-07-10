@@ -455,13 +455,9 @@ msgstr "Find us in the heart of Prague"
 msgid "Otevírací doba"
 msgstr "Opening hours"
 
-#: templates/core/home.html:151
-msgid "Po — Pá"
-msgstr "Mon — Fri"
-
-#: templates/core/home.html:152
-msgid "So — Ne"
-msgstr "Sat — Sun"
+#: templates/core/home.html:148
+msgid "Denně od 9:00 do 5:00 ráno"
+msgstr "Daily from 9 AM to 5 AM"
 
 #: templates/core/home.html:164
 msgid "Odhalte svůj vlastní ráj"

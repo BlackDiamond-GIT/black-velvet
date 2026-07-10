@@ -456,13 +456,9 @@ msgstr "Мы находимся в сердце Праги"
 msgid "Otevírací doba"
 msgstr "Часы работы"
 
-#: templates/core/home.html:151
-msgid "Po — Pá"
-msgstr "Пн — Пт"
-
-#: templates/core/home.html:152
-msgid "So — Ne"
-msgstr "Сб — Вс"
+#: templates/core/home.html:148
+msgid "Denně od 9:00 do 5:00 ráno"
+msgstr "Ежедневно с 9:00 до 5:00 утра"
 
 #: templates/core/home.html:164
 msgid "Odhalte svůj vlastní ráj"

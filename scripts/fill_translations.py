@@ -136,8 +136,7 @@ TRANSLATIONS = {
         'Kontakt a mapa': 'Contact & map',
         'Najdete nás v srdci Prahy': 'Find us in the heart of Prague',
         'Otevírací doba': 'Opening hours',
-        'Po — Pá': 'Mon — Fri',
-        'So — Ne': 'Sat — Sun',
+        'Denně od 9:00 do 5:00 ráno': 'Daily from 9 AM to 5 AM',
         'Odhalte svůj vlastní ráj': 'Discover your own paradise',
         'Rezervovat masáž': 'Book a massage',
         'Black Velvet Spa — luxusní masážní salon v srdci Prahy, kde se setkává profesionalita s klidem a diskrétní atmosférou.': (
@@ -423,8 +422,7 @@ TRANSLATIONS = {
         'Kontakt a mapa': 'Контакты и карта',
         'Najdete nás v srdci Prahy': 'Мы находимся в сердце Праги',
         'Otevírací doba': 'Часы работы',
-        'Po — Pá': 'Пн — Пт',
-        'So — Ne': 'Сб — Вс',
+        'Denně od 9:00 do 5:00 ráno': 'Ежедневно с 9:00 до 5:00 утра',
         'Odhalte svůj vlastní ráj': 'Откройте свой собственный рай',
         'Rezervovat masáž': 'Записаться на массаж',
         'Black Velvet Spa — luxusní masážní salon v srdci Prahy, kde se setkává profesionalita s klidem a diskrétní atmosférou.': (

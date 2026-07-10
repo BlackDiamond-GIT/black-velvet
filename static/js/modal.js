@@ -96,9 +96,7 @@
       '<div class="modal__hours">' +
         '<span style="display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:12px;">Otevírací doba</span>' +
         '<div class="modal__hours-grid">' +
-          '<span style="color:rgba(240,233,224,.45);">Po — Pá</span><span>10:00 — 22:00</span>' +
-          '<span style="color:rgba(240,233,224,.45);">Sobota</span><span>10:00 — 20:00</span>' +
-          '<span style="color:rgba(240,233,224,.45);">Neděle</span><span>12:00 — 18:00</span>' +
+          '<span style="color:rgba(240,233,224,.45);">Denně</span><span>9:00 — 5:00 ráno</span>' +
         '</div>' +
       '</div>' +
       '<div class="modal__actions" style="margin-top:28px;">' +
