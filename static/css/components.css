@@ -388,7 +388,7 @@ html[lang="ru"] .lang-switch__btn {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(20px, 3vw, 28px);
 }
 
