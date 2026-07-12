@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Fill en/ru translations in django.po files."""
 from pathlib import Path
 
@@ -93,8 +93,8 @@ TRANSLATIONS = {
         ),
         'Masáže': 'Massages',
         'Naše masérky Praha — Odbornice Black Velvet Spa': 'Our Masseuses Prague — Black Velvet Spa Experts',
-        'Seznamte se s našimi certifikovanými masérkami v Praze. Aromaterapie, sportovní a relaxační masáže od profesionálek.': (
-            'Meet our certified masseuses in Prague. Aromatherapy, sports and relaxation '
+        'Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, sportovní a relaxační masáže od profesionálek.': (
+            'Meet our experienced masseuses in Prague. Aromatherapy, sports and relaxation '
             'massages from professionals.'
         ),
         'Masérky': 'Masseuses',
@@ -149,7 +149,7 @@ TRANSLATIONS = {
             'Every massage is performed by experienced masseuses who care about your individual needs and comfort.'
         ),
         'Co nás odlišuje': 'What sets us apart',
-        'Profesionální tým certifikovaných masérek': 'Professional team of certified masseuses',
+        'Profesionální tým zkušených masérek': 'Professional team of experienced masseuses',
         'Klidné a diskrétní prostředí v centru Prahy 1': 'Calm and discreet environment in the centre of Prague 1',
         'Široká nabídka relaxačních a terapeutických masáží': 'Wide range of relaxation and therapeutic massages',
         'Jednoduchá online rezervace termínů': 'Easy online appointment booking',
@@ -282,8 +282,8 @@ TRANSLATIONS = {
         'Žádné masáže k dispozici.': 'No massages available.',
         'Specializace': 'Specializations',
         'Rezervovat s touto masérkou': 'Book with this masseuse',
-        'Certifikované masérky s letitou praxí. Každá specializuje na jiné techniky masáže pro maximální komfort.': (
-            'Certified masseuses with years of experience. Each specializes in different massage techniques for maximum comfort.'
+        'Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky masáže pro maximální komfort.': (
+            'Experienced masseuses with years of experience. Each specializes in different massage techniques for maximum comfort.'
         ),
         'Žádné masérky k dispozici.': 'No masseuses available.',
         'Cena od': 'Price from',
@@ -379,8 +379,8 @@ TRANSLATIONS = {
         ),
         'Masáže': 'Массаж',
         'Naše masérky Praha — Odbornice Black Velvet Spa': 'Наши массажистки Прага — Эксперты Black Velvet Spa',
-        'Seznamte se s našimi certifikovanými masérkami v Praze. Aromaterapie, sportovní a relaxační masáže od profesionálek.': (
-            'Познакомьтесь с нашими сертифицированными массажистками в Праге. '
+        'Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, sportovní a relaxační masáže od profesionálek.': (
+            'Познакомьтесь с нашими опытными массажистками в Праге. '
             'Ароматерапия, спортивный и расслабляющий массаж от профессионалов.'
         ),
         'Masérky': 'Массажистки',
@@ -435,7 +435,7 @@ TRANSLATIONS = {
             'Каждый массаж проводят опытные массажистки, которые заботятся о ваших индивидуальных потребностях и комфорте.'
         ),
         'Co nás odlišuje': 'Чем мы отличаемся',
-        'Profesionální tým certifikovaných masérek': 'Профессиональная команда сертифицированных массажисток',
+        'Profesionální tým zkušených masérek': 'Профессиональная команда опытных массажисток',
         'Klidné a diskrétní prostředí v centru Prahy 1': 'Спокойная и дискретная обстановка в центре Праги 1',
         'Široká nabídka relaxačních a terapeutických masáží': 'Широкий выбор расслабляющего и терапевтического массажа',
         'Jednoduchá online rezervace termínů': 'Простое онлайн-бронирование',
@@ -568,8 +568,8 @@ TRANSLATIONS = {
         'Žádné masáže k dispozici.': 'Нет доступных массажей.',
         'Specializace': 'Специализация',
         'Rezervovat s touto masérkou': 'Записаться к этой массажистке',
-        'Certifikované masérky s letitou praxí. Každá specializuje na jiné techniky masáže pro maximální komfort.': (
-            'Сертифицированные массажистки с многолетним опытом. Каждая специализируется на разных техниках массажа для максимального комфорта.'
+        'Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky masáže pro maximální komfort.': (
+            'Опытные массажистки с многолетним опытом. Каждая специализируется на разных техниках массажа для максимального комфорта.'
         ),
         'Žádné masérky k dispozici.': 'Нет доступных массажисток.',
         'Cena od': 'Цена от',

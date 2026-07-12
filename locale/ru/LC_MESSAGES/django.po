@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+﻿# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -321,10 +321,10 @@ msgstr "Наши массажистки Прага — Эксперты Black Ve
 
 #: apps/team/views.py:16
 msgid ""
-"Seznamte se s našimi certifikovanými masérkami v Praze. Aromaterapie, "
+"Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, "
 "sportovní a relaxační masáže od profesionálek."
 msgstr ""
-"Познакомьтесь с нашими сертифицированными массажистками в Праге. "
+"Познакомьтесь с нашими опытными массажистками в Праге. "
 "Ароматерапия, спортивный и расслабляющий массаж от профессионалов."
 
 #: apps/team/views.py:25 apps/team/views.py:57
@@ -498,8 +498,8 @@ msgid "Co nás odlišuje"
 msgstr "Чем мы отличаемся"
 
 #: templates/pages/about.html:22
-msgid "Profesionální tým certifikovaných masérek"
-msgstr "Профессиональная команда сертифицированных массажисток"
+msgid "Profesionální tým zkušených masérek"
+msgstr "Профессиональная команда опытных массажисток"
 
 #: templates/pages/about.html:23
 msgid "Klidné a diskrétní prostředí v centru Prahy 1"
@@ -955,10 +955,10 @@ msgstr "Записаться к этой массажистке"
 
 #: templates/team/list.html:13
 msgid ""
-"Certifikované masérky s letitou praxí. Každá specializuje na jiné techniky "
+"Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky "
 "masáže pro maximální komfort."
 msgstr ""
-"Сертифицированные массажистки с многолетним опытом. Каждая специализируется "
+"Опытные массажистки с многолетним опытом. Каждая специализируется "
 "на разных техниках массажа для максимального комфорта."
 
 #: templates/team/list.html:19

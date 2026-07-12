@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+﻿# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -321,10 +321,10 @@ msgstr "Our Masseuses Prague — Black Velvet Spa Experts"
 
 #: apps/team/views.py:16
 msgid ""
-"Seznamte se s našimi certifikovanými masérkami v Praze. Aromaterapie, "
+"Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, "
 "sportovní a relaxační masáže od profesionálek."
 msgstr ""
-"Meet our certified masseuses in Prague. Aromatherapy, sports and relaxation "
+"Meet our experienced masseuses in Prague. Aromatherapy, sports and relaxation "
 "massages from professionals."
 
 #: apps/team/views.py:25 apps/team/views.py:57
@@ -497,8 +497,8 @@ msgid "Co nás odlišuje"
 msgstr "What sets us apart"
 
 #: templates/pages/about.html:22
-msgid "Profesionální tým certifikovaných masérek"
-msgstr "Professional team of certified masseuses"
+msgid "Profesionální tým zkušených masérek"
+msgstr "Professional team of experienced masseuses"
 
 #: templates/pages/about.html:23
 msgid "Klidné a diskrétní prostředí v centru Prahy 1"
@@ -955,10 +955,10 @@ msgstr "Book with this masseuse"
 
 #: templates/team/list.html:13
 msgid ""
-"Certifikované masérky s letitou praxí. Každá specializuje na jiné techniky "
+"Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky "
 "masáže pro maximální komfort."
 msgstr ""
-"Certified masseuses with years of experience. Each specializes in different "
+"Experienced masseuses with years of experience. Each specializes in different "
 "massage techniques for maximum comfort."
 
 #: templates/team/list.html:19

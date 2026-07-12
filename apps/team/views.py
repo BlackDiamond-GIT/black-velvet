@@ -15,7 +15,7 @@ class TeamListView(SEOMixin, ListView):
     context_object_name = 'masseuses'
     seo_title = _('Naše masérky Praha — Odbornice Black Velvet Spa')
     seo_description = _(
-        'Seznamte se s našimi certifikovanými masérkami v Praze. '
+        'Seznamte se s našimi zkušenými masérkami v Praze. '
         'Aromaterapie, sportovní a relaxační masáže od profesionálek.'
     )
 
