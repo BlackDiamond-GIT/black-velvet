@@ -16,8 +16,8 @@ class ServiceListView(SEOMixin, ListView):
     context_object_name = 'services'
     seo_title = _('Relaxační a terapeutické masáže Praha | Black Velvet')
     seo_description = _(
-        'Kompletní nabídka masáží v Praze — aromaterapeutická, klasická, sportovní, '
-        'relaxační a lymfatická. Rezervujte termín online.'
+        'Kompletní nabídka masáží v Praze — VIP masáž, relaxační masáž, '
+        'masáž pro ženy a masáž pro páry. Rezervujte termín online.'
     )
 
     def get_queryset(self):

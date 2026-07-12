@@ -78,10 +78,10 @@ msgstr "Massage Price List Prague — Prices & Duration | Black Velvet"
 #: apps/pages/views.py:21
 msgid ""
 "Kompletní ceník masáží v Black Velvet Spa Praha. Transparentní ceny "
-"aromaterapeutické, sportovní a relaxační masáže."
+"VIP masáže, relaxační masáže, masáže pro ženy a masáže pro páry."
 msgstr ""
 "Complete massage price list at Black Velvet Spa Prague. Transparent prices "
-"for aromatherapy, sports and relaxation massages."
+"for VIP massage, relaxation massage, massage for women and couples massage."
 
 #: apps/pages/views.py:30 templates/pages/salon_rules.html:35
 #: templates/partials/footer.html:29 templates/partials/nav.html:10
@@ -288,11 +288,11 @@ msgstr "Relaxation & Therapeutic Massages Prague | Black Velvet"
 
 #: apps/services/views.py:18
 msgid ""
-"Kompletní nabídka masáží v Praze — aromaterapeutická, klasická, sportovní, "
-"relaxační a lymfatická. Rezervujte termín online."
+"Kompletní nabídka masáží v Praze — VIP masáž, relaxační masáž, "
+"masáž pro ženy a masáž pro páry. Rezervujte termín online."
 msgstr ""
-"Full range of massages in Prague — aromatherapy, classic, sports, relaxation"
-" and lymphatic. Book online."
+"Full range of massages in Prague — VIP massage, relaxation massage, "
+"massage for women and couples massage. Book online."
 
 #: apps/services/views.py:27 apps/services/views.py:67
 #: templates/partials/footer.html:26

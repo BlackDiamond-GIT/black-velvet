@@ -19,7 +19,7 @@ class PricesView(SEOMixin, TemplateView):
     seo_title = _('Ceník masáží Praha — Ceny a délky | Black Velvet')
     seo_description = _(
         'Kompletní ceník masáží v Black Velvet Spa Praha. '
-        'Transparentní ceny aromaterapeutické, sportovní a relaxační masáže.'
+        'Transparentní ceny VIP masáže, relaxační masáže, masáže pro ženy a masáže pro páry.'
     )
 
     def get_context_data(self, **kwargs):
