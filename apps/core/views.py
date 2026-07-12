@@ -10,7 +10,6 @@ from django.views.generic import TemplateView
 
 from apps.pages.models import FAQ, Review
 from apps.services.models import Service
-from apps.team.models import Masseuse
 
 from .i18n import translate_url_for_language
 from .middleware import _ADMIN_LANG_COOKIE
@@ -82,7 +81,6 @@ class HomeView(SEOMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['services'] = Service.objects.filter(is_active=True)[:6]
-        context['team'] = Masseuse.objects.filter(is_active=True)[:4]
         context['faqs'] = FAQ.objects.filter(is_active=True, page=FAQ.PAGE_HOME)
         context['reviews'] = Review.objects.filter(is_published=True)
         context['schema_website'] = True

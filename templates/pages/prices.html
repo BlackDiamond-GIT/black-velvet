@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/prices.css' %}">
@@ -43,7 +43,8 @@
                 data-price-usd="{{ entry.item.price_usd }}">
             {{ entry.item.formatted_price }}
           </span>
-          <a href="{% url 'reservations:wizard' %}" class="price-row__cta" data-track-cta="prices_rezervace">
+          {% whatsapp_url placement="prices_rezervace" as wa_price_row_url %}
+          <a href="{{ wa_price_row_url }}" class="price-row__cta" data-track-cta="prices_rezervace">
             {% trans "Rezervovat" %}
           </a>
         </div>
@@ -56,7 +57,8 @@
   {% endif %}
 
   <div class="prices-cta reveal">
-    <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="prices_rezervace">
+    {% whatsapp_url placement="prices_cta" as wa_prices_cta_url %}
+    <a href="{{ wa_prices_cta_url }}" class="btn btn--primary btn--lg" data-track-cta="prices_cta">
       {% trans "Rezervovat masáž" %}
     </a>
   </div>

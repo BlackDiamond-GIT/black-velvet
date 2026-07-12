@@ -1,4 +1,4 @@
-{% load i18n media_urls %}
+{% load i18n media_urls booking_tags %}
 <article class="svc-card reveal"
   data-service-modal
   data-service-name="{{ service.name }}"
@@ -6,7 +6,8 @@
   data-service-price="{{ service.price_label }}"
   data-service-duration="{{ service.duration_display }}"
   data-service-url="{{ service.get_absolute_url }}"
-  data-reserve-url="{% url 'reservations:wizard' %}"
+  {% whatsapp_url placement="service_card" as wa_card_url %}
+  data-reserve-url="{{ wa_card_url }}"
   {% if service.image %}data-service-image="{{ service.image|fill_media_url:'card-service' }}"{% endif %}>
   <a href="{{ service.get_absolute_url }}" class="svc-card__link">
     <div class="svc-card__media">

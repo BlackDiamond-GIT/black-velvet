@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -23,7 +23,8 @@
       <h1 class="hero__title">{% trans "Masáž a relaxace" %}</h1>
       <p class="hero__desc">{% trans "Black Velvet Spa — luxusní masážní salon v srdci Prahy. Odhalte svůj vlastní ráj." %}</p>
       <div class="hero__actions">
-        <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="hero_rezervovat">{% trans "Rezervovat" %}</a>
+        {% whatsapp_url placement="hero_rezervovat" as wa_hero_url %}
+        <a href="{{ wa_hero_url }}" class="btn btn--primary btn--lg" data-track-cta="hero_rezervovat">{% trans "Rezervovat" %}</a>
         <a href="{% url 'services:list' %}" class="btn btn--outline btn--lg">{% trans "Naše masáže" %}</a>
       </div>
     </div>
@@ -40,22 +41,6 @@
       {% for service in services %}
         {% include "partials/service_card.html" %}
       {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="section-pad">
-  <div class="container">
-    <div class="reveal section-header section-header--center">
-      <h2 class="section-heading section-heading--center">{% trans "Odbornice pro váš komfort a relaxaci" %}</h2>
-    </div>
-    <div class="team-grid">
-      {% for masseuse in team %}
-        {% include "partials/team_card.html" %}
-      {% endfor %}
-    </div>
-    <div class="reveal" style="text-align:center;margin-top:clamp(48px, 6vw, 72px);">
-      <a href="{% url 'team:list' %}" class="btn btn--outline">{% trans "Všechny masérky" %} →</a>
     </div>
   </div>
 </section>
@@ -158,7 +143,8 @@
   <div class="cta-banner__glow" aria-hidden="true"></div>
   <div class="container" style="position:relative;z-index:1;max-width:700px;text-align:center;">
     <h2 class="reveal section-heading section-heading--center" style="margin-bottom:36px;">{% trans "Odhalte svůj vlastní ráj" %}</h2>
-    <a href="{% url 'reservations:wizard' %}" class="reveal rd1 btn btn--primary btn--lg" data-track-cta="cta_banner">{% trans "Rezervovat masáž" %}</a>
+    {% whatsapp_url placement="cta_banner" as wa_cta_url %}
+    <a href="{{ wa_cta_url }}" class="reveal rd1 btn btn--primary btn--lg" data-track-cta="cta_banner">{% trans "Rezervovat masáž" %}</a>
   </div>
 </section>
 {% endblock %}

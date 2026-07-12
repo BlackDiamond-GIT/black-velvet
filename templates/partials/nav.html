@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n booking_tags %}
 <header class="site-nav">
   <div class="site-nav__inner">
     {% include "partials/logo.html" with logo_animated=True %}
@@ -6,8 +6,6 @@
     <nav class="desktop-nav desktop-nav--links" aria-label="{% trans 'Hlavní navigace' %}">
       <a href="{% url 'core:home' %}" class="nav-link">{% trans "Hlavní strana" %}</a>
       <a href="{% url 'services:list' %}" class="nav-link">{% trans "Masáže" %}</a>
-      <a href="{% url 'team:list' %}" class="nav-link">{% trans "Masérky" %}</a>
-      <a href="{% url 'pages:schedule' %}" class="nav-link">{% trans "Rozvrh" %}</a>
       <a href="{% url 'pages:prices' %}" class="nav-link">{% trans "Ceník" %}</a>
       <a href="{% url 'blog:list' %}" class="nav-link">{% trans "Blog" %}</a>
       <a href="{% url 'pages:contact' %}" class="nav-link">{% trans "Kontakt" %}</a>
@@ -15,13 +13,15 @@
 
     <div class="desktop-nav desktop-nav--actions">
       {% include "partials/lang_switch.html" %}
-      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="nav_rezervace">{% trans "Rezervace" %}</a>
+      {% whatsapp_url placement="nav_rezervace" as wa_nav_url %}
+      <a href="{{ wa_nav_url }}" class="btn btn--primary" data-track-cta="nav_rezervace">{% trans "Rezervace" %}</a>
     </div>
 
     <div class="site-nav__mobile-actions">
       {% include "partials/lang_switch.html" with lang_switch_class="lang-switch--mobile-header" %}
+      {% whatsapp_url placement="mobile_header_wa_rezervace" as wa_mobile_hdr_url %}
       <a
-        href="{% url 'reservations:wizard' %}"
+        href="{{ wa_mobile_hdr_url }}"
         class="mobile-wa-btn"
         aria-label="{% trans 'Rezervovat masáž' %}"
         data-track-cta="mobile_header_wa_rezervace"
@@ -48,12 +48,11 @@
     <nav class="mobile-overlay__nav" aria-label="{% trans 'Mobilní navigace' %}">
       <a href="{% url 'core:home' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Hlavní strana" %}</a>
       <a href="{% url 'services:list' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Masáže" %}</a>
-      <a href="{% url 'team:list' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Masérky" %}</a>
-      <a href="{% url 'pages:schedule' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Rozvrh" %}</a>
       <a href="{% url 'pages:prices' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Ceník" %}</a>
       <a href="{% url 'blog:list' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Blog" %}</a>
       <a href="{% url 'pages:contact' %}" class="mobile-nav-link" data-mobile-menu-close>{% trans "Kontakt" %}</a>
-      <a href="{% url 'reservations:wizard' %}" class="mobile-nav-link" data-mobile-menu-close data-track-cta="mobile_menu_rezervace">{% trans "Rezervace" %}</a>
+      {% whatsapp_url placement="mobile_menu_rezervace" as wa_menu_url %}
+      <a href="{{ wa_menu_url }}" class="mobile-nav-link" data-mobile-menu-close data-track-cta="mobile_menu_rezervace">{% trans "Rezervace" %}</a>
     </nav>
     <div class="mobile-overlay__info">
       <p class="mobile-overlay__info-label">{% trans "Informace" %}</p>
@@ -65,7 +64,8 @@
       {% include "partials/social_links.html" with social_links_class="social-links--overlay" social_menu_close=True %}
     </div>
     <div class="mobile-overlay__footer">
-      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="mobile_rezervace" data-mobile-menu-close>{% trans "Rezervovat masáž" %}</a>
+      {% whatsapp_url placement="mobile_rezervace" as wa_mobile_footer_url %}
+      <a href="{{ wa_mobile_footer_url }}" class="btn btn--primary btn--lg" data-track-cta="mobile_rezervace" data-mobile-menu-close>{% trans "Rezervovat masáž" %}</a>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n booking_tags %}
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid" style="margin-bottom:64px;">
@@ -16,11 +16,10 @@
         <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,233,224,.35);margin-bottom:20px;">{% trans "Navigace" %}</p>
         <nav style="display:flex;flex-direction:column;gap:12px;">
           <a href="{% url 'core:home' %}" class="footer-link">{% trans "Hlavní strana" %}</a>
-          <a href="{% url 'team:list' %}" class="footer-link">{% trans "Masérky" %}</a>
-          <a href="{% url 'pages:schedule' %}" class="footer-link">{% trans "Rozvrh" %}</a>
           <a href="{% url 'blog:list' %}" class="footer-link">{% trans "Blog" %}</a>
           <a href="{% url 'pages:contact' %}" class="footer-link">{% trans "Kontakt" %}</a>
-          <a href="{% url 'reservations:wizard' %}" class="footer-link">{% trans "Rezervace" %}</a>
+          {% whatsapp_url placement="footer_rezervace" as wa_footer_url %}
+          <a href="{{ wa_footer_url }}" class="footer-link">{% trans "Rezervace" %}</a>
         </nav>
       </div>
       <div>

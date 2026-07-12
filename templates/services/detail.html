@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/services.css' %}">
@@ -25,7 +25,8 @@
           <dd>{{ service.duration_display }}</dd>
         </div>
       </dl>
-      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="service_detail_rezervace">{% trans "Rezervovat masáž" %}</a>
+      {% whatsapp_url placement="service_detail_rezervace" as wa_svc_url %}
+      <a href="{{ wa_svc_url }}" class="btn btn--primary" data-track-cta="service_detail_rezervace">{% trans "Rezervovat masáž" %}</a>
     </div>
   </article>
   <div class="service-detail__content reveal">

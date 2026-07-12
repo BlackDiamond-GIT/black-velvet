@@ -6,9 +6,8 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 
-from apps.core.breadcrumbs import crumb, home_crumb
-from apps.core.mixins import SEOMixin
 from apps.services.models import Service
 from apps.team.models import Masseuse
 
@@ -40,23 +39,9 @@ def _clear_wizard(request):
     request.session.pop(SESSION_KEY, None)
 
 
-class ReservationWizardView(SEOMixin, TemplateView):
-    template_name = 'reservations/wizard.html'
-    seo_title = _('Rezervace masáže Praha — Online booking | Black Velvet')
-    seo_description = _(
-        'Rezervujte masáž online v Black Velvet Spa Praha. '
-        'Vyberte službu, masérku, termín a potvrďte rezervaci.'
-    )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        wizard = _get_wizard(self.request)
-        context['wizard_step'] = wizard.get('step', 1)
-        context['services'] = Service.objects.filter(is_active=True)
-        context['breadcrumbs'] = [home_crumb(), crumb(_('Rezervace'))]
-        context['schema_breadcrumb'] = True
-        context['schema_howto'] = True
-        return context
+class ReservationWizardView(RedirectView):
+    permanent = False
+    pattern_name = 'core:home'
 
 
 class WizardStepView(View):

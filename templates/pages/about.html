@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/pages.css' %}">
@@ -29,7 +29,8 @@
     <p>{% trans "Respekt, diskrétnost a péče o detail jsou pro nás základem každé návštěvy. Věříme, že kvalitní masáž obnovuje tělo i mysl — a proto klademe důraz na osobní přístup ke každému klientovi." %}</p>
 
     <div class="page-text-content__cta">
-      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="about_rezervace">{% trans "Rezervovat masáž" %}</a>
+      {% whatsapp_url placement="about_rezervace" as wa_about_url %}
+      <a href="{{ wa_about_url }}" class="btn btn--primary" data-track-cta="about_rezervace">{% trans "Rezervovat masáž" %}</a>
       <a href="{% url 'pages:contact' %}" class="btn btn--outline">{% trans "Kontakt" %}</a>
     </div>
   </div>

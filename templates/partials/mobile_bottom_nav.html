@@ -1,19 +1,16 @@
-{% load i18n %}
+{% load i18n booking_tags %}
+{% whatsapp_url placement="mobile_bottom_rezervovat" as wa_bottom_url %}
 <nav class="mobile-bottom-nav" aria-label="{% trans 'Mobilní navigace' %}">
   <a href="{% url 'services:list' %}"
      class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'services' %} is-active{% endif %}">
     <span class="mobile-bottom-nav__label">{% trans "Masáže" %}</span>
   </a>
-  <a href="{% url 'team:list' %}"
-     class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'team' %} is-active{% endif %}">
-    <span class="mobile-bottom-nav__label">{% trans "Masérky" %}</span>
-  </a>
   <a href="{% url 'pages:prices' %}"
      class="mobile-bottom-nav__link{% if request.resolver_match.namespace == 'pages' and request.resolver_match.url_name == 'prices' %} is-active{% endif %}">
     <span class="mobile-bottom-nav__label">{% trans "Ceník" %}</span>
   </a>
-  <a href="{% url 'reservations:wizard' %}"
-     class="mobile-bottom-nav__link mobile-bottom-nav__link--rezerv{% if request.resolver_match.namespace == 'reservations' %} is-active{% endif %}"
+  <a href="{{ wa_bottom_url }}"
+     class="mobile-bottom-nav__link mobile-bottom-nav__link--rezerv"
      data-track-cta="mobile_bottom_rezervovat">
     <span class="mobile-bottom-nav__label">{% trans "Rezervovat" %}</span>
   </a>

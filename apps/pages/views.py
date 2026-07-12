@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.translation import get_language, gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView, TemplateView
+from django.views.generic.base import RedirectView
 
 from apps.core.breadcrumbs import crumb, home_crumb
 from apps.core.mixins import SEOMixin
@@ -11,7 +12,6 @@ from apps.core.mixins import SEOMixin
 from .forms import ContactForm
 from .models import FAQ, PriceCategory
 from .prices_data import build_price_list
-from .schedule import get_schedule_context
 
 
 class PricesView(SEOMixin, TemplateView):
@@ -77,21 +77,9 @@ class ContactView(SEOMixin, FormView):
         return super().form_invalid(form)
 
 
-class ScheduleView(SEOMixin, TemplateView):
-    template_name = 'pages/schedule.html'
-    seo_title = _('Rozvrh masérek Praha — Otevírací doba | Black Velvet')
-    seo_description = _(
-        'Rozvrh masérek a otevírací doba Black Velvet Spa ve Vinohradech, Praha 2. '
-        'Aktuální směny a volné termíny pro rezervaci masáže.'
-    )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        lang = (get_language() or 'cs')[:2]
-        context.update(get_schedule_context(lang))
-        context['breadcrumbs'] = [home_crumb(), crumb(_('Rozvrh'))]
-        context['schema_breadcrumb'] = True
-        return context
+class ScheduleView(RedirectView):
+    permanent = False
+    pattern_name = 'core:home'
 
 
 class AboutView(SEOMixin, TemplateView):

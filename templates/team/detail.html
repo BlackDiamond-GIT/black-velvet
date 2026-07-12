@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/team.css' %}">
@@ -25,7 +25,8 @@
         {% endfor %}
       </ul>
       {% endif %}
-      <a href="{% url 'reservations:wizard' %}" class="btn btn--primary" data-track-cta="masseuse_detail_rezervace">{% trans "Rezervovat s touto masérkou" %}</a>
+      {% whatsapp_url placement="masseuse_detail_rezervace" as wa_masseuse_url %}
+      <a href="{{ wa_masseuse_url }}" class="btn btn--primary" data-track-cta="masseuse_detail_rezervace">{% trans "Rezervovat s touto masérkou" %}</a>
     </div>
   </div>
 </div>

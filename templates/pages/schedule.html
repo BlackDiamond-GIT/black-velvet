@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n booking_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/schedule.css' %}">
@@ -97,7 +97,8 @@
                   <span class="week-slot__status">{% trans "Obsazeno" %}</span>
                 </div>
                 {% else %}
-                <a href="{% url 'reservations:wizard' %}" class="week-slot__inner week-slot__link" data-track-cta="schedule_slot">
+                {% whatsapp_url placement="schedule_slot" as wa_schedule_slot_url %}
+                <a href="{{ wa_schedule_slot_url }}" class="week-slot__inner week-slot__link" data-track-cta="schedule_slot">
                   <span class="week-slot__time">{{ slot.time }}</span>
                   <span class="week-slot__svc">
                     <span class="week-slot__period week-slot__period--{{ slot.period }}">{{ slot.period_label }}</span>
@@ -125,7 +126,8 @@
   </section>
 
   <div class="schedule-cta reveal">
-    <a href="{% url 'reservations:wizard' %}" class="btn btn--primary btn--lg" data-track-cta="schedule_rezervace">
+    {% whatsapp_url placement="schedule_rezervace" as wa_schedule_cta_url %}
+    <a href="{{ wa_schedule_cta_url }}" class="btn btn--primary btn--lg" data-track-cta="schedule_rezervace">
       {% trans "Rezervovat masáž" %}
     </a>
   </div>
