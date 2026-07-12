@@ -464,7 +464,7 @@ html[lang="ru"] .lang-switch__btn {
 
 .svc-card__media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   background: #0a0810;
 }
