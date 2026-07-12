@@ -155,14 +155,45 @@
     startAuto();
   }
 
+  function markWizSelection(scope) {
+    (scope || document).querySelectorAll('.wiz-card input:checked').forEach(function (input) {
+      var card = input.closest('.wiz-card');
+      if (card) card.classList.add('is-selected');
+    });
+  }
+
+  function initWizardSelection() {
+    // Rezervační průvodce: klik na kartu vizuálně označí vybranou (.wiz-card.is-selected).
+    // Radio je display:none, vizuál tedy řeší JS. Delegováno na document → přežije HTMX swapy.
+    if (document.body.dataset.wizBound) return;
+    document.body.dataset.wizBound = '1';
+    document.addEventListener('change', function (e) {
+      var input = e.target;
+      if (!input || input.tagName !== 'INPUT' || !input.closest('.wiz-card')) return;
+      if (input.type === 'radio' && input.name) {
+        var sel = '.wiz-card input[type="radio"][name="' + input.name.replace(/["\\]/g, '\\$&') + '"]';
+        document.querySelectorAll(sel).forEach(function (r) {
+          var card = r.closest('.wiz-card');
+          if (card) card.classList.toggle('is-selected', r.checked);
+        });
+      } else {
+        var card = input.closest('.wiz-card');
+        if (card) card.classList.toggle('is-selected', input.checked);
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMobileMenu();
     initNavScroll();
     initFAQ();
     initTestimonials();
+    initWizardSelection();
+    markWizSelection();
   });
 
   document.body.addEventListener('htmx:afterSwap', function () {
     initFAQ();
+    markWizSelection();
   });
 })();
