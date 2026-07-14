@@ -32,16 +32,6 @@
   <div class="service-detail__content reveal">
     {{ service.description|linebreaks }}
   </div>
-  {% if masseuses %}
-  <section class="service-detail__team reveal">
-    <h2 class="service-detail__team-title">{% trans "Masérky pro tuto masáž" %}</h2>
-    <ul class="service-detail__team-list">
-      {% for masseuse in masseuses %}
-      <li><a href="{{ masseuse.get_absolute_url }}" class="footer-link">{{ masseuse.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
   {% if related_services %}
   <section class="subsection-header">
     <h2 class="section-heading">{% trans "Další masáže" %}</h2>

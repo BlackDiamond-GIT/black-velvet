@@ -160,7 +160,7 @@
       "meta_description_cs": "Julia — Klasická & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Julia — Klasická & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Julia — Klasická & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 0,
       "updated_at": "2026-06-12 13:08:30.848464"
     },
@@ -186,7 +186,7 @@
       "meta_description_cs": "Diana — Uvolňující & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Diana — Uvolňující & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Diana — Uvolňující & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 1,
       "updated_at": "2026-06-12 13:08:30.848464"
     },
@@ -212,7 +212,7 @@
       "meta_description_cs": "Laura — Aromamasáž & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Laura — Aromamasáž & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Laura — Aromamasáž & Hlubokotkanová masáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 2,
       "updated_at": "2026-06-12 13:08:30.848464"
     },
@@ -238,7 +238,7 @@
       "meta_description_cs": "Vanessa — Klasická & Sportovní masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Vanessa — Klasická & Sportovní masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Vanessa — Klasická & Sportovní masáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 3,
       "updated_at": "2026-06-12 13:08:30.848464"
     },
@@ -264,7 +264,7 @@
       "meta_description_cs": "Ella — Sportovní & Regenerační masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Ella — Sportovní & Regenerační masáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Ella — Sportovní & Regenerační masáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 4,
       "updated_at": "2026-06-12 13:08:30.848464"
     },
@@ -290,7 +290,7 @@
       "meta_description_cs": "Mira — Lymfatická & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_en": "Mira — Lymfatická & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
       "meta_description_ru": "Mira — Lymfatická & Aromamasáž v Praze. Rezervujte sezení v Black Elixir.",
-      "is_active": 1,
+      "is_active": 0,
       "order": 5,
       "updated_at": "2026-06-12 13:08:30.848464"
     }
@@ -435,7 +435,7 @@
       "meta_description_ru": null,
       "published_at": "2026-06-12 12:38:38.987823",
       "updated_at": "2026-06-12 12:38:38.989133",
-      "is_published": 1,
+      "is_published": 0,
       "author_id": null
     },
     {
@@ -481,7 +481,7 @@
       "excerpt_ru": "Планируете спа-выходные? Узнайте, как максимально насладиться спа-процедурами, включая советы по подготовке, выбору правильных процедур и уходу после массажа.",
       "content": "<p>Spa víkend nebo wellness RetReat není luxus, ale investice do vašeho zdraví a pohody. V tomto průvodci vám ukážeme, jak si zprostředkovat nejen nejlepší massage, ale celou transformační zkušenost.</p>\n<h2>Příprava na spa víkend</h2>\n<p>Víkend do spa by měl začít několik dní předem.</p>\n<h2>Výběr správných procedur</h2>\n<p>V Black Elixir nabízíme různé typy masáží.</p>\n<h2>Během masáže</h2>\n<p>Během samotné masáže se snažte zcela se uvolnit a komunikujte s terapeautem.</p>\n<h2>Po masáži - péče a regenerace</h2>\n<p>Péče po masáži je stejně důležitá jako sama masáž. Dejte si čas na odpočinek a hydrataci.</p>\n<h2>Speciální balíčky pro víkend</h2>\n<p>Nabízíme speciální balíčky pro wellness víkendy včetně Couples Retreat a Solo Retreat.</p>\n<h2>Závěr</h2>\n<p>Wellness víkend je výjimečná příležitost, jak se vrátit k sobě a znovu se připojit se svým tělem.</p>",
       "content_cs": "<p>Spa víkend nebo wellness RetReat není luxus, ale investice do vašeho zdraví a pohody. V tomto průvodci vám ukážeme, jak si zprostředkovat nejen nejlepší massage, ale celou transformační zkušenost.</p>\n<h2>Příprava na spa víkend</h2>\n<p>Víkend do spa by měl začít několik dní předem.</p>\n<h2>Výběr správných procedur</h2>\n<p>V Black Elixir nabízíme různé typy masáží.</p>\n<h2>Během masáže</h2>\n<p>Během samotné masáže se snažte zcela se uvolnit a komunikujte s terapeautem.</p>\n<h2>Po masáži - péče a regenerace</h2>\n<p>Péče po masáži je stejně důležitá jako sama masáž. Dejte si čas na odpočinek a hydrataci.</p>\n<h2>Speciální balíčky pro víkend</h2>\n<p>Nabízíme speciální balíčky pro wellness víkendy včetně Couples Retreat a Solo Retreat.</p>\n<h2>Závěr</h2>\n<p>Wellness víkend je výjimečná příležitost, jak se vrátit k sobě a znovu se připojit se svým tělem.</p>",
-      "content_en": "<p>A spa weekend or wellness retreat is not a luxury, but an investment in your health and well-being. In this guide, we'll show you how to experience not just the best massage, but an entire transformational experience.</p>\n<h2>Preparing for a Spa Weekend</h2>\n<p>A spa weekend should begin several days in advance. Start drinking more water and prefer lighter food.</p>\n<h2>Choosing the Right Treatments</h2>\n<p>At Black Elixir, we offer various types of massages including classic, Thai, and aromatherapy.</p>\n<h2>During the Massage</h2>\n<p>During the massage itself, try to fully relax and communicate with your therapist.</p>\n<h2>After Massage - Care and Recovery</h2>\n<p>Post-massage care is as important as the massage itself. Rest and hydrate properly.</p>\n<h2>Special Packages for the Weekend</h2>\n<p>We offer special packages for wellness weekends including Couples Retreat and Solo Retreat.</p>\n<h2>Conclusion</h2>\n<p>A wellness weekend is an exceptional opportunity to return to yourself and reconnect with your body.</p>",
+      "content_en": "<p>A spa weekend or wellness retreat is not a luxury, but an investment in your health and well-being. In this guide, we'll show you how to experience not just the best massage, but an entire transformational experience.</p>\n<h2>Preparing for a Spa Weekend</h2>\n<p>A spa weekend should begin several days in advance. Start drinking more water and prefer lighter food.</p>\n<h2>Choosing the Right Treatments</h2>\n<p>At Black Velvet, we offer various types of massages tailored to your needs.</p>\n<h2>During the Massage</h2>\n<p>During the massage itself, try to fully relax and communicate with your therapist.</p>\n<h2>After Massage - Care and Recovery</h2>\n<p>Post-massage care is as important as the massage itself. Rest and hydrate properly.</p>\n<h2>Special Packages for the Weekend</h2>\n<p>We offer special packages for wellness weekends including Couples Retreat and Solo Retreat.</p>\n<h2>Conclusion</h2>\n<p>A wellness weekend is an exceptional opportunity to return to yourself and reconnect with your body.</p>",
       "content_ru": "<p>Спа-выходные или wellness-ретрит - это не роскошь, а инвестирование в ваше здоровье и благополучие. В этом руководстве мы покажем вам, как испытать не просто лучший массаж, но целостный трансформационный опыт.</p>\n<h2>Подготовка к спа-выходным</h2>\n<p>Спа-выходные должны начинаться несколько дней назад. Начните пить больше воды и отдавайте предпочтение легкой пище.</p>\n<h2>Выбор правильных процедур</h2>\n<p>В Black Elixir мы предлагаем различные виды массажа.</p>\n<h2>Во время массажа</h2>\n<p>Во время самого массажа старайтесь полностью расслабиться.</p>\n<h2>После массажа</h2>\n<p>Уход после массажа очень важен. Отдохните и гидратируйтесь.</p>\n<h2>Специальные пакеты</h2>\n<p>Мы предлагаем специальные пакеты для спа-выходных.</p>\n<h2>Заключение</h2>\n<p>Спа-выходной - это исключительная возможность вернуться к себе.</p>",
       "author_name": "Black Elixir",
       "image": "blog/spa-retreat-kompletni-pruvodce_cfILT1d.webp",
@@ -596,10 +596,10 @@
       "role_cs": "Stálá klientka",
       "role_en": "Regular client",
       "role_ru": "Постоянная клиентка",
-      "text": "Nádherná zkušenost. Prostředí salonu je naprosto unikátní a masérka Elena byla profesionální.",
-      "text_cs": "Nádherná zkušenost. Prostředí salonu je naprosto unikátní a masérka Elena byla profesionální.",
-      "text_en": "A wonderful experience. The salon atmosphere is truly unique and masseuse Elena was professional.",
-      "text_ru": "Прекрасный опыт. Атмосфера салона по-настоящему уникальна, а массажистка Юлия была профессиональной.",
+      "text": "Nádherná zkušenost. Prostředí salonu je naprosto unikátní a přístup byl maximálně profesionální.",
+      "text_cs": "Nádherná zkušenost. Prostředí salonu je naprosto unikátní a přístup byl maximálně profesionální.",
+      "text_en": "A wonderful experience. The salon atmosphere is truly unique and the approach was thoroughly professional.",
+      "text_ru": "Прекрасный опыт. Атмосфера салона по-настоящему уникальна, а подход был максимально профессиональным.",
       "rating": 5,
       "is_published": 1,
       "order": 0
@@ -611,10 +611,10 @@
       "role_cs": "Pravidelný host",
       "role_en": "Regular guest",
       "role_ru": "Постоянный гость",
-      "text": "Sportovní masáž u Lucie mi pomohla po závodě. Salon má fantastickou atmosféru.",
-      "text_cs": "Sportovní masáž u Lucie mi pomohla po závodě. Salon má fantastickou atmosféru.",
-      "text_en": "Sports massage with Lucie helped me after a race. The salon has a fantastic atmosphere.",
-      "text_ru": "Спортивный массаж у Lucie помог после соревнований. В салоне фантастическая атмосфера.",
+      "text": "Masáž mi skvěle pomohla uvolnit se po náročném týdnu. Salon má fantastickou atmosféru.",
+      "text_cs": "Masáž mi skvěle pomohla uvolnit se po náročném týdnu. Salon má fantastickou atmosféru.",
+      "text_en": "The massage helped me unwind after a demanding week. The salon has a fantastic atmosphere.",
+      "text_ru": "Массаж отлично помог расслабиться после напряжённой недели. В салоне фантастическая атмосфера.",
       "rating": 5,
       "is_published": 1,
       "order": 1
@@ -626,10 +626,10 @@
       "role_cs": "Klientka",
       "role_en": "Client",
       "role_ru": "Клиентка",
-      "text": "Rezervace proběhla hladce. Aromamasáž překonala má očekávání.",
-      "text_cs": "Rezervace proběhla hladce. Aromamasáž překonala má očekávání.",
-      "text_en": "Booking went smoothly. The aromatherapy massage exceeded my expectations.",
-      "text_ru": "Бронирование прошло гладко. Аромамассаж превзошёл мои ожидания.",
+      "text": "Rezervace proběhla hladce. Masáž překonala má očekávání.",
+      "text_cs": "Rezervace proběhla hladce. Masáž překonala má očekávání.",
+      "text_en": "Booking went smoothly. The massage exceeded my expectations.",
+      "text_ru": "Бронирование прошло гладко. Массаж превзошёл мои ожидания.",
       "rating": 5,
       "is_published": 1,
       "order": 2

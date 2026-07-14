@@ -22,7 +22,13 @@ def _social_urls():
 
 
 def site_settings(request):
+    from django.utils.translation import get_language
+
     from apps.pages.models import Review
+    from .models import SiteSettings
+
+    site = SiteSettings.load()
+    lang = (get_language() or settings.LANGUAGE_CODE)[:2]
     aggregate = Review.objects.filter(is_published=True).aggregate(
         avg=Avg('rating'), count=Count('id')
     )
@@ -38,6 +44,8 @@ def site_settings(request):
         'SITE_COUNTRY': settings.SITE_COUNTRY,
         'SITE_LAT': settings.SITE_LAT,
         'SITE_LNG': settings.SITE_LNG,
+        'SITE_HOURS': site.get_hours_for_language(lang),
+        'SITE_HOURS': site.get_hours_for_language(lang),
         **_social_urls(),
         'GA4_MEASUREMENT_ID': settings.GA4_MEASUREMENT_ID,
         'REVIEW_RATING': round(aggregate['avg'] or 0, 1),

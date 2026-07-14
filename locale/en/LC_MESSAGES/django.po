@@ -1,7 +1,6 @@
-﻿# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
@@ -11,12 +10,13 @@ msgstr ""
 "POT-Creation-Date: 2026-06-12 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: apps/blog/views.py:19
 msgid "Blog o masáži a relaxaci Praha | Black Velvet"
@@ -30,9 +30,8 @@ msgstr ""
 "Tips, advice and articles about massage, relaxation and wellness in Prague. "
 "Practical information from Black Velvet Spa experts."
 
-#: apps/blog/views.py:30 apps/blog/views.py:71
-#: templates/partials/footer.html:20 templates/partials/nav.html:11
-#: templates/partials/nav.html:63
+#: apps/blog/views.py:30 apps/blog/views.py:71 templates/partials/footer.html:20
+#: templates/partials/nav.html:11 templates/partials/nav.html:63
 msgid "Blog"
 msgstr "Blog"
 
@@ -43,14 +42,6 @@ msgstr "Home"
 #: apps/core/views.py:17
 msgid "Masáž a relaxace Praha — Luxusní spa salon | Black Velvet"
 msgstr "Massage & Relaxation Prague — Luxury Spa Salon | Black Velvet"
-
-#: apps/core/views.py:19
-msgid ""
-"Black Velvet Spa — luxusní masážní salon v srdci Prahy. Aromaterapeutické, "
-"relaxační a sportovní masáže. Rezervujte online."
-msgstr ""
-"Black Velvet Spa — a luxury massage salon in the heart of Prague. "
-"Aromatherapy, relaxation and sports massages. Book online."
 
 #: apps/pages/forms.py:14
 msgid "Vaše jméno"
@@ -77,8 +68,8 @@ msgstr "Massage Price List Prague — Prices & Duration | Black Velvet"
 
 #: apps/pages/views.py:21
 msgid ""
-"Kompletní ceník masáží v Black Velvet Spa Praha. Transparentní ceny "
-"VIP masáže, relaxační masáže, masáže pro ženy a masáže pro páry."
+"Kompletní ceník masáží v Black Velvet Spa Praha. Transparentní ceny VIP "
+"masáže, relaxační masáže, masáže pro ženy a masáže pro páry."
 msgstr ""
 "Complete massage price list at Black Velvet Spa Prague. Transparent prices "
 "for VIP massage, relaxation massage, massage for women and couples massage."
@@ -121,8 +112,8 @@ msgid ""
 "Rozvrh masérek a otevírací doba Black Velvet Spa ve Vinohradech, Praha 2. "
 "Aktuální směny a volné termíny pro rezervaci masáže."
 msgstr ""
-"Masseuse schedule and opening hours of Black Velvet Spa in Vinohrady, Prague "
-"2. Current shifts and available slots for massage booking."
+"Masseuse schedule and opening hours of Black Velvet Spa in Vinohrady, Prague"
+" 2. Current shifts and available slots for massage booking."
 
 #: apps/pages/views.py:92 templates/partials/footer.html:19
 #: templates/partials/mobile_bottom_nav.html:13 templates/partials/nav.html:9
@@ -186,23 +177,19 @@ msgstr "Privacy policy"
 msgid "Vyberte masáž"
 msgstr "Choose a massage"
 
-#: apps/reservations/forms.py:25
-#: templates/partials/htmx/reservation_step2.html:5
+#: apps/reservations/forms.py:25 templates/partials/htmx/reservation_step2.html:5
 msgid "Vyberte masérku"
 msgstr "Choose a masseuse"
 
-#: apps/reservations/forms.py:26
-#: templates/partials/htmx/reservation_step2.html:12
+#: apps/reservations/forms.py:26 templates/partials/htmx/reservation_step2.html:12
 msgid "Libovolná masérka"
 msgstr "Any masseuse"
 
-#: apps/reservations/forms.py:32
-#: templates/partials/htmx/reservation_step3.html:7
+#: apps/reservations/forms.py:32 templates/partials/htmx/reservation_step3.html:7
 msgid "Datum"
 msgstr "Date"
 
-#: apps/reservations/forms.py:36
-#: templates/partials/htmx/reservation_step3.html:11
+#: apps/reservations/forms.py:36 templates/partials/htmx/reservation_step3.html:11
 msgid "Čas"
 msgstr "Time"
 
@@ -239,14 +226,12 @@ msgstr "Booking"
 msgid "Služba"
 msgstr "Service"
 
-#: apps/reservations/views.py:136
-#: templates/partials/htmx/reservation_step4.html:6
+#: apps/reservations/views.py:136 templates/partials/htmx/reservation_step4.html:6
 #: templates/partials/htmx/reservation_step5.html:7
 msgid "Masérka"
 msgstr "Masseuse"
 
-#: apps/reservations/views.py:136
-#: templates/partials/htmx/reservation_step4.html:7
+#: apps/reservations/views.py:136 templates/partials/htmx/reservation_step4.html:7
 #: templates/partials/htmx/reservation_step5.html:8
 msgid "Termín"
 msgstr "Appointment"
@@ -282,22 +267,17 @@ msgstr ""
 "\n"
 "Confirmation: {url}"
 
-#: apps/services/views.py:16
-msgid "Relaxační a terapeutické masáže Praha | Black Velvet"
-msgstr "Relaxation & Therapeutic Massages Prague | Black Velvet"
-
 #: apps/services/views.py:18
 msgid ""
-"Kompletní nabídka masáží v Praze — VIP masáž, relaxační masáž, "
-"masáž pro ženy a masáž pro páry. Rezervujte termín online."
+"Kompletní nabídka masáží v Praze — VIP masáž, relaxační masáž, masáž pro "
+"ženy a masáž pro páry. Rezervujte termín online."
 msgstr ""
-"Full range of massages in Prague — VIP massage, relaxation massage, "
-"massage for women and couples massage. Book online."
+"Full range of massages in Prague — VIP massage, relaxation massage, massage "
+"for women and couples massage. Book online."
 
 #: apps/services/views.py:27 apps/services/views.py:67
-#: templates/partials/footer.html:26
-#: templates/partials/mobile_bottom_nav.html:5 templates/partials/nav.html:7
-#: templates/partials/nav.html:59
+#: templates/partials/footer.html:26 templates/partials/mobile_bottom_nav.html:5
+#: templates/partials/nav.html:7 templates/partials/nav.html:59
 msgid "Masáže"
 msgstr "Massages"
 
@@ -321,16 +301,15 @@ msgstr "Our Masseuses Prague — Black Velvet Spa Experts"
 
 #: apps/team/views.py:16
 msgid ""
-"Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, "
-"sportovní a relaxační masáže od profesionálek."
+"Seznamte se s našimi zkušenými masérkami v Praze. Aromaterapie, sportovní a "
+"relaxační masáže od profesionálek."
 msgstr ""
-"Meet our experienced masseuses in Prague. Aromatherapy, sports and relaxation "
-"massages from professionals."
+"Meet our experienced masseuses in Prague. Aromatherapy, sports and "
+"relaxation massages from professionals."
 
-#: apps/team/views.py:25 apps/team/views.py:57
-#: templates/pages/schedule.html:32 templates/partials/footer.html:18
-#: templates/partials/mobile_bottom_nav.html:9 templates/partials/nav.html:8
-#: templates/partials/nav.html:60
+#: apps/team/views.py:25 apps/team/views.py:57 templates/pages/schedule.html:32
+#: templates/partials/footer.html:18 templates/partials/mobile_bottom_nav.html:9
+#: templates/partials/nav.html:8 templates/partials/nav.html:60
 msgid "Masérky"
 msgstr "Masseuses"
 
@@ -376,8 +355,7 @@ msgstr ""
 "your own paradise."
 
 #: templates/core/home.html:26 templates/pages/prices.html:56
-#: templates/pages/schedule.html:88
-#: templates/partials/mobile_bottom_nav.html:18
+#: templates/pages/schedule.html:88 templates/partials/mobile_bottom_nav.html:18
 msgid "Rezervovat"
 msgstr "Book now"
 
@@ -503,10 +481,6 @@ msgstr "Professional team of experienced masseuses"
 #: templates/pages/about.html:23
 msgid "Klidné a diskrétní prostředí v centru Prahy 1"
 msgstr "Calm and discreet environment in the centre of Prague 1"
-
-#: templates/pages/about.html:24
-msgid "Široká nabídka relaxačních a terapeutických masáží"
-msgstr "Wide range of relaxation and therapeutic massages"
 
 #: templates/pages/about.html:25
 msgid "Jednoduchá online rezervace termínů"
@@ -701,8 +675,7 @@ msgstr "Turn off your mobile phone in the massage room"
 
 #: templates/pages/salon_rules.html:30
 msgid "Salon je místem relaxace — prosíme o klidný a diskrétní chování"
-msgstr ""
-"The salon is a place of relaxation — please behave calmly and discreetly"
+msgstr "The salon is a place of relaxation — please behave calmly and discreetly"
 
 #: templates/pages/salon_rules.html:31
 msgid "Masáž je poskytována výhradně v rámci profesionálních služeb"
@@ -929,10 +902,6 @@ msgstr "Masseuses for this massage"
 msgid "Další masáže"
 msgstr "More massages"
 
-#: templates/services/list.html:12
-msgid "Relaxační a terapeutické masáže Praha"
-msgstr "Relaxation & therapeutic massages Prague"
-
 #: templates/services/list.html:13
 msgid ""
 "Každá masáž je individuálně přizpůsobena vašim potřebám. Vyberte si tu "
@@ -955,11 +924,11 @@ msgstr "Book with this masseuse"
 
 #: templates/team/list.html:13
 msgid ""
-"Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky "
-"masáže pro maximální komfort."
+"Zkušené masérky s letitou praxí. Každá specializuje na jiné techniky masáže "
+"pro maximální komfort."
 msgstr ""
-"Experienced masseuses with years of experience. Each specializes in different "
-"massage techniques for maximum comfort."
+"Experienced masseuses with years of experience. Each specializes in "
+"different massage techniques for maximum comfort."
 
 #: templates/team/list.html:19
 msgid "Žádné masérky k dispozici."
@@ -979,3 +948,20 @@ msgstr ""
 "serves only as advertising for individual masseuses. A condition of "
 "advertising is renting space in the massage salon. Entry is permitted to "
 "persons over 18 years of age."
+
+msgid ""
+"Black Velvet Spa — luxusní masážní salon v srdci Prahy. VIP a relaxační "
+"masáže, masáže pro ženy i pro páry. Rezervace přes WhatsApp."
+msgstr ""
+"Black Velvet Spa — a luxury massage salon in the heart of Prague. VIP and "
+"relaxation massages, massages for women and for couples. Book via WhatsApp."
+
+msgid "Relaxační masáže Praha | Black Velvet"
+msgstr "Relaxation Massages Prague | Black Velvet"
+
+msgid "Relaxační masáže Praha"
+msgstr "Relaxation Massages Prague"
+
+msgid "Široká nabídka relaxačních masáží"
+msgstr "Wide range of relaxation massages"
+

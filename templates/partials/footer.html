@@ -8,7 +8,8 @@
         <address style="font-style:normal;font-size:13px;color:rgba(240,233,224,.38);line-height:1.8;">
           {{ SITE_ADDRESS }}<br>
           <a href="tel:{{ SITE_PHONE|cut:' ' }}" class="footer-link">{{ SITE_PHONE }}</a><br>
-          <a href="mailto:{{ SITE_EMAIL }}" class="footer-link">{{ SITE_EMAIL }}</a>
+          <a href="mailto:{{ SITE_EMAIL }}" class="footer-link">{{ SITE_EMAIL }}</a><br>
+          {% trans "Otevírací doba" %}: {{ SITE_HOURS }}
         </address>
         {% include "partials/social_links.html" %}
       </div>

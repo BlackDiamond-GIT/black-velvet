@@ -75,7 +75,7 @@ class HomeView(SEOMixin, TemplateView):
     seo_title = _('Masáž a relaxace Praha — Luxusní spa salon | Black Velvet')
     seo_description = _(
         'Black Velvet Spa — luxusní masážní salon v srdci Prahy. '
-        'Aromaterapeutické, relaxační a sportovní masáže. Rezervujte online.'
+        'VIP a relaxační masáže, masáže pro ženy i pro páry. Rezervace přes WhatsApp.'
     )
 
     def get_context_data(self, **kwargs):
