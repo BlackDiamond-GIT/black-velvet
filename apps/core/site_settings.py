@@ -15,17 +15,17 @@ from .phone_rotation import (
 
 
 class SiteSettings(models.Model):
-    phone_primary = models.CharField(_('Основний телефон'), max_length=30, default='+420 778 622 334')
+    phone_primary = models.CharField(_('Основний телефон'), max_length=30, default='+420 797 669 633')
     phone_secondary = models.CharField(_('Додатковий телефон'), max_length=30, blank=True)
     whatsapp_number = models.CharField(
         _('WhatsApp (без + і пробілів)'),
         max_length=20,
-        default='420778622334',
-        help_text=_('Напр. 420778622334 — для wa.me/'),
+        default='420797669633',
+        help_text=_('Напр. 420797669633 — для wa.me/'),
     )
-    rotation_phone_1 = models.CharField(_('Ротаційний телефон 1'), max_length=30, default='+420 778 622 334')
-    rotation_phone_2 = models.CharField(_('Ротаційний телефон 2'), max_length=30, default='+420 778 622 334')
-    rotation_phone_3 = models.CharField(_('Ротаційний телефон 3'), max_length=30, default='+420 778 622 334')
+    rotation_phone_1 = models.CharField(_('Ротаційний телефон 1'), max_length=30, default='+420 797 669 633')
+    rotation_phone_2 = models.CharField(_('Ротаційний телефон 2'), max_length=30, default='+420 797 669 633')
+    rotation_phone_3 = models.CharField(_('Ротаційний телефон 3'), max_length=30, default='+420 797 669 633')
     phone_rotation_hours = models.PositiveSmallIntegerField(_('Інтервал ротації (год)'), default=2)
     email = models.EmailField(_('Email'), default='info@black-velvet.cz')
     address = models.CharField(
@@ -33,7 +33,7 @@ class SiteSettings(models.Model):
         max_length=200,
         default='Lužická 1416/29, Vinohrady, 120 00 Praha 2',
     )
-    location_phone_1 = models.CharField(_('Телефон (студія 1)'), max_length=30, default='+420 778 622 334')
+    location_phone_1 = models.CharField(_('Телефон (студія 1)'), max_length=30, default='+420 797 669 633')
     map_url = models.URLField(_('Посилання на карту (студія 1)'), max_length=500, blank=True)
     maps_embed_url = models.TextField(_('Google Maps embed URL (студія 1)'), blank=True)
     address_2 = models.CharField(_('Адреса (студія 2)'), max_length=200, blank=True)

@@ -20,7 +20,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv(
 
 SITE_URL = config('SITE_URL', default='https://black-velvet.cz')
 SITE_NAME = 'Black Velvet Spa'
-SITE_PHONE = '+420 778 622 334'
+SITE_PHONE = '+420 797 669 633'
 SITE_EMAIL = 'info@black-velvet.cz'
 SITE_ADDRESS = 'Lužická 1416/29, Vinohrady, 120 00 Praha 2'
 SITE_STREET = 'Lužická 1416/29'
