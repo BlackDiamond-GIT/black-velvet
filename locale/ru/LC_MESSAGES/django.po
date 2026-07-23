@@ -42,8 +42,8 @@ msgid "Domů"
 msgstr "Главная"
 
 #: apps/core/views.py:17
-msgid "Masáž a relaxace Praha — Luxusní spa salon | Black Velvet"
-msgstr "Массаж и релаксация Прага — Роскошный spa-салон | Black Velvet"
+msgid "Black Velvet Spa | Luxusní relaxační masáže Praha"
+msgstr "Black Velvet Spa | Роскошный расслабляющий массаж в Праге"
 
 #: apps/pages/forms.py:14
 msgid "Vaše jméno"
@@ -942,22 +942,38 @@ msgstr "Правовое уведомление"
 
 #: templates/partials/legal_notice.html:5
 msgid ""
-"Salon Black Velvet neposkytuje žádné sexuální služby v žádném rozsahu a "
-"slouží pouze jako inzerce jednotlivých masérek. Podmínkou inzerce je "
-"pronájem prostor masážního salonu. Vstup je povolen osobám starším 18 let."
+"Provozovatelem salonu Black Velvet Spa je společnost Prague relax s.r.o., "
+"IČO: 23481412, se sídlem: Chvalská 718/10, Hloubětín, 198 00 Praha 9. Black "
+"Velvet Spa je registrovaná ochranná známka. Všechny naše služby jsou "
+"poskytovány certifikovaným personálem a mají výhradně relaxační, regenerační "
+"a wellness charakter v souladu s právními předpisy ČR."
 msgstr ""
-"Салон Black Velvet не предоставляет никаких сексуальных услуг в каком-либо "
-"виде и служит только для рекламы отдельных массажисток. Условием размещения "
-"рекламы является аренда помещений массажного салона. Вход разрешён лицам "
-"старше 18 лет."
+"Оператор салона Black Velvet Spa — компания Prague relax s.r.o., "
+"идентификационный номер: 23481412, юридический адрес: Chvalská 718/10, "
+"Hloubětín, 198 00 Praha 9. Black Velvet Spa является зарегистрированной "
+"торговой маркой. Все наши услуги оказываются сертифицированным персоналом и "
+"носят исключительно расслабляющий, восстановительный и wellness-характер в "
+"соответствии с законодательством Чешской Республики."
 
 msgid ""
-"Black Velvet Spa — luxusní masážní salon v srdci Prahy. VIP a relaxační "
-"masáže, masáže pro ženy i pro páry. Rezervace přes WhatsApp."
+"Prémiový masážní salon na Vinohradech na adrese Lužická 1416/29. Nabízíme "
+"exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí."
 msgstr ""
-"Black Velvet Spa — люксовый массажный салон в сердце Праги. VIP и "
-"расслабляющие массажи, массаж для женщин и для пар. Бронируйте через "
-"WhatsApp."
+"Премиальный массажный салон на Виноградах по адресу Lužická 1416/29. Мы "
+"предлагаем эксклюзивные расслабляющие ритуалы и массаж для пар в роскошной "
+"приватной обстановке."
+
+msgid "Provozovatel"
+msgstr "Оператор"
+
+msgid "IČO"
+msgstr "Идентификационный номер"
+
+msgid "Sídlo"
+msgstr "Юридический адрес"
+
+msgid "Provozovna"
+msgstr "Адрес салона"
 
 msgid "Relaxační masáže Praha | Black Velvet"
 msgstr "Расслабляющий массаж Прага | Black Velvet"
@@ -967,4 +983,3 @@ msgstr "Расслабляющий массаж Прага"
 
 msgid "Široká nabídka relaxačních masáží"
 msgstr "Широкий выбор расслабляющих массажей"
-

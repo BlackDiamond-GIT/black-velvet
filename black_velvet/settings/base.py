@@ -20,9 +20,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv(
 
 SITE_URL = config('SITE_URL', default='https://black-velvet.cz')
 SITE_NAME = 'Black Velvet Spa'
-SITE_PHONE = '+420 797 669 633'
+SITE_PHONE = '+420 776 739 466'
 SITE_EMAIL = 'info@black-velvet.cz'
-SITE_ADDRESS = 'Lužická 1416/29, Vinohrady, 120 00 Praha 2'
+SITE_ADDRESS = 'Lužická 1416/29, 120 00 Vinohrady'
 SITE_STREET = 'Lužická 1416/29'
 SITE_CITY = 'Praha 2'
 SITE_POSTAL = '120 00'
@@ -31,7 +31,7 @@ SITE_LAT = 50.0736378
 SITE_LNG = 14.4461347
 SITE_INSTAGRAM = config('SITE_INSTAGRAM', default='')
 SITE_FACEBOOK = config('SITE_FACEBOOK', default='')
-SITE_WHATSAPP = config('SITE_WHATSAPP', default='')
+SITE_WHATSAPP = config('SITE_WHATSAPP', default='https://wa.me/420776739466')
 
 INSTALLED_APPS = [
     'unfold',

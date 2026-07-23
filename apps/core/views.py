@@ -72,10 +72,10 @@ def toggle_admin_language(request):
 
 class HomeView(SEOMixin, TemplateView):
     template_name = 'core/home.html'
-    seo_title = _('Masáž a relaxace Praha — Luxusní spa salon | Black Velvet')
+    seo_title = _('Black Velvet Spa | Luxusní relaxační masáže Praha')
     seo_description = _(
-        'Black Velvet Spa — luxusní masážní salon v srdci Prahy. '
-        'VIP a relaxační masáže, masáže pro ženy i pro páry. Rezervace přes WhatsApp.'
+        'Prémiový masážní salon na Vinohradech na adrese Lužická 1416/29. '
+        'Nabízíme exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí.'
     )
 
     def get_context_data(self, **kwargs):

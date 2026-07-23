@@ -14,7 +14,14 @@
   <div class="page-text-content privacy-content reveal">
     <p>{% trans "Black Velvet Spa zpracovává osobní údaje v souladu s nařízením GDPR a platnými právními předpisy České republiky." %}</p>
     <h2>{% trans "Správce údajů" %}</h2>
-    <p>{{ SITE_NAME }}, {{ SITE_ADDRESS }}, {{ SITE_EMAIL }}</p>
+    <p>
+      Prague relax s.r.o.<br>
+      {% trans 'IČO' %}: 23481412<br>
+      {% trans 'Sídlo' %}: Chvalská 718/10, Hloubětín, 198 00 Praha 9<br>
+      E-mail: {{ SITE_EMAIL }}
+    </p>
+    <h2>{% trans 'Provozovna' %}</h2>
+    <p>{{ SITE_NAME }}, {{ SITE_ADDRESS }}</p>
     <h2>{% trans "Účel zpracování" %}</h2>
     <p>{% trans "Osobní údaje zpracováváme za účelem rezervace masáží, komunikace s klienty a plnění smluvních povinností." %}</p>
     <h2>{% trans "Vaše práva" %}</h2>
