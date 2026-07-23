@@ -40,8 +40,8 @@ msgid "Domů"
 msgstr "Home"
 
 #: apps/core/views.py:17
-msgid "Black Velvet Spa | Luxusní relaxační masáže Praha"
-msgstr "Black Velvet Spa | Luxury Relaxation Massages Prague"
+msgid "Black Velvet Spa | Luxusní relaxační masáže Vinohrady"
+msgstr "Black Velvet Spa | Luxury Relaxation Massages Vinohrady"
 
 #: apps/pages/forms.py:14
 msgid "Vaše jméno"
@@ -953,11 +953,11 @@ msgstr ""
 "and wellness in nature, in accordance with the laws of the Czech Republic."
 
 msgid ""
-"Prémiový masážní salon na Vinohradech na adrese Lužická 1416/29. Nabízíme "
+"Prémiový masážní salon v Praze na Vinohradech (Lužická 29). Nabízíme "
 "exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí."
 msgstr ""
-"Premium massage salon in Vinohrady at Lužická 1416/29. We offer exclusive "
-"relaxation rituals and couples massages in a luxurious private setting."
+"Premium massage salon in Prague's Vinohrady district (Lužická 29). We offer "
+"exclusive relaxation rituals and couples massages in a luxurious private setting."
 
 msgid "Provozovatel"
 msgstr "Operator"

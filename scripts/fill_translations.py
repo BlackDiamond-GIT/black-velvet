@@ -8,6 +8,11 @@ BASE = Path(__file__).resolve().parent.parent / 'locale'
 
 TRANSLATIONS = {
     'en': {
+        'Black Velvet Spa | Luxusní relaxační masáže Vinohrady': 'Black Velvet Spa | Luxury Relaxation Massages Vinohrady',
+        'Prémiový masážní salon v Praze na Vinohradech (Lužická 29). Nabízíme exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí.': (
+            "Premium massage salon in Prague's Vinohrady district (Lužická 29). We offer exclusive "
+            'relaxation rituals and couples massages in a luxurious private setting.'
+        ),
         'Blog o masáži a relaxaci Praha | Black Velvet': 'Massage & Relaxation Blog Prague | Black Velvet',
         'Tipy, rady a články o masáži, relaxaci a wellness v Praze. Praktické informace od odborníků Black Velvet Spa.': (
             'Tips, advice and articles about massage, relaxation and wellness in Prague. '
@@ -294,6 +299,11 @@ TRANSLATIONS = {
         '%s let': '%s years',
     },
     'ru': {
+        'Black Velvet Spa | Luxusní relaxační masáže Vinohrady': 'Black Velvet Spa | Роскошный расслабляющий массаж на Виноградах',
+        'Prémiový masážní salon v Praze na Vinohradech (Lužická 29). Nabízíme exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí.': (
+            'Премиальный массажный салон в Праге на Виноградах (Lužická 29). Мы предлагаем '
+            'эксклюзивные расслабляющие ритуалы и массаж для пар в роскошной приватной обстановке.'
+        ),
         'Blog o masáži a relaxaci Praha | Black Velvet': 'Блог о массаже и релаксации Прага | Black Velvet',
         'Tipy, rady a články o masáži, relaxaci a wellness v Praze. Praktické informace od odborníků Black Velvet Spa.': (
             'Советы, рекомендации и статьи о массаже, релаксации и wellness в Праге. '

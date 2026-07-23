@@ -1,3 +1,5 @@
+from html import unescape
+
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils import translation
@@ -84,8 +86,8 @@ class PragueRelaxPublicContentTests(TestCase):
 
     def test_home_uses_requested_seo_and_legal_notice(self):
         response = self.client.get('/')
-        self.assertContains(response, 'Black Velvet Spa | Luxusní relaxační masáže Praha')
-        self.assertContains(response, 'Prémiový masážní salon na Vinohradech na adrese Lužická 1416/29.')
+        self.assertContains(response, 'Black Velvet Spa | Luxusní relaxační masáže Vinohrady')
+        self.assertContains(response, 'Prémiový masážní salon v Praze na Vinohradech (Lužická 29).')
         self.assertContains(response, 'Prague relax s.r.o.')
         self.assertContains(response, 'IČO: 23481412')
         self.assertContains(response, 'registrovaná ochranná známka')
@@ -93,11 +95,16 @@ class PragueRelaxPublicContentTests(TestCase):
     def test_legal_notice_and_home_seo_are_translated(self):
         english = self.client.get('/en/')
         self.assertContains(english, 'The operator of Black Velvet Spa is Prague relax s.r.o.')
-        self.assertContains(english, 'Black Velvet Spa | Luxury Relaxation Massages Prague')
+        self.assertContains(english, 'Black Velvet Spa | Luxury Relaxation Massages Vinohrady')
+        self.assertIn(
+            "Premium massage salon in Prague's Vinohrady district (Lužická 29).",
+            unescape(english.content.decode()),
+        )
 
         russian = self.client.get('/ru/')
         self.assertContains(russian, 'Оператор салона Black Velvet Spa')
-        self.assertContains(russian, 'Black Velvet Spa | Роскошный расслабляющий массаж в Праге')
+        self.assertContains(russian, 'Black Velvet Spa | Роскошный расслабляющий массаж на Виноградах')
+        self.assertContains(russian, 'Премиальный массажный салон в Праге на Виноградах (Lužická 29).')
 
     def test_contact_and_privacy_identify_operator_separately_from_salon(self):
         contact = self.client.get(reverse('pages:contact'))
@@ -131,8 +138,16 @@ class PragueRelaxPublicContentTests(TestCase):
             'Exkluzivní a individuální celotělová péče s plnou pozorností certifikovaného terapeuta za využití prémiových bio olejů.',
         )
         self.assertEqual(
-            by_slug['masaz-pro-zeny']['short_desc_cs'],
-            'Zklidňující regenerační rituál v harmonickém a plně soukromém prostředí, zaměřený na odbourání stresu a hluboké uvolnění svalů.',
+            by_slug['relaxacni-masaz']['short_desc_cs'],
+            'Hluboká relaxační masáž celého těla s využitím prémiových bio olejů pro odbourání stresu a psychického napětí.',
+        )
+        self.assertEqual(
+            by_slug['relaxacni-masaz']['short_desc_en'],
+            'Deep full-body relaxation massage using premium organic oils to relieve stress and mental tension.',
+        )
+        self.assertEqual(
+            by_slug['relaxacni-masaz']['short_desc_ru'],
+            'Глубокий расслабляющий массаж всего тела с использованием премиальных био-масел для снятия стресса и психического напряжения.',
         )
         active_meta = ' '.join(
             service.get('meta_title', '')

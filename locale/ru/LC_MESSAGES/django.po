@@ -42,8 +42,8 @@ msgid "Domů"
 msgstr "Главная"
 
 #: apps/core/views.py:17
-msgid "Black Velvet Spa | Luxusní relaxační masáže Praha"
-msgstr "Black Velvet Spa | Роскошный расслабляющий массаж в Праге"
+msgid "Black Velvet Spa | Luxusní relaxační masáže Vinohrady"
+msgstr "Black Velvet Spa | Роскошный расслабляющий массаж на Виноградах"
 
 #: apps/pages/forms.py:14
 msgid "Vaše jméno"
@@ -956,12 +956,12 @@ msgstr ""
 "соответствии с законодательством Чешской Республики."
 
 msgid ""
-"Prémiový masážní salon na Vinohradech na adrese Lužická 1416/29. Nabízíme "
+"Prémiový masážní salon v Praze na Vinohradech (Lužická 29). Nabízíme "
 "exkluzivní relaxační rituály a masáže pro páry v luxusním privátním prostředí."
 msgstr ""
-"Премиальный массажный салон на Виноградах по адресу Lužická 1416/29. Мы "
-"предлагаем эксклюзивные расслабляющие ритуалы и массаж для пар в роскошной "
-"приватной обстановке."
+"Премиальный массажный салон в Праге на Виноградах (Lužická 29). Мы предлагаем "
+"эксклюзивные расслабляющие ритуалы и массаж для пар в роскошной приватной "
+"обстановке."
 
 msgid "Provozovatel"
 msgstr "Оператор"
