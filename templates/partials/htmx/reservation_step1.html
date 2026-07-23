@@ -9,7 +9,7 @@
       <input type="radio" name="service" value="{{ service.pk }}" style="display:none;" required>
       <h3 style="font-family:var(--font-heading);font-size:18px;font-style:italic;margin-bottom:8px;">{{ service.name }}</h3>
       <p style="font-size:12px;color:var(--color-text-muted);margin-bottom:8px;">{{ service.short_desc }}</p>
-      <p style="font-size:11px;color:var(--color-gold);">{{ service.duration_display }} · {{ service.price_label }}</p>
+      <p style="font-size:11px;color:var(--color-gold);">{{ service.duration_display }} · {{ service.localized_price_label }}</p>
     </label>
     {% endfor %}
   </div>

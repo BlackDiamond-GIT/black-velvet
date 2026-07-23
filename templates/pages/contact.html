@@ -15,14 +15,24 @@
   </header>
 
   <section class="contact-quick" aria-label="{% trans 'Rychlý kontakt' %}">
-    <a href="https://maps.google.com/?q={{ SITE_ADDRESS|urlencode }}"
-       class="contact-card reveal rd1"
-       target="_blank"
-       rel="noopener noreferrer">
-      <span class="contact-card__label">{% trans "Adresa" %}</span>
-      <span class="contact-card__value">{{ SITE_NAME }}</span>
-      <span class="contact-card__meta">{{ SITE_ADDRESS }}</span>
-    </a>
+    <div class="contact-card-group reveal rd1">
+      <a href="https://maps.google.com/?q={{ SITE_ADDRESS|urlencode }}"
+         class="contact-card"
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="contact-card__label">{% trans "Adresa" %}</span>
+        <span class="contact-card__value">{{ SITE_NAME }}</span>
+        <span class="contact-card__meta">{{ SITE_ADDRESS }}</span>
+      </a>
+      <section class="contact-operator" aria-labelledby="operator-heading">
+        <h2 id="operator-heading" class="contact-card__label">{% trans 'Provozovatel' %}</h2>
+        <p class="contact-card__meta">
+          Prague relax s.r.o.<br>
+          {% trans 'IČO' %}: 23481412<br>
+          {% trans 'Sídlo' %}: Chvalská 718/10, Hloubětín, 198 00 Praha 9
+        </p>
+      </section>
+    </div>
     <a href="tel:{{ SITE_PHONE|cut:' ' }}" class="contact-card reveal rd2">
       <span class="contact-card__label">{% trans "Telefon" %}</span>
       <span class="contact-card__value">{{ SITE_PHONE }}</span>
@@ -35,15 +45,6 @@
       <span class="contact-card__label">{% trans "Otevírací doba" %}</span>
       <span class="contact-card__value">{{ SITE_HOURS }}</span>
     </div>
-  </section>
-
-  <section class='page-text-content reveal' aria-labelledby='operator-heading'>
-    <h2 id='operator-heading'>{% trans 'Provozovatel' %}</h2>
-    <p>
-      Prague relax s.r.o.<br>
-      {% trans 'IČO' %}: 23481412<br>
-      {% trans 'Sídlo' %}: Chvalská 718/10, Hloubětín, 198 00 Praha 9
-    </p>
   </section>
 
   <section class="contact-main">

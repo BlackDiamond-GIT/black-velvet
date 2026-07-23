@@ -3,7 +3,7 @@
   data-service-modal
   data-service-name="{{ service.name }}"
   data-service-desc="{{ service.short_desc }}"
-  data-service-price="{{ service.price_label }}"
+  data-service-price="{{ service.localized_price_label }}"
   data-service-duration="{{ service.duration_display }}"
   data-service-url="{{ service.get_absolute_url }}"
   {% whatsapp_url placement="service_card" as wa_card_url %}
@@ -17,7 +17,7 @@
     <div class="svc-card-info">
       <div class="svc-card__badges">
         <span class="svc-card__badge">{{ service.duration_display }}</span>
-        <span class="svc-card__badge svc-card__badge--price">{{ service.price_label }}</span>
+        <span class="svc-card__badge svc-card__badge--price">{{ service.localized_price_label }}</span>
       </div>
       <h3 class="svc-card__title">{{ service.name }}</h3>
       <p class="svc-card__desc">{{ service.short_desc }}</p>

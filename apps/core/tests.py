@@ -6,6 +6,7 @@ from django.conf import settings
 
 from apps.core.models import SiteSettings
 from apps.core.seed_loader import load_bundle
+from apps.services.models import Service
 
 from apps.core.i18n import translate_url_for_language
 
@@ -109,6 +110,19 @@ class PragueRelaxPublicContentTests(TestCase):
         self.assertContains(privacy, 'Provozovna')
         self.assertContains(privacy, 'Prague relax s.r.o.')
 
+    def test_contact_places_operator_details_directly_under_address(self):
+        for path in ('/kontakt/', '/en/kontakt/', '/ru/kontakt/'):
+            response = self.client.get(path)
+            html = response.content.decode()
+            address_group = html.index('class="contact-card-group')
+            address = html.index('Lužická 1416/29', address_group)
+            operator = html.index('class="contact-operator"', address)
+            company = html.index('Prague relax s.r.o.', operator)
+            phone_card = html.index('tel:', company)
+            self.assertLess(address, operator)
+            self.assertLess(operator, company)
+            self.assertLess(company, phone_card)
+
     def test_service_seed_has_requested_copy_and_no_active_elixir_seo(self):
         services = load_bundle()['services']
         by_slug = {service['slug']: service for service in services}
@@ -134,6 +148,45 @@ class PublicRoutingAndSeoTests(TestCase):
         'en': '/en',
         'ru': '/ru',
     }
+
+    def test_price_label_is_localized_in_every_language(self):
+        Service.objects.create(
+            name='VIP masáž',
+            name_cs='VIP masáž',
+            name_en='VIP Massage',
+            name_ru='VIP-массаж',
+            slug='vip-masaz',
+            short_desc='Test',
+            short_desc_cs='Test',
+            short_desc_en='Test',
+            short_desc_ru='Тест',
+            description='Test',
+            description_cs='Test',
+            description_en='Test',
+            description_ru='Тест',
+            duration_min=30,
+            duration_max=90,
+            price_czk=1800,
+            price_label='od 1800 Kč',
+            is_active=True,
+        )
+        expected = {
+            'cs': 'od 1800 Kč',
+            'en': 'from 1800 Kč',
+            'ru': 'от 1800 Kč',
+        }
+        for language, prefix in self.LANGUAGE_PREFIXES.items():
+            response = self.client.get(f'{prefix}/masaze/vip-masaz/')
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, f'<dd>{expected[language]}</dd>', html=True)
+        self.assertNotContains(
+            self.client.get('/en/masaze/vip-masaz/'),
+            'Price from od',
+        )
+        self.assertNotContains(
+            self.client.get('/ru/masaze/vip-masaz/'),
+            'Цена от od',
+        )
 
     def test_masseuse_detail_redirect_ignores_slug_in_every_language(self):
         for language, prefix in self.LANGUAGE_PREFIXES.items():

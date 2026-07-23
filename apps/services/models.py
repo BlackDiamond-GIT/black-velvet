@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils.translation import get_language
 
 from apps.pages.currency import format_price
 
@@ -46,6 +47,19 @@ class Service(models.Model):
 
     def formatted_price(self, currency='czk'):
         return format_price(self.get_price_amount(currency), currency)
+
+    @property
+    def localized_price_label(self):
+        label = (self.price_label or f'od {self.price_czk} Kč').strip()
+        if not label.lower().startswith('od '):
+            return label
+
+        prefix = {
+            'cs': 'od',
+            'en': 'from',
+            'ru': 'от',
+        }.get((get_language() or 'cs')[:2], 'od')
+        return f'{prefix} {label[3:]}'
 
     def get_absolute_url(self):
         return reverse('services:detail', kwargs={'slug': self.slug})
