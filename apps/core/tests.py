@@ -1,5 +1,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse
+from django.utils import translation
 
 from django.conf import settings
 
@@ -44,7 +45,8 @@ class DefaultLanguageRoutingTests(TestCase):
         self.assertEqual(response['Location'], '/masaze/')
 
     def test_home_reverse_uses_unprefixed_czech_url(self):
-        self.assertEqual(reverse('core:home'), '/')
+        with translation.override('cs'):
+            self.assertEqual(reverse('core:home'), '/')
 
     def test_translate_url_from_english_to_czech(self):
         self.assertEqual(translate_url_for_language('/en/', 'cs'), '/')
@@ -124,3 +126,66 @@ class PragueRelaxPublicContentTests(TestCase):
             if service.get('is_active')
         )
         self.assertNotIn('Black Elixir', active_meta)
+
+
+class PublicRoutingAndSeoTests(TestCase):
+    LANGUAGE_PREFIXES = {
+        'cs': '',
+        'en': '/en',
+        'ru': '/ru',
+    }
+
+    def test_masseuse_detail_redirect_ignores_slug_in_every_language(self):
+        for language, prefix in self.LANGUAGE_PREFIXES.items():
+            response = self.client.get(f'{prefix}/maserky/julia/')
+            self.assertRedirects(
+                response,
+                f'{prefix}/' if prefix else '/',
+                fetch_redirect_response=False,
+            )
+
+    def test_retired_services_redirect_in_every_language(self):
+        retired_slugs = (
+            'aromaterapie',
+            'cbd-relaxacni-masaz',
+            'klasicka-masaz',
+            'lymfaticka-masaz',
+        )
+        for language, prefix in self.LANGUAGE_PREFIXES.items():
+            for retired_slug in retired_slugs:
+                response = self.client.get(
+                    f'{prefix}/masaze/{retired_slug}/'
+                )
+                self.assertRedirects(
+                    response,
+                    f'{prefix}/masaze/relaxacni-masaz/',
+                    status_code=301,
+                    fetch_redirect_response=False,
+                )
+
+    def test_robots_and_sitemap_cover_all_public_languages(self):
+        robots = self.client.get('/robots.txt')
+        self.assertEqual(robots.status_code, 200)
+        self.assertContains(
+            robots,
+            'Sitemap: https://black-velvet.cz/sitemap.xml',
+        )
+        self.assertContains(robots, 'Disallow: /en/rezervace/krok/')
+        self.assertContains(robots, 'Disallow: /ru/rezervace/krok/')
+
+        sitemap = self.client.get('/sitemap.xml')
+        self.assertEqual(sitemap.status_code, 200)
+        self.assertIn('application/xml', sitemap['Content-Type'])
+        sitemap_xml = sitemap.content.decode()
+        self.assertIn('https://testserver/', sitemap_xml)
+        self.assertIn('https://testserver/en/', sitemap_xml)
+        self.assertIn('https://testserver/ru/', sitemap_xml)
+        for language in ('cs', 'en', 'ru', 'x-default'):
+            self.assertIn(f'hreflang="{language}"', sitemap_xml)
+        for retired_slug in (
+            'aromaterapie',
+            'cbd-relaxacni-masaz',
+            'klasicka-masaz',
+            'lymfaticka-masaz',
+        ):
+            self.assertNotIn(retired_slug, sitemap_xml)

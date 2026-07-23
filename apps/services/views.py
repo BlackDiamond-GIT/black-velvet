@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 
@@ -7,6 +8,14 @@ from apps.media_library.cloudinary_urls import normalize_cloudinary_url
 from apps.pages.models import FAQ
 
 from .models import Service
+
+
+LEGACY_SERVICE_REDIRECTS = {
+    'aromaterapie': 'relaxacni-masaz',
+    'cbd-relaxacni-masaz': 'relaxacni-masaz',
+    'klasicka-masaz': 'relaxacni-masaz',
+    'lymfaticka-masaz': 'relaxacni-masaz',
+}
 
 
 class ServiceListView(SEOMixin, ListView):
@@ -35,6 +44,16 @@ class ServiceDetailView(SEOMixin, DetailView):
     context_object_name = 'service'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        target_slug = LEGACY_SERVICE_REDIRECTS.get(kwargs.get('slug'))
+        if target_slug:
+            return redirect(
+                'services:detail',
+                slug=target_slug,
+                permanent=True,
+            )
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         return Service.objects.filter(is_active=True)
