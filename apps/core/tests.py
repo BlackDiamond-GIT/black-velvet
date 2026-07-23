@@ -149,6 +149,27 @@ class PragueRelaxPublicContentTests(TestCase):
             by_slug['relaxacni-masaz']['short_desc_ru'],
             'Глубокий расслабляющий массаж всего тела с использованием премиальных био-масел для снятия стресса и психического напряжения.',
         )
+        self.assertEqual(
+            by_slug['masaz-pro-zeny']['short_desc_cs'],
+            'Speciální masáž přizpůsobená potřebám ženského těla pro hlubokou relaxaci a harmonii.',
+        )
+        self.assertEqual(
+            by_slug['masaz-pro-zeny']['short_desc_en'],
+            'Special massage tailored to the needs of the female body for deep relaxation and harmony.',
+        )
+        self.assertEqual(
+            by_slug['masaz-pro-zeny']['short_desc_ru'],
+            'Специальный массаж, адаптированный к потребностям женского тела для глубокого расслабления и гармонии.',
+        )
+        active_short_copy = ' '.join(
+            str(service.get(field, ''))
+            for service in services
+            if service.get('is_active')
+            for field in ('short_desc_cs', 'short_desc_en', 'short_desc_ru')
+        )
+        self.assertNotIn('Zklidňující regenerační rituál', active_short_copy)
+        self.assertNotIn('A soothing regenerative ritual', active_short_copy)
+        self.assertNotIn('Успокаивающий восстанавливающий ритуал', active_short_copy)
         active_meta = ' '.join(
             service.get('meta_title', '')
             for service in services
