@@ -78,11 +78,11 @@ class PragueRelaxPublicContentTests(TestCase):
 
     def test_contact_defaults_use_new_salon_details(self):
         site = SiteSettings.load()
-        self.assertEqual(settings.SITE_PHONE, '+420 776 739 466')
+        self.assertEqual(settings.SITE_PHONE, '+420 797 669 633')
         self.assertEqual(settings.SITE_ADDRESS, 'Lužická 1416/29, 120 00 Vinohrady')
-        self.assertEqual(site.get_active_phone_display(), '+420 776 739 466')
-        self.assertEqual(site.get_active_whatsapp_number(), '420776739466')
-        self.assertEqual(site.whatsapp_url, 'https://wa.me/420776739466')
+        self.assertEqual(site.get_active_phone_display(), '+420 797 669 633')
+        self.assertEqual(site.get_active_whatsapp_number(), '420797669633')
+        self.assertEqual(site.whatsapp_url, 'https://wa.me/420797669633')
 
     def test_home_uses_requested_seo_and_legal_notice(self):
         response = self.client.get('/')
