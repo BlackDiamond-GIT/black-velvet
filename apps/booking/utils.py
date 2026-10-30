@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import urllib.parse
 
+from django.conf import settings as django_settings
 from django.utils.translation import get_language
-
-from apps.core.models import SiteSettings
 
 
 def build_whatsapp_url(
@@ -16,8 +15,8 @@ def build_whatsapp_url(
     lang: str | None = None,
 ) -> str:
     """Build wa.me URL with pre-filled booking message."""
-    settings = SiteSettings.get()
-    number = settings.get_active_whatsapp_number()
+    # Hard-coded per owner decision 2026-10-30: always route to MAIN number.
+    number = django_settings.PHONE_MAIN_DIGITS
 
     if not lang:
         lang = get_language() or "cs"

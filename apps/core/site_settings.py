@@ -15,17 +15,17 @@ from .phone_rotation import (
 
 
 class SiteSettings(models.Model):
-    phone_primary = models.CharField(_('Основний телефон'), max_length=30, default='+420 797 669 633')
+    phone_primary = models.CharField(_('Основний телефон'), max_length=30, default='+420 607 365 598')
     phone_secondary = models.CharField(_('Додатковий телефон'), max_length=30, blank=True)
     whatsapp_number = models.CharField(
         _('WhatsApp (без + і пробілів)'),
         max_length=20,
-        default='420797669633',
-        help_text=_('Напр. 420797669633 — для wa.me/'),
+        default='420607365598',
+        help_text=_('e.g. 420607365598 — used in wa.me/ links'),
     )
-    rotation_phone_1 = models.CharField(_('Ротаційний телефон 1'), max_length=30, default='+420 797 669 633')
-    rotation_phone_2 = models.CharField(_('Ротаційний телефон 2'), max_length=30, default='+420 797 669 633')
-    rotation_phone_3 = models.CharField(_('Ротаційний телефон 3'), max_length=30, default='+420 797 669 633')
+    rotation_phone_1 = models.CharField(_('Ротаційний телефон 1'), max_length=30, default='+420 607 365 598')
+    rotation_phone_2 = models.CharField(_('Ротаційний телефон 2'), max_length=30, default='+420 607 365 598')
+    rotation_phone_3 = models.CharField(_('Ротаційний телефон 3'), max_length=30, default='+420 607 365 598')
     phone_rotation_hours = models.PositiveSmallIntegerField(_('Інтервал ротації (год)'), default=2)
     email = models.EmailField(_('Email'), default='info@black-velvet.cz')
     address = models.CharField(
@@ -45,7 +45,7 @@ class SiteSettings(models.Model):
     hours_ru = models.CharField(_('Години роботи (RU)'), max_length=100, blank=True, default='Ежедневно с 9:00 до 5:00')
     instagram_url = models.URLField(_('Instagram'), blank=True)
     facebook_url = models.URLField(_('Facebook'), blank=True)
-    whatsapp_url = models.URLField(_('WhatsApp URL'), blank=True, default='https://wa.me/420797669633')
+    whatsapp_url = models.URLField(_('WhatsApp URL'), blank=True, default='https://wa.me/420607365598')
     telegram_url = models.URLField(_('Telegram'), blank=True)
     default_meta_title = models.CharField(_('Meta title за замовчуванням'), max_length=200, blank=True)
     default_meta_description = models.CharField(_('Meta description за замовчуванням'), max_length=300, blank=True)
@@ -97,20 +97,17 @@ class SiteSettings(models.Model):
         return active_index(now, interval_hours=self.phone_rotation_hours)
 
     def get_active_phone_display(self, now=None):
-        phones = self.get_rotation_phones()
-        if not all(phones):
-            return (self.phone_primary or '').strip()
-        return phones[self.get_active_phone_index(now)]
+        # Hard-coded per owner decision 2026-10-30: always return MAIN number.
+        from django.conf import settings as django_settings
+        return django_settings.PHONE_MAIN
 
     def get_active_phone_tel(self, now=None):
         return format_tel_href(self.get_active_phone_display(now))
 
     def get_active_whatsapp_number(self, now=None):
-        display = self.get_active_phone_display(now)
-        digits = normalize_whatsapp_digits(display)
-        if digits:
-            return digits
-        return normalize_whatsapp_digits(self.whatsapp_number)
+        # Hard-coded per owner decision 2026-10-30: always return MAIN digits.
+        from django.conf import settings as django_settings
+        return django_settings.PHONE_MAIN_DIGITS
 
     def get_rotation_preview(self, now=None):
         local = prague_now(now)
@@ -135,6 +132,9 @@ class SiteSettings(models.Model):
         return self.hours
 
     def get_studio_locations(self, language_code=None):
+        from django.conf import settings as django_settings
+        allowed = getattr(django_settings, 'ALLOWED_PHONES', set())
+        main = getattr(django_settings, 'PHONE_MAIN', '')
         locations = []
         for address, map_url, phone in (
             (self.address, self.map_url, self.location_phone_1),
@@ -144,6 +144,9 @@ class SiteSettings(models.Model):
             if not addr:
                 continue
             phone_display = (phone or '').strip()
+            # Use MAIN for empty or non-allowed studio phones.
+            if not phone_display or phone_display not in allowed:
+                phone_display = main
             locations.append({
                 'address': addr,
                 'map_url': (map_url or '').strip(),
