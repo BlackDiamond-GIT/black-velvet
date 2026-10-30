@@ -17,7 +17,8 @@ def _social_urls():
     return {
         'SITE_INSTAGRAM': site.instagram_url or settings.SITE_INSTAGRAM,
         'SITE_FACEBOOK': site.facebook_url or settings.SITE_FACEBOOK,
-        'SITE_WHATSAPP_URL': site.whatsapp_url or settings.SITE_WHATSAPP,
+        # Always use the hard-coded constant — never the DB or hub value.
+        'SITE_WHATSAPP_URL': settings.SITE_WHATSAPP,
     }
 
 

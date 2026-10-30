@@ -353,8 +353,8 @@ msgstr "Вимагати підтвердження віку"
 msgid "WhatsApp number (no +, no spaces)"
 msgstr "Номер WhatsApp (без + і пробілів)"
 
-msgid "e.g. 420722123111 — used in wa.me/ links"
-msgstr "наприклад 420722123111 — використовується в посиланнях wa.me/"
+msgid "e.g. 420607365598 — used in wa.me/ links"
+msgstr "наприклад 420607365598 — використовується в посиланнях wa.me/"
 
 msgid "Apple/Google Maps link displayed on the contacts page"
 msgstr "Посилання Apple/Google Maps, що відображається на сторінці контактів"

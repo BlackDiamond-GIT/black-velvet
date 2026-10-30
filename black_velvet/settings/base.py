@@ -20,7 +20,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv(
 
 SITE_URL = config('SITE_URL', default='https://black-velvet.cz')
 SITE_NAME = 'Black Velvet Spa'
-SITE_PHONE = '+420 797 669 633'
 SITE_EMAIL = 'info@black-velvet.cz'
 SITE_ADDRESS = 'Lužická 1416/29, 120 00 Vinohrady'
 SITE_STREET = 'Lužická 1416/29'
@@ -31,7 +30,20 @@ SITE_LAT = 50.0736378
 SITE_LNG = 14.4461347
 SITE_INSTAGRAM = config('SITE_INSTAGRAM', default='')
 SITE_FACEBOOK = config('SITE_FACEBOOK', default='')
-SITE_WHATSAPP = config('SITE_WHATSAPP', default='https://wa.me/420797669633')
+
+# ── Allowed phone numbers (owner decision 2026-10-30) ─────────────────────────
+# MAIN is used everywhere: header, footer, hero, contact, booking, WhatsApp, JSON-LD.
+# STUDIO_1 / STUDIO_2 are only valid in per-studio location blocks.
+# Nothing else. No rotation, no DB/env/hub override.
+PHONE_MAIN        = '+420 607 365 598'
+PHONE_MAIN_DIGITS = '420607365598'        # for wa.me/ links
+PHONE_MAIN_WA     = 'https://wa.me/420607365598'
+PHONE_STUDIO_1    = '+420 797 669 633'    # studio location only
+PHONE_STUDIO_2    = '+420 778 622 334'    # studio location only
+ALLOWED_PHONES    = {PHONE_MAIN, PHONE_STUDIO_1, PHONE_STUDIO_2}
+
+SITE_PHONE    = PHONE_MAIN
+SITE_WHATSAPP = PHONE_MAIN_WA
 
 INSTALLED_APPS = [
     'unfold',
