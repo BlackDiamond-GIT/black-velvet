@@ -14,6 +14,6 @@ with po_path.open('r', encoding='utf-8') as f:
 with Path('locale/uk/LC_MESSAGES/django.mo').open('wb') as f:
     write_mo(f, catalog)
 PY
-python manage.py create_admin_user
+python manage.py lock_default_admin
 python manage.py seed_data
 python manage.py collectstatic --no-input
